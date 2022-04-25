@@ -1,0 +1,75 @@
+
+
+.selectApprove {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 24px;
+    margin-left: 1rem;
+}
+
+.payment-header {
+    color: #1572A1;
+}
+
+.selectApprove select {
+    font-family: "SF Pro Rounded-Medium";
+    border-radius: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+    color: #4b4b4b;
+    background-color: transparent;
+}
+
+/* TABLE */
+
+.tableContainer {
+    border-radius: 5px;
+    background-color: white;
+}
+
+.table-payment {
+    min-width: 950px;
+}
+
+.table-payment .tableContainer {
+    margin: 10px 10px;
+    max-width: 950px;
+}
+
+.tableContainer .tableHeaderCell {
+    font-family: "SF Pro Rounded-Semibold";
+    font-size: large;
+    background-color: #1572A1;
+    color: white;
+    padding-left: 2rem;
+}
+
+.table-payment .cell {
+    font-family: "SF Pro Rounded-Medium";
+    font-size: medium;
+    padding-left: 2rem;
+}
+
+.table-payment .status {
+    font-size: 1rem;
+    color: white;
+    background-color: rgb(180, 180, 180);
+    border-radius: 5px;
+    padding: 4px 10px;
+    display: inline-block;
+    height: 30px;
+    font-family: "SF Pro Rounded-Medium";
+
+}
+
+.table-payment button {
+    font-family: "SF Pro Rounded-Semibold";
+    font-size: 14px;
+    text-transform: capitalize;
+
+    border-radius: 5px;
+    border: 0;
+
+    background-color: #001935;
+    color: white;
+}

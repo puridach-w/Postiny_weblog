@@ -1,0 +1,38 @@
+.content{
+    width: calc(100vw - 387px);
+    height: calc(100vh - 120px);
+}
+
+.text{
+    color: #1572A1;
+    margin: 6% 0 0 20%;
+    font-size: 35px;
+}
+
+.box{
+    background-color: #1572A1;
+    color: white;
+    padding-top: 9% ;
+    width: 55%;
+    height: 64%;
+    border-radius: 20px;
+    text-align: center;
+    border: none;
+}
+
+.margin-fBox{
+    margin: 35% 0 0 80%;
+}
+
+.margin-sBox{
+    margin: 35% 0 0 60%;
+}
+
+.margin-tBox{
+    margin: 35% 0 0 40%;
+}
+
+.btn-text{
+    font-size: 34px;
+    cursor: pointer;
+}

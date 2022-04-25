@@ -1,0 +1,18 @@
+.goback-btn {
+    margin-top: 60px;
+    margin-left: 80px;
+}
+
+.goback-btn a {
+    font-family: SF Pro Rounded-Medium;
+    color: #676767;
+    font-size: 17px;
+    text-decoration: none;
+    padding-top: 10px;
+    /* margin-top: 10px; */
+    position: relative;
+}
+
+.goback-btn a:hover {
+    color: black;
+}

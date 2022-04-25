@@ -1,0 +1,142 @@
+.comments {
+  margin-top: 20px;
+  margin-bottom: 3rem;
+  border: 1px solid #585858;
+  border-radius: 10px;
+}
+
+.comments-wrap {
+  margin-top: 3rem;
+  margin-left: 3rem;
+}
+
+.comments-title {
+  font-size: 24px;
+  margin-top: 2rem;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.comment-form-title {
+  font-size: 18px;
+}
+
+
+.comment-form-textarea {
+  width: 50%;
+  height: 3rem;
+  margin-top: 0.5rem;
+  border: 0;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #535353;
+  border: 1px solid #4d4d4d;
+}
+
+.comment-form-button {
+  margin-top: 0.3rem;
+  font-size: 16px;
+  font-family: "SF Pro Rounded-Medium";
+  padding: 8px 16px;
+  background: #1572A1;
+  border-radius: 8px;
+  color: white;
+  border: 0;
+}
+
+.comment-form-button:hover:enabled {
+  cursor: pointer;
+  background: #858585;
+}
+
+.comment-form-button:disabled {
+  opacity: 0.8;
+  cursor: default;
+}
+
+.comment-form-cancel-button {
+  margin-left: 10px;
+}
+
+.comments-container {
+  margin-top: 3rem;
+  margin-left: 2rem;
+}
+
+/* Each comment */
+
+.comment {
+  display: contents;
+  /* margin-bottom: 0rem; */
+  color: #000000;
+  opacity: 0.5;
+}
+
+.comment-image-container {
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  margin-right: 1rem;
+  margin-bottom: 1.5rem;
+  width: fit-content;
+  border-radius: 10px;
+}
+
+.comment-image-container img {
+  border-radius: 50px;
+  margin-right: 1rem;
+  margin-top: 0;
+  width: fit-content;
+  height: fit-content;
+}
+
+.comment-right-part {
+  width: 100%;
+}
+
+.comment-content {
+  display: flex;
+}
+
+.comment-author {
+  margin-right: 1rem;
+  font-size: 20px;
+  color: #000000;
+}
+
+.comment-date {
+  margin-top: 6px;
+  font-size: 10px;
+}
+
+.comment-id {
+  margin-top: 6px;
+  margin-left: 1rem;
+  font-size: 12px;
+  color: #1572A1;
+}
+
+.comment-text {
+  font-size: 14px;
+}
+
+.comment-actions {
+  display:inline-block;
+  font-size: 12px;
+  color: #1572A1;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.comment-action {
+  display: inline-block;
+  margin: 0 8px 0 0;
+}
+
+.comment-action:hover {
+  text-decoration: underline;
+}
+
+.replies {
+  margin-top: 20px;
+}

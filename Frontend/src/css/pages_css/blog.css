@@ -1,0 +1,93 @@
+
+.blog { 
+    font-family: "SF Pro Rounded-Semibold";
+}
+
+.blog-wrap {
+    max-width: 1080px;
+    margin-left: 2rem;
+}
+
+.blog-goBack {
+    text-decoration: none;
+    font-size: 0.8rem;
+    color: #e0e0e0;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    display: block;
+}
+
+.blog-wrap h1 {
+    font-family: "SF Pro Rounded-Bold";
+    font-size: 38px;
+    font-weight: 500;
+}
+
+.blog-author {
+    margin: 0;
+    font-size: 16px;
+    color: #1572A1;
+    font-weight: 800;
+}
+
+.blog-date {
+    margin: 0;
+    font-size: 14px;
+    color: #1572A1;
+    font-weight: 100;
+}
+
+.blog-wrap img {
+    width: 100%;
+    max-height: 720px;
+}
+
+.blog-desc {
+    /* padding: 0.5rem; */
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+    color: rgb(61, 61, 61);
+}
+
+.blog-category {
+    font-weight: 50;
+    font-size: 16px;
+    background: linear-gradient(to right, #1572A1, #80b7d3);
+    color: #fff;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+    width: fit-content;
+    text-transform: capitalize;
+}
+
+.interect {
+    margin-left: 2rem;
+}
+
+.active-like {
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 9px;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid transparent;
+    color: #ffffff;
+    background-color: #e65e7e;
+}
+
+.inactive-like {
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 9px;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+    color: #e65e7e;
+    background-color: transparent;
+    border: 1px solid #e65e7e;
+}
+

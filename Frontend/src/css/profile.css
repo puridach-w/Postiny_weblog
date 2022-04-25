@@ -1,0 +1,218 @@
+/* .backbtnprofile {
+    margin-top: 70px;
+    margin-left: 80px;
+}
+
+.backbtnprofile a {
+    font-family: SF Pro Rounded-Medium;
+    color: #676767;
+    font-size: 17px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.backbtnprofile a:hover {
+    color: black;
+} */
+
+.profile {
+    background-color: transparent;
+}
+
+.profileSummary {
+    background-color: yellow;
+    /* display: flex;
+    flex-wrap: wrap; */
+    /* justify-content: space-between; */
+    width: 1300px;
+    height: 190px;
+    /* margin: 100px; */
+    padding-left: 210px;
+    padding-top: 20px;
+}
+
+.profileimg img {
+    border-radius: 50%;
+    height: 150px;
+    float: left;
+    margin-right: 150px;
+    background-color: aqua;
+}
+
+
+/* .profileimg {
+    margin-right: 50px;
+} */
+
+.sub,
+.article,
+.like {
+    float: left;
+    background-color: transparent;
+    align-items: center;
+    width: 180px;
+    height: 80px;
+    /* border: 1px solid #000; */
+    text-align: left;
+    margin-top: 50px;
+    margin-right: 80px;
+}
+
+.sub h3,
+.article h3,
+.like h3 {
+    color: black;
+    margin-top: 6px;
+    font-family: SF Pro Rounded-Bold;
+    font-size: 19px;
+}
+
+.sub h5,
+.article h5,
+.like h5 {
+    color: #B0B0B0;
+    font-family: SF Pro Rounded-Semibold;
+    font-size: 15px;
+}
+
+.summary img {
+    float: left;
+    margin-right: 22px;
+    width: 55px;
+}
+
+.profileDetail {
+    margin-left: 220px;
+    margin-top: -5px;
+    background-color: white;
+}
+
+.profileDetail h2 {
+    font-family: SF Pro Rounded-Semibold;
+    font-size: 42px;
+}
+
+.profileDetail h3 {
+    font-family: SF Pro Rounded-Medium;
+    font-size: 24px;
+    font-weight: lighter;
+    margin-top: -2px;
+}
+
+.profileDetail h4 {
+    font-family: SF Pro Rounded-Medium;
+    font-size: 16px;
+    font-weight: lighter;
+    margin-top: 14px;
+    color: #B0B0B0;
+}
+
+.editprofilebtn {
+    position: absolute;
+    margin-left: 810px;
+    margin-top: -45px;
+    margin-bottom: 100px;
+}
+
+.editprofilebtn .MuiButton-outlined {
+    font-family: SF Pro Rounded-Semibold;
+    font-weight: lighter;
+}
+
+.myarticle {
+    width: 1300px;
+    height: 190px;
+    background-color: blue;
+    padding: 100px;
+}
+
+
+/* 
+.blogItem-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.blogItem-cover {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
+}
+
+.blogItem-wrap h3 {
+    margin: 0.5rem 0 1rem 0;
+    flex: 1;
+}
+
+.blogItem-desc {
+    position: relative;
+    max-height: 50px;
+    overflow: hidden;
+    padding-right: 0.6rem;
+    font-size: 0.8rem;
+    color: #a9a9a9;
+}
+
+.blogItem-desc::before {
+    position: absolute;
+    content: '...';
+    bottom: 0;
+    right: 0;
+}
+
+.blogItem-wrap footer {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    justify-content: space-between;
+}
+
+.blogItem-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.blogItem-author {
+    display: flex;
+    align-items: center;
+}
+
+.blogItem-author img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 0.5rem;
+}
+
+.blogItem-author p {
+    font-size: 0.6rem;
+    color: #a9a9a9;
+    font-weight: 600;
+}
+
+.blogList-wrap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 3rem;
+}
+
+@media (max-width: 768px) {
+    .blogList-wrap {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .blogList-wrap {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.myarticle {
+    width: 1200px;
+    margin-left: 200px;
+} */

@@ -1,0 +1,103 @@
+.modalApprove {
+    /* font-family: "SF Pro Rounded-Medium"; */
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    
+    position: fixed;
+    display: flex;
+}
+  
+.approveContainer {
+    width: 850px;
+    height: 640px;
+    /* margin-top: 120px; */
+    margin-left: 60px;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: #666666 0px 5px 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+  
+.approveContainer .title {
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 40px;
+    margin-left: 10px;
+}
+  
+.approveClose {
+    display: flex;
+    justify-content: flex-end;
+}
+  
+.approveClose button {
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+}
+  
+.approveContainer img {
+    margin: 0;
+    margin-left: 10px;
+    padding: 0;
+    width: 300px;
+    height: 430px;
+
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.approveContainer .body {
+    display: flex;
+}
+
+.body .info {
+    font-family: "SF Pro Rounded-Semibold";
+    font-size: 22px;
+    margin-top: 1rem;
+    margin-left: 2rem;
+}
+
+.body .info span {
+    color: #1572A1;
+    margin-left: 200px;
+    float: right;
+}
+  
+.body .footer {
+    flex: 20%;
+    display: flex;
+    margin-top: 16rem;
+    margin-left: 100px;
+    float: bottom;
+}
+  
+.body .footer button {
+    width: 150px;
+    height: 45px;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    float: right;
+}
+
+.body .footer button:hover {
+    background-color: #666666;
+}
+
+.footer .approve {
+    background-color: #27B636;
+}
+
+.footer .reject {
+    background-color: #D82020;
+    margin-left: 20px;
+}

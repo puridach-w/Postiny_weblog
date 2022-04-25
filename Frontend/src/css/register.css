@@ -1,0 +1,252 @@
+.formreg .input-container {
+    padding-right: 127px;
+}
+
+
+/* * {
+    padding: 0;
+    margin: 0;
+    height: auto;
+} */
+
+.copy h2 {
+    padding: 10px 0px;
+    font-weight: 100;
+    font-size: 3rem;
+    background-color: transparent;
+}
+
+.split-screen {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* margin-top: 20px; */
+}
+
+.left {
+    /* height: 250px; */
+    background-size: cover;
+    background-color: #1572A1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100%; */
+}
+
+.left h2 {
+    color: white;
+    padding-left: 20px;
+    padding-top: 120px;
+    text-align: left;
+    font-family: SF Pro Rounded-Medium;
+}
+
+.left img {
+    width: 315px;
+    padding-left: 25px;
+    padding-top: -20px;
+}
+
+.right {
+    /* display: flex; */
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+}
+
+.backbtn {
+    padding-bottom: 620px;
+    padding-left: 50px;
+    width: 100px;
+    position: relative;
+    background-color: white;
+}
+
+.backbtn a {
+    font-family: SF Pro Rounded-Medium;
+    color: #676767;
+    font-size: 17px;
+    text-decoration: none;
+    padding-top: 50px;
+}
+
+.backbtn a:hover {
+    color: black;
+}
+
+
+/* .right .copy {
+    color: black;
+    text-align: center;
+} */
+
+.right .formreg {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: transparent;
+    padding-left: 100px;
+    padding-bottom: 480px;
+    width: 880px;
+    background-color: white;
+}
+
+.right h2 {
+    color: #1572A1;
+    width: 700px;
+    padding-top: 480px;
+    padding-bottom: 20px;
+    text-align: left;
+    font-family: SF Pro Rounded-Semibold;
+}
+
+.formreg input[type='text'],
+.formreg input[type='password'],
+.formreg input[type='email'],
+.formreg input[type='tel'],
+.formreg input[type='date'] {
+    /* display: block; */
+    background-color: #f1f1f1;
+    border: 1.5px solid;
+    width: 260px;
+    height: 40px;
+    padding: 10px 10px;
+    border-radius: 10px;
+    text-align: left;
+    color: black;
+    border-color: #f1f1f1;
+    font-family: SF Pro Rounded-Medium;
+    font-size: 15px;
+    /* margin-top: 5px; */
+}
+
+.formreg textarea {
+    background-color: #f1f1f1;
+    width: 260px;
+    border: 1.5px solid;
+    padding: 10px 10px;
+    border-radius: 10px;
+    text-align: left;
+    color: black;
+    border-color: #f1f1f1;
+    font-family: SF Pro Rounded-Medium;
+    font-size: 15px;
+}
+
+
+/* input[type='text'] {
+    padding-top: 0px;
+} */
+
+
+/* input[type='password'] {
+    min-width: 500px;
+} */
+
+.formreg select {
+    margin-right: 120px;
+    /* display: block; */
+    background-color: #f1f1f1;
+    border: 1.5px solid;
+    width: 140px;
+    height: 40px;
+    padding: 10px 5px;
+    border-radius: 10px;
+    text-align: left;
+    color: black;
+    border-color: #f1f1f1;
+    font-family: SF Pro Rounded-Medium;
+    font-size: 15px;
+    border-right: 16px solid transparent;
+    /* margin-top: 5px; */
+}
+
+.formreg .dateofbirth {
+    width: 600px;
+}
+
+.formreg select:required:invalid {
+    color: gray;
+}
+
+.formreg input[type='date']:required:invalid {
+    color: gray;
+}
+
+.signupbtn {
+    border: none;
+    background-color: #1572A1;
+    color: white;
+    width: 260px;
+    height: 45px;
+    display: block;
+    border-radius: 5px;
+    padding: 10px 0;
+    margin-top: 40px;
+    font-family: SF Pro Rounded-Semibold;
+    font-size: 15px;
+    cursor: pointer;
+    position: relative;
+}
+
+.signupbtn:hover {
+    background-color: black;
+}
+
+.formreg label {
+    display: block;
+    padding-top: 0.6rem;
+    padding-bottom: 0.75rem;
+    font-family: SF Pro Rounded-Medium;
+    font-size: 1rem;
+    color: #454444;
+}
+
+@media screen and (min-width: 900px) {
+    .split-screen {
+        flex-direction: row;
+        height: 100vh;
+        background-color: white;
+    }
+    .left {
+        display: flex;
+        width: 30%;
+        height: auto;
+    }
+    .right {
+        display: flex;
+        width: auto;
+        height: auto;
+    }
+}
+
+
+/* .password {
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+}
+
+.conpassword {
+    width: 300px;
+    margin-left: -150px;
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+} */
+
+
+/* .pwinput {
+    margin-left: -70px;
+} */
+
+
+/* input[type='text'] {
+    margin-top: 20px;
+}
+
+input[type='password'],
+input[type='email'] {
+    margin-top: 8px;
+} */

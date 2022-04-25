@@ -1,0 +1,45 @@
+@font-face {
+    font-family: "SF Pro Rounded-Semibold";
+    font-style: normal;
+    font-weight: 400;
+    src: url("https://fonts.animaapp.com/SFProRounded-Semibold") format("opentype");
+}
+
+@font-face {
+    font-family: "SF Pro Rounded-Bold";
+    font-style: normal;
+    font-weight: 700;
+    src: url("https://fonts.animaapp.com/SFProRounded-Bold") format("opentype");
+}
+
+@font-face {
+    font-family: "SF Pro Rounded-Regular";
+    font-style: normal;
+    font-weight: 500;
+    src: url("https://fonts.animaapp.com/SFProRounded-Regular") format("opentype");
+}
+
+@font-face {
+    font-family: "SF Pro Rounded-Medium";
+    font-style: normal;
+    font-weight: 500;
+    src: url("https://fonts.animaapp.com/SFProRounded-Medium") format("opentype");
+}
+
+.App {
+    width: 100vw;
+    height: 100vh;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.topbar-color {
+    background-color: #f1f1f1;
+}
