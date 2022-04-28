@@ -14,7 +14,7 @@ import Layout from "./components/Layout/Layout";
 export default function App() {
 	return (
 		<div className="App">
-			{/* <BrowserRouter>
+			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Signin/>}/>
 					<Route path="/signin" element={<Signin/>}/>
@@ -33,8 +33,8 @@ export default function App() {
 					<Route path="/changecategory" element={<ChangeCategory />}/>
 					<Route path="/changepassword" element={<ChangePW />}/>
 				</Routes>
-			</BrowserRouter> */}
-			<Layout />
+			</BrowserRouter>
+			{/* <Layout /> */}
 		</div>
 	)
 }
