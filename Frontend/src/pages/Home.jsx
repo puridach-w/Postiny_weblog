@@ -12,6 +12,9 @@ import WriteArticleModal from "../components/Modal/WriteArticleModal";
 import '../css/pages_css/home.css';
 import { adsArticles, blogList, favCategory } from "../dummyData";
 
+import SidebarUser from "../components/Layout/SidebarUser";
+import Topbar from "../components/Layout/Topbar";
+
 const useStyles = makeStyles((theme) => ({
 	button: {
 	  margin: theme.spacing(0),
@@ -59,9 +62,20 @@ function Home() {
 			setBlogs(blogList);
 		}
 	}
+
+	const dummy = {
+		username: "Jimmy",
+		profile_pic: "https://picsum.photos/400/600"
+	};
 	
 	return (
-		<div className="home" style={{paddingLeft: "60px"}}>
+		<div>
+            <div className="topbar-color">
+                <Topbar name={dummy.username} img={dummy.profile_pic}/>
+                <div style={{display: "flex"}}>
+                    <SidebarUser role="user" />
+                    <div>
+                <div className="home" style={{paddingLeft: "60px"}}>
 			{modalOpen && <WriteArticleModal setOpenModal={setModalOpen} setBlur={setBlur} />}
 			<div style={{ filter: blur? "blur(5px)" : "none"}}>
 				{/* Write new article */}
@@ -110,6 +124,11 @@ function Home() {
 				{!blogs.length? <EmptyBlog /> : <BlogList blogs={blogs} />}
 			</div>
 		</div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+		
 	);
 }
 

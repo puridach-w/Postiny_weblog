@@ -6,14 +6,29 @@ import ReportRoundedIcon from '@material-ui/icons/ReportRounded';
 import MonetizationOnRoundedIcon from '@material-ui/icons/MonetizationOnRounded';
 import Popup from "../components/Modal/reportPopUp";
 
+import SidebarUser from "../components/Layout/SidebarUser";
+import Topbar from "../components/Layout/Topbar";
+
+
 
 function Report() {
     const [modalOpen, setModalOpen] = React.useState(false);
     const [type,setType] = React.useState("");
     const [blur,setBlur] = React.useState(false);
 
+    const dummy = {
+        username: "Jimmy",
+        profile_pic: "https://picsum.photos/400/600"
+    };
+
 	return (
-	<div style={{marginLeft: "60px"}} className="container-fluid content">
+    <div>
+        <div className="topbar-color">
+            <Topbar name={dummy.username} img={dummy.profile_pic}/>
+            <div style={{display: "flex"}}>
+                <SidebarUser role="user" />
+                <div>
+                  <div style={{marginLeft: "60px"}} className="container-fluid content">
         {modalOpen && <Popup setOpenModal={setModalOpen} reportType={type} setBlur={setBlur}/>}
         <div style={{ filter: blur ? "blur(5px)" : "none" }} >
             <div className="row">
@@ -58,6 +73,11 @@ function Report() {
             </div>
         </div>
     </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+	
 	);
 }
 

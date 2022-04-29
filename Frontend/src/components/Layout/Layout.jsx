@@ -21,12 +21,8 @@ function Layout() {
                 <Topbar name={dummy.username} img={dummy.profile_pic}/>
                 <div style={{display: "flex"}}>
                     <SidebarUser role="user" />
-                    {/* <SidebarUser role="admin"/> */}
-                    {/* <SidebarUser role="approver" /> */}
                     <div>
-                        <HomeRoute />
-                        {/* <AdminRoutes /> */}
-                        {/* <ApproverRoutes /> */}
+                      
                     </div> 
                 </div>
             </div>

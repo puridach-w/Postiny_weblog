@@ -7,6 +7,10 @@ import ListTransaction from "./transaction/ListTransaction";
 import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
 import { useNavigate } from "react-router-dom";
 
+import SidebarUser from "../components/Layout/SidebarUser";
+import Topbar from "../components/Layout/Topbar";
+
+
 
 function Wallet() {
 	const balance = walletData[0].coinBalance;
@@ -16,9 +20,20 @@ function Wallet() {
     let path = '/topup'; 
     navigate(path);
   	}
+	
+	const dummy = {
+		username: "Jimmy",
+		profile_pic: "https://picsum.photos/400/600"
+	};
 
 	return (
-	<div style={{marginLeft: "60px"}} className="container-fluid">
+		<div>
+            <div className="topbar-color">
+                <Topbar name={dummy.username} img={dummy.profile_pic}/>
+                <div style={{display: "flex"}}>
+                    <SidebarUser role="user" />
+                    <div>
+                      <div style={{marginLeft: "60px"}} className="container-fluid">
 		<div className='content'>
 			<div className='row'>
 				<div className='col-lg-6'>
@@ -56,6 +71,11 @@ function Wallet() {
 			</div>
 		</div>
 	</div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+	
 	);
 	
 }

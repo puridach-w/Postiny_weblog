@@ -3,10 +3,26 @@ import '../css/pages_css/TransactionUpload.css';
 import WallpaperRoundedIcon from '@material-ui/icons/WallpaperRounded';
 import {useLocation} from 'react-router-dom';
 
+import SidebarUser from "../components/Layout/SidebarUser";
+import Topbar from "../components/Layout/Topbar";
+
+
 function TransactionUpload(){
     const location = useLocation();
 
-    return <div style={{marginLeft: "60px"}} className="container-fluid">
+    const dummy = {
+        username: "Jimmy",
+        profile_pic: "https://picsum.photos/400/600"
+    };
+
+    return (
+        <div>
+            <div className="topbar-color">
+                <Topbar name={dummy.username} img={dummy.profile_pic}/>
+                <div style={{display: "flex"}}>
+                    <SidebarUser role="user" />
+                    <div>
+                      <div style={{marginLeft: "60px"}} className="container-fluid">
         <div className="content row">
             <div className="col-lg-6 total">
                 <h1>Total payment: <span className="amount">{location.state.value}฿</span></h1> <br/>
@@ -29,6 +45,12 @@ function TransactionUpload(){
             </div> 
         </div>
     </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    
+    )
 }
 
 export default TransactionUpload;

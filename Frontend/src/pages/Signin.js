@@ -2,8 +2,12 @@ import { React, useState} from "react";
 import ponyIn from "../images/ponyin.png"
 import "../css/signin.css"
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Signin() {
+   var navigate = useNavigate();
+
+
    const [signinData, setSigninData] = useState(
       {username: "", password: ""}
    )
@@ -18,13 +22,21 @@ export default function Signin() {
       })
    }
 
-   function handleSubmit(event) {
+   function HandleSubmit(event) {
       const init = async() => {
          Axios.post("http://localhost:8080/signin",{
             username: signinData.username,
             password: signinData.password
          }).then(function (response) {
             console.log(response.data);
+            const temp = response.data;
+            if(temp === "Success login USER"){
+               navigate("/home");
+            } else if(temp=== "Success login APPROVER"){
+               navigate("/payment");
+            } else if(temp === "Success login ADMIN"){
+               navigate("/report-admin");
+            }
          })
          }
       init();
@@ -49,7 +61,7 @@ export default function Signin() {
                   onChange={handleChange} name="username" value={signinData.username}/><br />
                   <input type="password" placeholder="Password" required
                   onChange={handleChange} name="password" value={signinData.password}/><br />
-                  <button type = "button" className="btn" onClick={handleSubmit}>Sign in</button> <br />
+                  <button type = "button" className="btn" onClick={HandleSubmit}>Sign in</button> <br />
                </form>
                </div>
                <div className="f-container">

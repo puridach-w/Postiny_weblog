@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import ponyreg from "../images/ponyreg.png"
 import "../css/register.css"
-import Axios from 'axios'
+import Axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
-
+    var navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [firstname, setFirstname] = useState("");
@@ -41,7 +42,8 @@ export default function Register() {
             gender: gender,
             DOB: DOB,
             password: password
-        }).then(() => {
+        }).then((response) => {
+            console.log("Register success");
             setUserInfo([
                 ...userInfo,
                 {
@@ -55,6 +57,7 @@ export default function Register() {
                     password: password
                 }
             ]);
+            navigate("/newcategory");
         });
     }
 
@@ -150,7 +153,8 @@ export default function Register() {
                             />
                         </div>
     
-                    <button className="signupbtn"
+                    <button type="button" 
+                        className="signupbtn"
                         onClick={addUser}
                     >Create account
                     </button>

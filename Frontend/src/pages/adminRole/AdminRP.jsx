@@ -3,6 +3,8 @@ import "../../css/pages_css/adminRole/adminRP.css"
 import {reports} from "../../dummyData"
 import AdminTable  from "./AdminTable";
 import AdminModal from './AdminModal';
+import SidebarUser from "../../components/Layout/SidebarUser";
+import Topbar from "../../components/Layout/Topbar";
 
 
 function AdminRP() {
@@ -24,9 +26,20 @@ function AdminRP() {
         setData(data);
      }
 
+     const dummy = {
+        username: "Jimmy",
+        profile_pic: "https://picsum.photos/400/600"
+    };
+
 
     return (
-        <div style={{marginLeft: "110px"}} className="reportPage" >
+        <div>
+            <div className="topbar-color">
+                <Topbar name={dummy.username} img={dummy.profile_pic}/>
+                <div style={{display: "flex"}}>
+                    <SidebarUser role="admin"/>
+                    <div>
+                       <div style={{marginLeft: "110px"}} className="reportPage" >
         {modalOpen && <AdminModal data={data} setOpenModal={setModalOpen} setBlur={setBlur}/>}
         <div style={{ filter: blur ? "blur(5px)" : "none" }}>
             <button className="btn-addData addData">
@@ -47,7 +60,12 @@ function AdminRP() {
         </div>
             
 
+        </div> 
+                    </div> 
+                </div>
+            </div>
         </div>
+        
     )
 }
 

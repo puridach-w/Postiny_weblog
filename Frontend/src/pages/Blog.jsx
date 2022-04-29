@@ -8,6 +8,9 @@ import Comments from "../components/Comment/Comments"
 
 import "../css/pages_css/blog.css";
 
+import SidebarUser from "../components/Layout/SidebarUser";
+import Topbar from "../components/Layout/Topbar";
+
 const Blog = () => {
   const {id} = useParams();
   const [blog, setBlog] = useState(null);
@@ -31,8 +34,19 @@ const Blog = () => {
     }
   });
 
+  const dummy = {
+    username: "Jimmy",
+    profile_pic: "https://picsum.photos/400/600"
+};
+
   return (
-    <div className="blog" style={{marginLeft: "60px"}}>
+    <div>
+            <div className="topbar-color">
+                <Topbar name={dummy.username} img={dummy.profile_pic}/>
+                <div style={{display: "flex"}}>
+                    <SidebarUser role="user" />
+                    <div>
+                      <div className="blog" style={{marginLeft: "60px"}}>
       <div className="fix-goback">
         <Link to= '/home' >
           <Gobackbtn />
@@ -63,6 +77,11 @@ const Blog = () => {
       <EmptyBlog />
       }
     </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    
   )
 }
 

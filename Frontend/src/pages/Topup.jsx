@@ -3,6 +3,9 @@ import Pony from "../images/ponyreg.png"
 import '../css/pages_css/topup.css';
 import { useNavigate } from "react-router-dom";
 
+import SidebarUser from "../components/Layout/SidebarUser";
+import Topbar from "../components/Layout/Topbar";
+
 function Topup(){
 
     const [amount,setAmount] = React.useState("");
@@ -27,8 +30,20 @@ function Topup(){
         }
     }
 
+    const dummy = {
+        username: "Jimmy",
+        profile_pic: "https://picsum.photos/400/600"
+    };
 
-    return <div style={{marginLeft: "60px"}} className="container-fluid">
+
+    return (
+        <div>
+            <div className="topbar-color">
+                <Topbar name={dummy.username} img={dummy.profile_pic}/>
+                <div style={{display: "flex"}}>
+                    <SidebarUser role="user" />
+                    <div>
+                    <div style={{marginLeft: "60px"}} className="container-fluid">
         <div className="content row">
             <div className="col-lg-6">
                 <img className="ponyImg" alt="" src={Pony} />
@@ -44,6 +59,12 @@ function Topup(){
             </div>
         </div>
     </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    
+    )
 }
 
 export default Topup;

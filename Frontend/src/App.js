@@ -10,6 +10,16 @@ import EditPersonal from "./pages/EditPersonal";
 import ChangeCategory from "./pages/ChangeCategory";
 import ChangePW from "./pages/Changepw";
 import Layout from "./components/Layout/Layout";
+import PaymentApprove from "./pages/approverRole/PaymentApprove";
+import AdminRP from "./pages/adminRole/AdminRP";
+import Home from "./pages/Home";
+import Blog from './pages/Blog';
+import Dashboard from "./pages/Dashboard";
+import Wallet from "./pages/Wallet"
+import Report from "./pages/Report"
+import Page404 from "./pages/Page404";
+import Topup from "./pages/Topup";
+import TransactionUpload from "./pages/TransactionUpload"
 
 export default function App() {
 	return (
@@ -32,6 +42,18 @@ export default function App() {
 					<Route path="/editpersonal" element={<EditPersonal />}/>
 					<Route path="/changecategory" element={<ChangeCategory />}/>
 					<Route path="/changepassword" element={<ChangePW />}/>
+
+					<Route path="/payment" element={<PaymentApprove />} />
+
+					<Route path="/report-admin" element={<AdminRP />} />
+
+					<Route path="/home" element={<Home />} />
+					<Route path="/topup" element={<Topup />} />
+					<Route path="/blog/:id" element={<Blog />} />
+					<Route path="/dashboard" element={<Dashboard />} />
+					<Route path="/wallet" element={<Wallet />} />
+					<Route path="/report" element={<Report />} />
+					<Route path="/transaction-upload" element={<TransactionUpload />} />
 				</Routes>
 			</BrowserRouter>
 			{/* <Layout /> */}
