@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import "./writeArticleModal.css";
 import DropPicture from '@material-ui/icons/WallpaperRounded';
+import { Switch } from "antd";
 
 function WriteArticleModal({ setOpenModal, setBlur }) {
   const [select, setSelect] = useState([]);
   const category = ["Technology", "Gaming", "Music", "Beauty", "Sports", "Art"];
   
+  // find category
+  // write article
+
   return (
     <div className="modalBackground">
       <div className="modalContainer">
@@ -46,16 +50,22 @@ function WriteArticleModal({ setOpenModal, setBlur }) {
                 </span>
                 </p>
                 <p>Title <span style={{color: "red"}}>*</span></p>
-                <input className="title" type="text" placeholder="Once upon a time..." />
+                <input 
+                  className="title" 
+                  type="text" 
+                  placeholder="Once upon a time..." 
+                  />
                 <p>Description <span style={{color: "red"}}>*</span></p>
-                <textarea  className="des" placeholder="The start of  a wonderful story..." />
+                <textarea  
+                  className="des" 
+                  placeholder="The start of  a wonderful story..." />
               </div>
             </span>
           </div>
         </div>
 
         <div className="footer">
-          <button>Post</button>
+          <span><button>Post</button></span>
         </div>
       </div>
     </div>

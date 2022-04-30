@@ -31,7 +31,7 @@ export default function Register() {
             gender: gender,
             DOB: DOB,
             password: password
-        }).then((response) => {
+        }).then(() => {
             console.log("Register success");
             setUserInfo([
                 ...userInfo,
