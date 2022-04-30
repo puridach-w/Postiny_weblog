@@ -29,9 +29,11 @@ export default function Signin() {
             password: signinData.password
          }).then(function (response) {
             console.log(response.data);
-            const temp = response.data;
+            localStorage.setItem('token', response.data.token)
+            const temp = response.data.temp;
             if(temp === "Success login USER"){
                navigate("/home");
+               // can use window.location = '/home';
             } else if(temp=== "Success login APPROVER"){
                navigate("/payment");
             } else if(temp === "Success login ADMIN"){

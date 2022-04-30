@@ -210,7 +210,7 @@ CREATE TABLE `userinfo` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `role_id` int(11) NOT NULL,
   `username` varchar(16) NOT NULL,
-  `password` varchar(16) NOT NULL,
+  `password` varchar(64) NOT NULL,
   `email` varchar(64) NOT NULL,
   `firstname` varchar(32) NOT NULL,
   `lastname` varchar(32) NOT NULL,

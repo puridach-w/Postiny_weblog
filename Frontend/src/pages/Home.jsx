@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import Axios from 'axios';
 
 import CardSlider from '../components/CardSlider';
 import SearchBar from '../components/BlogList/SearchBar';
@@ -32,6 +33,22 @@ function Home() {
 	const [unchecked, setUnchecked] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
 	const [blur, setBlur] = useState(false);
+	const token = localStorage.getItem('token');
+
+	Axios.post('http://localhost:8080/auth', {
+		authorization : "Bearer " + token
+		}).then((response) => {
+			console.log(response.data);
+			if(response.data.status === 'ok'){
+				// alert("authen success");
+				alert(response.data.decoded.username);
+			} else{
+				alert("authen failed");
+				localStorage.removeItem("token");
+				window.location = "/";
+			}
+		})
+	
 
 	// Search submit
 	const handleSearchSubmit = (event) => {
