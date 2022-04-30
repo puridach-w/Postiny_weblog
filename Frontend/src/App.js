@@ -9,6 +9,11 @@ import EditProfile from "./pages/EditProfile";
 import EditPersonal from "./pages/EditPersonal";
 import ChangeCategory from "./pages/ChangeCategory";
 import ChangePW from "./pages/Changepw";
+import Subscribe from "./pages/Subscribe";
+import MyBlog from "./pages/MyBlog";
+import AddApprover from "./pages/adminRole/AdminCreateAccount"
+import AdminCreateSummary from "./pages/adminRole/AdminCreateSummary";
+
 import PaymentApprove from "./pages/approverRole/PaymentApprove";
 import AdminRP from "./pages/adminRole/AdminRP";
 import Home from "./pages/Home";
@@ -44,6 +49,10 @@ export default function App() {
 					<Route path="/editpersonal" element={<EditPersonal />}/>
 					<Route path="/changecategory" element={<ChangeCategory />}/>
 					<Route path="/changepassword" element={<ChangePW />}/>
+					<Route path="/subscribe/:id" element={<Subscribe />}/>
+					<Route path="/myblog/:id" element={<MyBlog />}/>
+					<Route path="/addapprover" element={<AddApprover />} />
+					<Route path="/createsummary" element={<AdminCreateSummary />} />
 
 					<Route path="/payment" element={<PaymentApprove />} />
 

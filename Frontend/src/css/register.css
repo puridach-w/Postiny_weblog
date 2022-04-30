@@ -12,7 +12,7 @@
 .copy h2 {
     padding: 10px 0px;
     font-weight: 100;
-    font-size: 3rem;
+    font-size: 3.75rem;
     background-color: transparent;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .left img {
-    width: 315px;
+    width: 420px;
     padding-left: 25px;
     padding-top: -20px;
 }
@@ -55,17 +55,17 @@
 }
 
 .backbtn {
-    padding-bottom: 620px;
-    padding-left: 50px;
-    width: 100px;
+    padding-bottom: 800px;
+    padding-left: 60px;
+    width: 300px;
     position: relative;
-    background-color: white;
+    background-color: transparent;
 }
 
 .backbtn a {
     font-family: SF Pro Rounded-Medium;
     color: #676767;
-    font-size: 17px;
+    font-size: 22px;
     text-decoration: none;
     padding-top: 50px;
 }
@@ -85,8 +85,8 @@
     flex-wrap: wrap;
     justify-content: space-between;
     background-color: transparent;
-    padding-left: 100px;
-    padding-bottom: 480px;
+    margin-left: -40px;
+    padding-bottom: 540px;
     width: 880px;
     background-color: white;
 }
@@ -109,7 +109,7 @@
     background-color: #f1f1f1;
     border: 1.5px solid;
     width: 260px;
-    height: 40px;
+    height: 50px;
     padding: 10px 10px;
     border-radius: 10px;
     text-align: left;
@@ -131,6 +131,7 @@
     border-color: #f1f1f1;
     font-family: SF Pro Rounded-Medium;
     font-size: 15px;
+    min-height: 200px;
 }
 
 
@@ -149,7 +150,7 @@
     background-color: #f1f1f1;
     border: 1.5px solid;
     width: 140px;
-    height: 40px;
+    height: 50px;
     padding: 10px 5px;
     border-radius: 10px;
     text-align: left;
@@ -182,7 +183,7 @@
     display: block;
     border-radius: 5px;
     padding: 10px 0;
-    margin-top: 40px;
+    margin-top: 60px;
     font-family: SF Pro Rounded-Semibold;
     font-size: 15px;
     cursor: pointer;
@@ -219,34 +220,3 @@
         height: auto;
     }
 }
-
-
-/* .password {
-    width: 400px;
-    display: flex;
-    flex-direction: row;
-    align-items: left;
-}
-
-.conpassword {
-    width: 300px;
-    margin-left: -150px;
-    display: flex;
-    flex-direction: row;
-    align-items: left;
-} */
-
-
-/* .pwinput {
-    margin-left: -70px;
-} */
-
-
-/* input[type='text'] {
-    margin-top: 20px;
-}
-
-input[type='password'],
-input[type='email'] {
-    margin-top: 8px;
-} */

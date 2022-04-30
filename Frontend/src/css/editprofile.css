@@ -6,19 +6,21 @@
 
 .editprofilett {
     font-family: SF Pro Rounded-Semibold;
-    padding-left: 30%;
-    font-size: 48px;
+    padding-left: 29%;
+    font-size: 50px;
     color: #1572A1;
     background-color: white;
+    padding-top: 5%;
 }
 
 .editprofilesubtt {
     font-family: SF Pro Rounded-Semibold;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: lighter;
     word-spacing: 2px;
     background-color: white;
-    padding-left: 10%;
+    padding-left: 6%;
+    padding-bottom: 6%;
 }
 
 .editprofilecard {
@@ -60,7 +62,7 @@
     cursor: pointer;
     color: #1572A1;
     font-family: SF Pro Rounded-Medium;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .editprofilecard .profilesectionbtn:hover {

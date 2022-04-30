@@ -2,8 +2,11 @@ import React from 'react'
 import '../css/pages_css/home.css';
 import ChevronLeft from '@material-ui/icons/ChevronLeftRounded';
 import ChevronRight from '@material-ui/icons/ChevronRightRounded';
+import { useNavigate } from "react-router-dom";
 
 export default function CardSlider(props) {
+
+    let navigate = useNavigate(); 
 
     const slideRight = () => {
         var slider = document.getElementById("slider");
@@ -22,7 +25,12 @@ export default function CardSlider(props) {
             {
                 props.adsArticles.map((article, index) => {
                     return (
-                        <div className="slider-card" key={index} onClick={ () => article.clickAds() }>
+                        <div className="slider-card" key={index} onClick={ () => {
+                            if (article.subRequired === "0"){
+                            article.clickAds()
+                            }
+                            else {navigate( `/subscribe/${article.id}`)}
+                            } }>
                             <div className="slider-card-image" 
                                 style={{backgroundImage:`url(${article.image})`}}></div>
                             <p className="slider-card-title">{article.title}</p>

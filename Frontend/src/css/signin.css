@@ -11,7 +11,7 @@
         justify-content: space-between;
         height: 180px;
         width: 100%;
-        padding: 0 110px;
+        padding: 0 100px;
     }
     /* .logo {
     background-color: transparent;
@@ -41,26 +41,26 @@
     header .logo {
         color: #1572A1;
         font-family: SF Pro Rounded-Bold;
-        font-size: 60px;
+        font-size: 64px;
         font-weight: 700;
         letter-spacing: 0px;
     }
     
     header .nav-items {
         display: flex;
-        padding-right: 200px;
+        padding-right: 40px;
         /* padding: 0 0 0 40px; */
     }
     
     header .nav-items li {
         list-style: none;
-        padding: 0 30px;
+        padding: 0 32px;
     }
     
     header .nav-items li a {
         font-family: SF Pro Rounded-Medium;
         color: #1572A1;
-        font-size: 20px;
+        font-size: 24px;
         text-decoration: none;
     }
     
@@ -84,8 +84,8 @@
         /* height: 400px; */
         /* padding: 100px 0px 10px 5px; */
         /* margin: -10vh 850px; */
-        padding-left: 980px;
-        padding-top: 10px;
+        padding-left: 1300px;
+        padding-top: 70px;
         padding-bottom: 100px;
         /* box-shadow: 5px 5px 5px 5px; */
     }
@@ -93,10 +93,12 @@
     .login h2 {
         color: #1572A1;
         padding: 10px 0px;
-        font-family: SF Pro Rounded-Medium;
+        font-family: SF Pro Rounded-Semibold;
         font-weight: 150;
-        font-size: 44px;
+        font-size: 52px;
         padding-bottom: 40px;
+        width: 300px;
+        letter-spacing: 0.3px;
     }
     
     .login input[type='text'],
@@ -104,8 +106,6 @@
         display: block;
         background-color: #f1f1f1;
         border: 1.5px solid;
-        width: 300px;
-        height: 25px;
         padding: 10px 10px;
         border-radius: 10px;
         text-align: left;
@@ -116,13 +116,13 @@
     }
     
     .login input[type='text'] {
-        width: 300px;
-        height: 25px;
+        width: 320px;
+        height: 50px;
     }
     
     .login input[type='password'] {
-        width: 300px;
-        height: 25px;
+        width: 320px;
+        height: 50px;
     }
     
     .login .btn {
@@ -130,10 +130,10 @@
         background-color: #1572A1;
         color: white;
         width: 320px;
-        height: 45px;
+        height: 50px;
         display: block;
         border-radius: 5px;
-        padding: 10px 0;
+        padding: 10px;
         padding-top: 10px;
         font-family: SF Pro Rounded-Semibold;
         font-size: 15px;
@@ -145,7 +145,7 @@
         position: relative;
         color: black;
         font-family: SF Pro Rounded-Medium;
-        font-size: 16px;
+        font-size: 20px;
         font-weight: 300;
         padding-left: 2px;
         padding-top: 20px;
@@ -158,390 +158,30 @@
     .f-container {
         width: 50%;
         height: 100%;
-        padding-left: 150px;
-        padding-top: 110px;
+        padding-left: 260px;
+        padding-top: 195px;
         font-family: SF Pro Rounded-Semibold;
         position: absolute;
-        font-size: 30px;
+        /* font-size: 90px; */
         background-color: white;
     }
     
     .img-container img {
-        width: 330px;
-        left: 550px;
-        padding-top: 150px;
+        width: 416px;
+        left: 800px;
+        padding-top: 220px;
         position: relative;
         background-color: white;
     }
-    /* p {
-        font-size: 40px;
-        font-weight: 600;
-        word-spacing: 3px;
-    } */
-    /*
-    .navbar {
-        z-index: 10000;
-        position: fixed;
-        width: 100%;
-        background-color: #ffffff;
-        padding: 22px 0px 18px 0px;
+    
+    .f-container h4 a {
+        text-decoration: none;
     }
     
-    .navButton {
-        display: initial;
-    }
-    
-    .navbar-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .signin-button {
-        background-color: transparent;
-        color: #1572A1;
-        font-family: SF Pro Rounded-Regular;
-        font-size: 1.5em;
-        font-weight: 500;
-        padding: 7px 25px 5px 25px;
-        border: none;
-        border-radius: 31px;
-        transition: 0.3s;
-    }
-    
-    .x2-sign-in {
-        background-color: white;
-        height: 1080px;
-        mix-blend-mode: normal;
-        overflow: hidden;
-        overflow-x: hidden;
-        position: relative;
-        width: 1920px;
-    }
-    
-    .hidden,
-    .hidden * {
-        pointer-events: none;
-        visibility: hidden;
-    }
-    
-    .signin-button-ZLWPO5 {
-        background-color: transparent;
-        height: 76px;
-        left: 1233px;
-        position: absolute;
-        top: 653px;
-        width: 510px;
-    }
-    
-    .rectangle-10-CbGilk {
-        background-color: #1573a2de;
-        border-radius: 15px;
-        height: 76px;
-        left: 0px;
-        mix-blend-mode: normal;
-        position: absolute;
-        top: 0px;
-        width: 508px;
-    }
-    
-    .valign-text-middle {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    
-    .sign-in-2-CbGilk {
-        background-color: transparent;
-        color: white;
+    .f-container h2 {
         font-family: SF Pro Rounded-Semibold;
-        font-size: large;
-        font-style: normal;
-        font-weight: 400;
-        height: 32px;
-        left: 210px;
-        letter-spacing: 0px;
-        line-height: normal;
-        mix-blend-mode: normal;
-        position: absolute;
-        text-align: center;
-        top: 22px;
-        width: 89px;
-    }
-    
-    .sign-in-ZLWPO5 {
-        background-color: transparent;
-        height: auto;
-        left: 1506px;
-        letter-spacing: 0px;
-        line-height: normal;
-        mix-blend-mode: normal;
-        position: absolute;
-        text-align: left;
-        top: 113px;
-        width: 71px;
-    }
-    
-    .enter-account-d7TyhK {
-        background-color: transparent;
-        height: 76px;
-        left: 1233px;
-        overflow: hidden;
-        position: absolute;
-        top: 537px;
-        width: 508px;
-    }
-    
-    .hidden-box-T8Evoq {
-        background-color: #f1f1f1;
-        height: 32px;
-        left: 30px;
-        mix-blend-mode: normal;
-        position: absolute;
-        top: 28px;
-        width: 147px;
-    }
-    
-    .rectangle-T8Evoq {
-        background-color: #f1f1f1;
-        border-radius: 15px;
-        height: 76px;
-        left: 0px;
-        mix-blend-mode: normal;
-        position: absolute;
-        top: 0px;
-        width: 508px;
-    }
-    
-    .line-T8Evoq {
-        background-color: transparent;
-        height: 1px;
-        left: 33px;
-        position: absolute;
-        top: 44px;
-        width: 1px;
-    }
-    
-    .username-T8Evoq {
-        background-color: transparent;
-        height: 30px;
-        left: 33px;
-        letter-spacing: 0px;
-        line-height: normal;
-        mix-blend-mode: normal;
-        position: absolute;
-        text-align: left;
-        top: 23px;
-        width: 147px;
-    }
-    
-    .testuser-T8Evoq {
-        background-color: transparent;
-        height: 32px;
-        left: 44px;
-        letter-spacing: 0px;
-        line-height: normal;
-        mix-blend-mode: normal;
-        position: absolute;
-        text-align: left;
-        top: 26px;
-        width: 128px;
-    }
-    
-    .join-our-community-ZLWPO5 {
-        background-color: transparent;
-        height: 227px;
-        left: 131px;
-        position: absolute;
-        top: 387px;
-        width: 531px;
-    }
-    
-    .if-you-dont-have-an-account-you-can-NhMgtJ {
-        background-color: transparent;
+        font-size: 50px;
+        font-weight: bold;
         color: black;
-        font-family: SF Pro Rounded-Regular;
-        font-size: medium;
-        font-style: normal;
-        font-weight: 400;
-        height: auto;
-        left: 0px;
-        letter-spacing: 0px;
-        line-height: normal;
-        mix-blend-mode: normal;
-        position: absolute;
-        text-align: left;
-        top: 166px;
-        width: 288px;
+        letter-spacing: 0.75px;
     }
-    
-    .join-us-to-explore-great-article-NhMgtJ {
-        background-color: transparent;
-        color: black;
-        font-family: SF Pro Rounded-Semibold;
-        font-size: x-large;
-        font-style: normal;
-        font-weight: 400;
-        height: auto;
-        left: 0px;
-        letter-spacing: 0px;
-        line-height: normal;
-        mix-blend-mode: normal;
-        position: absolute;
-        text-align: left;
-        top: 0px;
-        width: 527px;
-    }
-    
-    .register-here-ZLWPO5 {
-        background-color: transparent;
-        cursor: pointer;
-        height: auto;
-        left: 215px;
-        letter-spacing: 0px;
-        line-height: normal;
-        mix-blend-mode: normal;
-        position: absolute;
-        text-align: left;
-        top: 582px;
-        width: 140px;
-    }
-    
-    .register-ZLWPO5 {
-        background-color: transparent;
-        cursor: pointer;
-        height: auto;
-        left: 1647px;
-        letter-spacing: 0px;
-        line-height: normal;
-        mix-blend-mode: normal;
-        position: absolute;
-        text-align: left;
-        top: 113px;
-        width: 94px;
-    }
-    
-    .x3d-pony-2-1-ZLWPO5 {
-        background-color: transparent;
-        height: 466px;
-        left: 658px;
-        mix-blend-mode: normal;
-        object-fit: cover;
-        position: absolute;
-        top: 446px;
-        width: 466px;
-    }
-    
-    .rectangle-8-ZLWPO5 {
-        background-color: #1572A1;
-        border-radius: 15px;
-        height: 5px;
-        left: 1518px;
-        mix-blend-mode: normal;
-        position: absolute;
-        top: 149px;
-        width: 42px;
-    }
-    
-    .sign-in-button {
-        background-color: transparent;
-        color: #1572A1;
-        font-family: SF Pro Rounded-Regular;
-        font-size: medium;
-        font-style: normal;
-        font-weight: 500;
-        height: 65px;
-        padding: 20px;
-        /* left: 1233px;
-    letter-spacing: 0px;
-    line-height: normal;
-    mix-blend-mode: normal;
-    position: absolute;
-    text-align: left;
-    top: 303px;
-    width: 390px; 
-    }
-    
-    .welcome-ZLWPO5 {
-        background-color: transparent;
-        color: #1572A1;
-        font-family: SF Pro Rounded-Medium;
-        font-size: x-large;
-        font-style: normal;
-        font-weight: 500;
-        height: auto;
-        left: 1233px;
-        letter-spacing: 0px;
-        line-height: normal;
-        mix-blend-mode: normal;
-        position: absolute;
-        text-align: left;
-        top: 303px;
-        width: 390px;
-    }
-    
-    .enter-account-ZLWPO5 {
-        background-color: transparent;
-        height: 76px;
-        left: 1233px;
-        overflow: hidden;
-        position: absolute;
-        top: 425px;
-        width: 508px;
-    }
-    
-    .hidden-box-t2gMxD {
-        background-color: #f1f1f1;
-        height: 32px;
-        left: 30px;
-        mix-blend-mode: normal;
-        position: absolute;
-        top: 28px;
-        width: 147px;
-    }
-    
-    .username-t2gMxD {
-        background-color: transparent;
-        height: 30px;
-        left: 33px;
-        letter-spacing: 0px;
-        line-height: normal;
-        mix-blend-mode: normal;
-        position: absolute;
-        text-align: left;
-        top: 23px;
-        width: 147px;
-    }
-    
-    .testuser-t2gMxD {
-        background-color: transparent;
-        height: 32px;
-        left: 44px;
-        letter-spacing: 0px;
-        line-height: normal;
-        mix-blend-mode: normal;
-        position: absolute;
-        text-align: left;
-        top: 26px;
-        width: 128px;
-    }
-    
-    .rectangle-t2gMxD {
-        background-color: #f1f1f1;
-        border-radius: 15px;
-        height: 76px;
-        left: 0px;
-        mix-blend-mode: normal;
-        position: absolute;
-        top: 0px;
-        width: 508px;
-    }
-    
-    .line-t2gMxD {
-        background-color: transparent;
-        height: 1px;
-        left: 33px;
-        position: absolute;
-        top: 44px;
-        width: 1px;
-    }*/

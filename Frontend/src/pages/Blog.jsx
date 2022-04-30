@@ -8,23 +8,50 @@ import Comments from "../components/Comment/Comments"
 
 import "../css/pages_css/blog.css";
 
-import SidebarUser from "../components/Layout/SidebarUser";
-import Topbar from "../components/Layout/Topbar";
-
 const Blog = () => {
   const {id} = useParams();
   const [blog, setBlog] = useState(null);
   const [like, setLike] = useState(likeArray[0].like);
   const [likeActive, setLikeActive] = useState(false);
+  const startTime = new Date();
+  const twoMinutes = 60000;
+  const [read, setRead] = useState(false);
+
+  let ismyprofile = false;
 
   function likeMethod() {
-    if(likeActive) {
-      setLike(like-1);
-      setLikeActive(false);
-    } else {
-      setLike(like+1);
-      setLikeActive(true);
+    var canLike = checkTime();
+    if (canLike) {
+      if(likeActive) {
+        setLike(like-1);
+        setLikeActive(false);
+      } else {
+        setLike(like+1);
+        setLikeActive(true);
+      }
     }
+    else {
+      alert("you must read the article before liking it")
+    }
+  }
+
+  function addtodb(){
+    console.log("add laew mae")
+  }
+ 
+  function checkTime() {
+   var timePassed = new Date() - startTime > twoMinutes;
+     if (timePassed && !read){
+       setRead(true);
+       addtodb();
+       return true;
+     }
+     else if (read || ismyprofile){
+       return true;
+     }
+     else {
+       return false;
+     }
   }
 
   useEffect(() => {
@@ -34,19 +61,8 @@ const Blog = () => {
     }
   });
 
-  const dummy = {
-    username: "Jimmy",
-    profile_pic: "https://picsum.photos/400/600"
-};
-
   return (
-    <div>
-            <div className="topbar-color">
-                <Topbar name={dummy.username} img={dummy.profile_pic}/>
-                <div style={{display: "flex"}}>
-                    <SidebarUser role="user" />
-                    <div>
-                      <div className="blog" style={{marginLeft: "60px"}}>
+    <div className="blog" style={{marginLeft: "60px"}}>
       <div className="fix-goback">
         <Link to= '/home' >
           <Gobackbtn />
@@ -77,11 +93,6 @@ const Blog = () => {
       <EmptyBlog />
       }
     </div>
-                    </div> 
-                </div>
-            </div>
-        </div>
-    
   )
 }
 

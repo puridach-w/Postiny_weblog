@@ -9,7 +9,7 @@ export default function NewCat() {
             {/* <div className="backbtn">
                 <a href="#" >&lt; back</a>
             </div> */}
-            <GoBackBtn />
+            <GoBackBtn path="./register"/>
             <div className="choosecat">
                 <h2>Choose interested category</h2>
             </div>

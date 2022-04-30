@@ -9,6 +9,7 @@ import SearchBar from '../components/BlogList/SearchBar';
 import BlogList from '../components/BlogList/BlogList';
 import EmptyBlog from "../components/EmptyBlog";
 import WriteArticleModal from "../components/Modal/WriteArticleModal";
+import SearchUsername from '../components/SearchUsername';
 
 import '../css/pages_css/home.css';
 import { adsArticles, blogList, favCategory } from "../dummyData";
@@ -95,6 +96,9 @@ function Home() {
                 <div className="home" style={{paddingLeft: "60px"}}>
 			{modalOpen && <WriteArticleModal setOpenModal={setModalOpen} setBlur={setBlur} />}
 			<div style={{ filter: blur? "blur(5px)" : "none"}}>
+			{/* Search Username/> */}
+			<SearchUsername />
+				
 				{/* Write new article */}
 				<Button
 					variant="contained"

@@ -1,0 +1,113 @@
+.myblogList-wrap {
+    font-family: "SF Pro Rounded-Semibold";
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 5rem;
+    grid-row-gap: 1.5rem;
+    /* width: fit-content; */
+    width: 75rem;
+}
+
+@media(max-width: 1800px) {
+    .myblogList-wrap {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 900px) {
+    .myblogList-wrap {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.myblogItem-wrap {
+    display: inline-flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.myblogItem-cover {
+    width: 100%;
+    height: fit-content;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.myblogItem-category {
+    font-weight: 50;
+    font-size: 12px;
+    background: linear-gradient(to right, #1572A1, #80b7d3);
+    color: #fff;
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+    width: fit-content;
+    text-transform: capitalize;
+}
+
+.myblogItem-wrap h3 {
+    font-family: "SF Pro Rounded-Bold";
+    font-size: 18px;
+    margin: 0.5rem 0 0.4rem 0;
+    /* flex: 1; */
+}
+
+.myblogItem-desc {
+    z-index: 2;
+    position: relative;
+    max-height: 50px;
+    overflow: hidden;
+    font-size: 0.8rem;
+    padding-right: 0.6rem;
+    margin-bottom: 0;
+    color: #808080;
+}
+
+.myblogItem-desc::before {
+    position: absolute;
+    content: '...';
+    bottom: 0;
+    right: 0;
+}
+
+.myblogItem-wrap footer {
+    display: flex;
+    align-items: center;
+    /* margin-top: 0rem; */
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.myblogItem-link {
+    text-decoration: none;
+    color: #1572A1;
+}
+
+.myblogItem-info {
+    padding-top: 14px;
+    font-size: 14px;
+    color: #6E6E6E
+}
+
+
+/* .sociallocker-overlay {
+    background-color: black;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+} */
+
+.lockArticle {
+    opacity: 0.5;
+    width: 100%;
+    background: #f0ebeb;
+}
+
+.lockIcon {
+    position: absolute;
+    opacity: 1;
+    padding-left: 141px;
+    padding-top: 70px;
+    background-color: transparent;
+}

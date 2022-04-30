@@ -1,0 +1,82 @@
+.subscribeuser {
+    background-color: white;
+}
+
+.subcontainer1 {
+    background-color: white;
+    width: 1920px;
+    height: 700px;
+    padding-left: 36.5%;
+    padding-top: 35px;
+}
+
+.subprofileimg img {
+    border-radius: 50%;
+    height: 120px;
+    float: left;
+    margin-right: 40px;
+    margin-left: 60px;
+    margin-top: 14px;
+}
+
+.subsummary {
+    background-color: #f1f1f1;
+    width: 520px;
+    height: 600px;
+    padding-top: 40px;
+    border-radius: 25px;
+}
+
+.subsummary h2 {
+    color: #1352A1;
+    padding-left: 33%;
+    font-family: SF Pro Rounded-Bold;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.subsummary h3 {
+    color: black;
+    padding-top: 62px;
+    font-family: SF Pro Rounded-Semibold;
+    font-size: 28px;
+    letter-spacing: 0.5px;
+    margin-top: -18px;
+}
+
+
+/* .subcontainer2 {
+    background-color: pink;
+    width: 1920px;
+    height: 300px;
+    padding-left: 36%;
+} */
+
+.subdescription {
+    background-color: #edf6fa;
+    border: 3px double #1352A1;
+    width: 440px;
+    height: 260px;
+    padding-top: 80px;
+    border-radius: 25px;
+    margin-top: 80px;
+    margin-left: 38px;
+    padding: 50px;
+    letter-spacing: 0.5px;
+}
+
+.subButtons {
+    margin-top: 36px;
+    margin-left: 132px;
+}
+
+.subscribeuserbtn {
+    background-color: #1271a1;
+    width: 200px;
+    height: 40px;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    font-family: SF Pro Rounded-Semibold;
+    font-size: 16px;
+}

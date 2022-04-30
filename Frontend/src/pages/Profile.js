@@ -4,26 +4,28 @@ import profile from "../images/profilesample.jpg"
 import subicon from "../images/sub.jpg"
 import articleicon from "../images/article.jpg"
 import likeicon from "../images/like.jpg"
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button , IconButton} from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
+// import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { Button , IconButton} from '@mui/material';
+// import EditIcon from '@mui/icons-material/Edit';
 // import BlogList from '../components/BlogList/BlogList';
 // import EmptyBlog from "../components/EmptyBlog";
-import { blogList } from "../dummyData";
+// import { blogList } from "../dummyData";
 import GoBackBtn from "../components/gobackbtn";
+// import BlogList from '../components/BlogList/BlogList';
+// import EmptyBlog from "../components/EmptyBlog";
+import ProfileArticleList from "../components/ProfileArticleList";
+import ProfileSideBtn from "../components/ProfileSideButton";
 
 export default function Profile(props) {
 
 
-  const [blogs, setBlogs] = useState(blogList);
+    // let navigate = useNavigate(); 
 
-    let navigate = useNavigate(); 
-
-    function routeChange() { 
-      let path = `/editprofile`; 
-      navigate(path);
-    }
+    // function routeChange() { 
+    //   let path = `/editprofile`; 
+    //   navigate(path);
+    // }
 
     return ( 
         <div className="profile"> 
@@ -53,22 +55,24 @@ export default function Profile(props) {
             </div>
             <div className="profileDetail">
             <h2 className="fullname">{props.fname} {props.lname}</h2>
-            <div className="editprofilebtn">
+            <div className="besideprofilebtn">
               {/* <button onClick={routeChange} className="btn-modal">
                 Edit profile
               </button> */}
-              <Button style={{color: '#1D1D2B', borderColor: "#E3E3E6"}} variant="outlined" startIcon={<EditIcon />}
-              onClick={routeChange}>
-                Edit profile
-              </Button>
+              <ProfileSideBtn
+              id="1"
+              type="myprofile"/>
               </div>
             <h3 className="bio">{props.bio}</h3>
             <h4 className="favcat">{props.category.join("/")}</h4>
+            {/* <div className="myarticles">
+              {!blogs.length? <EmptyBlog /> : <BlogList blogs={blogs} />}
+            </div> */}
+            <ProfileArticleList
+            type="myprofile"/>
             </div>
 
-              <div className="myarticles">
-            
-            </div>
+              
            
         </div>
         );

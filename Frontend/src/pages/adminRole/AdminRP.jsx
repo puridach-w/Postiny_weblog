@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../css/pages_css/adminRole/adminRP.css"
 import {reports} from "../../dummyData"
 import AdminTable  from "./AdminTable";
 import AdminModal from './AdminModal';
 import SidebarUser from "../../components/Layout/SidebarUser";
 import Topbar from "../../components/Layout/Topbar";
+import AdminAddData  from "./AdminAddData";
 
 
 function AdminRP() {
     const [blur,setBlur] = useState(false)
     const [modalOpen, setModalOpen] = useState(false);
+    const [catModalOpen, setCatModalOpen] = useState(false);
     const [data,setData] = useState();
 
     const pendings = reports.filter( (item) => {
@@ -24,6 +27,14 @@ function AdminRP() {
         setModalOpen(true);
         setBlur(true);
         setData(data);
+     }
+
+     let navigate = useNavigate(); 
+
+     function routeChange() { 
+       let path = `/addapprover`; 
+       navigate(path);
+ 
      }
 
      const dummy = {
@@ -41,12 +52,16 @@ function AdminRP() {
                     <div>
                        <div style={{marginLeft: "110px"}} className="reportPage" >
         {modalOpen && <AdminModal data={data} setOpenModal={setModalOpen} setBlur={setBlur}/>}
+        {catModalOpen && <AdminAddData setOpenModal={setCatModalOpen} setBlur={setBlur}/>}
         <div style={{ filter: blur ? "blur(5px)" : "none" }}>
-            <button className="btn-addData addData">
+        <button className="btn-addData addData" onClick={() => {
+						setCatModalOpen(true);
+						setBlur(true);
+					}}>
                 <h1>Add data</h1>
                 <p>report type / category</p>
             </button>
-            <button className="btn-create create">
+            <button className="btn-create create" onClick={routeChange}>
                 <h1>Create new account</h1>
                 <p>approver role</p>
             </button>

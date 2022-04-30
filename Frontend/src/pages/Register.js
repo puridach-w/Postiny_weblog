@@ -19,19 +19,8 @@ export default function Register() {
 
     Axios.get('http://localhost:8080/userinfo').then((response) => {
         setUserInfo(response.data);
-        console.log("xxxxxxxxxxxxx " + userInfo);
     });
-
-    console.log("********** " + userInfo);
-    console.log("username " + username);
-    console.log("email " + email);
-    console.log("firstname " + firstname);
-    console.log("lastname " + lastname);
-    console.log("phone_number " + phone_number);
-    console.log("gender " + gender);
-    console.log("DOB " + DOB);
-    console.log("password " + password);
-   
+    
     const addUser = async () => {
         Axios.post('http://localhost:8080/register', {
             username: username,
@@ -60,6 +49,20 @@ export default function Register() {
             navigate("/newcategory");
         });
     }
+
+    var date = new Date();
+
+    var day = date.getDate() + 1;
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear() - 12;
+    var xyear = date.getFullYear() - 150;
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+
+    var minage = year + "-" + month + "-" + day;   
+    var maxage = xyear + "-" + month + "-" + day;
+
 
 
     return (
@@ -133,7 +136,7 @@ export default function Register() {
                         <div className="dateofbirth">
                             <div className="input-container dob">
                                 <label>Date of birth</label>
-                                <input id="dob" name="dob" type="date" required
+                                <input id="dob" name="dob" type="date" min={maxage} max={minage} required
                                     onChange={ (event) => {
                                         setDOB(event.target.value);
                                     }}

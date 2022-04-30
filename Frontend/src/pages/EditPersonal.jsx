@@ -57,7 +57,7 @@ export default function EditPersonal() {
                             </select>
                         </div>
                         
-                        <div className="input-container bio">
+                        <div className="input-container bio" rows="8">
                             <label>Bio</label>
                             <textarea className="profilebio">Bio</textarea>
                         </div>

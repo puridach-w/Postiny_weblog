@@ -20,23 +20,22 @@
 }
 
 .profileSummary {
-    background-color: yellow;
+    background-color: white;
     /* display: flex;
     flex-wrap: wrap; */
     /* justify-content: space-between; */
-    width: 1300px;
-    height: 190px;
+    width: 1800px;
+    height: 250px;
     /* margin: 100px; */
-    padding-left: 210px;
+    padding-left: 260px;
     padding-top: 20px;
 }
 
 .profileimg img {
     border-radius: 50%;
-    height: 150px;
+    height: 200px;
     float: left;
-    margin-right: 150px;
-    background-color: aqua;
+    margin-right: 200px;
 }
 
 
@@ -50,21 +49,21 @@
     float: left;
     background-color: transparent;
     align-items: center;
-    width: 180px;
+    width: 200px;
     height: 80px;
     /* border: 1px solid #000; */
     text-align: left;
-    margin-top: 50px;
-    margin-right: 80px;
+    margin-top: 60px;
+    margin-right: 100px;
 }
 
 .sub h3,
 .article h3,
 .like h3 {
     color: black;
-    margin-top: 6px;
+    margin-top: 10px;
     font-family: SF Pro Rounded-Bold;
-    font-size: 19px;
+    font-size: 22px;
 }
 
 .sub h5,
@@ -72,147 +71,60 @@
 .like h5 {
     color: #B0B0B0;
     font-family: SF Pro Rounded-Semibold;
-    font-size: 15px;
+    font-size: 18px;
 }
 
 .summary img {
     float: left;
     margin-right: 22px;
-    width: 55px;
+    width: 75px;
 }
 
 .profileDetail {
-    margin-left: 220px;
-    margin-top: -5px;
+    padding-left: 280px;
+    padding-top: -5px;
     background-color: white;
 }
 
 .profileDetail h2 {
     font-family: SF Pro Rounded-Semibold;
-    font-size: 42px;
+    font-size: 50px;
 }
 
 .profileDetail h3 {
     font-family: SF Pro Rounded-Medium;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: lighter;
     margin-top: -2px;
 }
 
 .profileDetail h4 {
     font-family: SF Pro Rounded-Medium;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: lighter;
     margin-top: 14px;
     color: #B0B0B0;
+    margin-bottom: 44px;
 }
 
-.editprofilebtn {
+.besideprofilebtn {
     position: absolute;
-    margin-left: 810px;
-    margin-top: -45px;
+    margin-left: 980px;
+    margin-top: -55px;
     margin-bottom: 100px;
 }
 
-.editprofilebtn .MuiButton-outlined {
+.besideprofilebtn .MuiButton-outlined {
     font-family: SF Pro Rounded-Semibold;
     font-weight: lighter;
+    font-size: 18px;
+    border-radius: 8px;
 }
 
-.myarticle {
-    width: 1300px;
-    height: 190px;
-    background-color: blue;
-    padding: 100px;
+.besideprofilebtn .MuiButton-contained {
+    font-family: SF Pro Rounded-Medium;
+    font-weight: lighter;
+    font-size: 17px;
+    width: 135px;
+    border-radius: 8px;
 }
-
-
-/* 
-.blogItem-wrap {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-}
-
-.blogItem-cover {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 20px;
-    margin-bottom: 0.5rem;
-}
-
-.blogItem-wrap h3 {
-    margin: 0.5rem 0 1rem 0;
-    flex: 1;
-}
-
-.blogItem-desc {
-    position: relative;
-    max-height: 50px;
-    overflow: hidden;
-    padding-right: 0.6rem;
-    font-size: 0.8rem;
-    color: #a9a9a9;
-}
-
-.blogItem-desc::before {
-    position: absolute;
-    content: '...';
-    bottom: 0;
-    right: 0;
-}
-
-.blogItem-wrap footer {
-    display: flex;
-    align-items: center;
-    margin-top: 1rem;
-    justify-content: space-between;
-}
-
-.blogItem-link {
-    text-decoration: none;
-    color: inherit;
-}
-
-.blogItem-author {
-    display: flex;
-    align-items: center;
-}
-
-.blogItem-author img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 0.5rem;
-}
-
-.blogItem-author p {
-    font-size: 0.6rem;
-    color: #a9a9a9;
-    font-weight: 600;
-}
-
-.blogList-wrap {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 3rem;
-}
-
-@media (max-width: 768px) {
-    .blogList-wrap {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 600px) {
-    .blogList-wrap {
-        grid-template-columns: repeat(1, 1fr);
-    }
-}
-
-.myarticle {
-    width: 1200px;
-    margin-left: 200px;
-} */

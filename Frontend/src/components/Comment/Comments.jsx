@@ -13,6 +13,10 @@ import './comment.css';
 const Comments = ({ commentsUrl, currentUserId }) => {
   const [backendComments, setBackendComments] = useState([]);
   const [activeComment, setActiveComment] = useState(null);
+  const startTime = new Date();
+  const twoMinutes = 5000;
+  const [read, setRead] = useState(false);
+  let ismyprofile = false;
 //   const rootComments = backendComments.filter(
 //     (backendComment) => backendComment.parentId === null
 //   );
@@ -26,12 +30,45 @@ const Comments = ({ commentsUrl, currentUserId }) => {
 //           new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
 //     );
 // ลบ (text, parentId) -> (text)
+
+function addtodb(){
+  console.log("add laew mae")
+}
+
+function checkTime() {
+  var timePassed = new Date() - startTime > twoMinutes;
+    if (timePassed && !read){
+      setRead(true);
+      addtodb();
+      return true;
+    }
+    else if (read || ismyprofile){
+      return true;
+    }
+    else {
+      return false;
+    }
+ }
+
+ 
+ const handleSubmit = (text) => {
+  var canComment = checkTime();
+  if (canComment) {
+  addComment(text);
+  }
+  else {
+    alert("you must read the article before giving comment")
+  }
+  
+}
+
   const addComment = (text) => {
         createCommentApi(text).then((comment) => {
             setBackendComments([comment, ...backendComments]);
             setActiveComment(null);
     });
   };
+
 
   const updateComment = (text, commentId) => {
     updateCommentApi(text).then(() => {
@@ -67,7 +104,7 @@ const Comments = ({ commentsUrl, currentUserId }) => {
         <div className="comments-wrap">
             <h3 className="comments-title">Comments</h3>
             <div className="comment-form-title">Write your comment here :)</div>
-            <CommentForm className="comment-form-box" submitLabel="Write" handleSubmit={addComment} />
+            <CommentForm className="comment-form-box" submitLabel="Write" handleSubmit={handleSubmit} />
         </div>
         <div className="comments-container">
             {rootComments.map((rootComment) => (

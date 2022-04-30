@@ -7,6 +7,21 @@ import GoBackBtn from "../components/gobackbtn";
 
 export default function Changepw() {
 
+   const [password, setPassword] = useState("");
+   const [newpassword, setNewPassword] = useState("");
+   const [confirmpassword, setConfirmPassword] = useState("");
+
+   function handleSubmit() {
+      const confirm = document.querySelector('input[name=cfnpassword]');
+        if (confirmpassword !== newpassword) {
+            confirm.setCustomValidity('Password do not match');
+        } else {
+         confirm.setCustomValidity('');
+          alert("updated!!");
+        }
+   }
+   
+
     return (
        <div>
       <GoBackBtn path="./editprofile"/>
@@ -17,18 +32,27 @@ export default function Changepw() {
                   
                   <div className="inputctn oldpassword">
                      <label>Current password</label>
-                     <input id="password" name="password" type="password" placeholder="Enter your current password" required/>
+                     <input id="oldpassword" name="oldpassword" type="password" placeholder="Enter your current password" required
+                     onChange={(event) => {
+                        setPassword(event.target.value)
+                    }}/>
                   </div>
                   <div className="inputctn newpassword">
                      <label>New password</label>
-                     <input id="password" name="password" type="password" placeholder="Enter your new password" required/>
+                     <input id="newpassword" name="newpassword" type="password" placeholder="Enter your new password" required
+                     onChange={(event) => {
+                        setNewPassword(event.target.value)
+                    }}/>
                   </div>
                   <div className="inputctn confirmnewpw">
                      <label>Confirm new password</label>
-                     <input id="password" name="password" type="password" placeholder="Confirm your new password" required/>
+                     <input id="cfnpassword" name="cfnpassword" type="password" placeholder="Confirm your new password" required
+                     onChange={(event) => {
+                        setConfirmPassword(event.target.value)
+                    }}/>
                   </div>
                   <div className="savechangepw">
-                     <button type="submit" className="cpwbtn" >Update password</button> <br />
+                     <button type="submit" className="cpwbtn" onClick={handleSubmit}>Update password</button> <br />
                   </div>
                </form>
                </div>

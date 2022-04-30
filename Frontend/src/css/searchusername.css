@@ -1,0 +1,21 @@
+.sucontainer {
+    width: 400px;
+}
+
+.searchusernamebtn {
+    border: none;
+    background-color: #616161;
+    color: white;
+    width: 80px;
+    height: 43px;
+    display: block;
+    border-radius: 5px;
+    padding: 10px;
+    padding-top: 10px;
+    font-family: SF Pro Rounded-Medium;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: -44px;
+    margin-left: 420px;
+    margin-bottom: 20px;
+}
