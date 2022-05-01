@@ -28,7 +28,6 @@ export default function Signin() {
             username: signinData.username,
             password: signinData.password
          }).then(function (response) {
-            console.log(response.data);
             localStorage.setItem('token', response.data.token)
             const temp = response.data.temp;
             if(temp === "Success login USER"){

@@ -71,7 +71,7 @@ const signin = (req, res) => {
         const password = req.body.password;
         let temp = "";
         console.log(username);
-        db.query("SELECT username, password, role_id, user_id FROM userinfo WHERE username = ?",[username], (err,result) => {
+        db.query("SELECT username,password,role_id FROM userinfo WHERE username = ?",[username], (err,result) => {
             let data = {temp: ""}
             if(err) {
                 console.log(err);
@@ -88,7 +88,7 @@ const signin = (req, res) => {
                     temp = "Success login USER";
                 }
                 if (bcrypt.compareSync(password, result[0].password)) {
-                    var token = jwt.sign({ username: result[0].username, user_id: result[0].user_id }, secret, {expiresIn: "10h"});
+                    var token = jwt.sign({ username: result[0].username }, secret, {expiresIn: "10h"});
                     res.json({temp: temp ,msg: "login success", token: token});
                 } else{
                     res.json({msg: "login failed"});
@@ -97,7 +97,7 @@ const signin = (req, res) => {
             }
         })
    });
-}
+};
 
 const auth = (req, res) => {
     try{
@@ -114,4 +114,4 @@ module.exports = {
     userInfo,
     signin,
     auth
-}
+};

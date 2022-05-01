@@ -39,6 +39,7 @@ function Home() {
 	Axios.post('http://localhost:8080/auth', {
 		authorization : "Bearer " + token
 		}).then((response) => {
+			console.log(response.data);
 			if(response.data.status === 'ok'){
 				const user_id = response.data.decoded.user_id;
 				localStorage.setItem("user_id",user_id);
@@ -47,7 +48,8 @@ function Home() {
 				localStorage.removeItem("token");
 				window.location = "/";
 			}
-	})
+		})
+	
 
 	// Search submit
 	const handleSearchSubmit = (event) => {
@@ -67,6 +69,7 @@ function Home() {
 
 	const handleFavourite = () => {
 		const allBlogs = blogList;
+		// const favCat = favCategory[0].category.map
 		const filteredFav = allBlogs.filter( (blog) => 
 			blog.category.toLowerCase().includes(favCategory[0].category.toLowerCase().trim())
 		);
