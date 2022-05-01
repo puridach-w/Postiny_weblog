@@ -20,8 +20,6 @@ const getCategory = (req, res) => {
 }
 
 const writeArticle = (req, res) => {
-    console.log("1");
-    console.log(req.body);
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
@@ -50,7 +48,27 @@ const writeArticle = (req, res) => {
     });
 }
 
+const blogList = (req, res) => {
+    console.log("bloglist");
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            res.status(500).json({'error':err});
+            return;
+        }
+        db.query("SELECT * FROM article", (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+    });
+}
+
 module.exports = {
     writeArticle,
-    getCategory
+    getCategory,
+    blogList
 }

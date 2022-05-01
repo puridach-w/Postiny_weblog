@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Home() {
 	const classes = useStyles();
-	const [blogs, setBlogs] = useState(blogList);
+	const [blogs, setBlogs] = useState([]);
 	const [searchKey, setSearchKey] = useState(null);
 	const [unchecked, setUnchecked] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
@@ -39,7 +39,6 @@ function Home() {
 	Axios.post('http://localhost:8080/auth', {
 		authorization : "Bearer " + token
 		}).then((response) => {
-			console.log(response.data);
 			if(response.data.status === 'ok'){
 				const user_id = response.data.decoded.user_id;
 				localStorage.setItem("user_id",user_id);
@@ -48,8 +47,13 @@ function Home() {
 				localStorage.removeItem("token");
 				window.location = "/";
 			}
-		})
-	
+	});
+
+	useEffect( () => {
+		Axios.get('http://localhost:8080/getbloglist').then((response) => {
+			setBlogs(response.data);
+		});
+	}, []);
 
 	// Search submit
 	const handleSearchSubmit = (event) => {
@@ -59,7 +63,7 @@ function Home() {
 
 	// Search for blogs by category
 	const handleSearchResults = () => {
-		const allBlogs = blogList;
+		const allBlogs = blogs;
 		const filteredBlogs = allBlogs.filter( (blog) => 
 			blog.category.toLowerCase().includes(searchKey.toLowerCase().trim())
 		);
@@ -68,7 +72,7 @@ function Home() {
 	}
 
 	const handleFavourite = () => {
-		const allBlogs = blogList;
+		const allBlogs = blogs;
 		// const favCat = favCategory[0].category.map
 		const filteredFav = allBlogs.filter( (blog) => 
 			blog.category.toLowerCase().includes(favCategory[0].category.toLowerCase().trim())
@@ -77,7 +81,7 @@ function Home() {
 		if (!unchecked) {
 			setBlogs(filteredFav);
 		} else {
-			setBlogs(blogList);
+			setBlogs(blogs);
 		}
 	}
 
@@ -92,59 +96,59 @@ function Home() {
                 <Topbar name={dummy.username} img={dummy.profile_pic}/>
                 <div style={{display: "flex"}}>
                     <SidebarUser role="user" />
-                    <div>
-                <div className="home" style={{paddingLeft: "60px"}}>
-			{modalOpen && <WriteArticleModal setOpenModal={setModalOpen} setBlur={setBlur} />}
-			<div style={{ filter: blur? "blur(5px)" : "none"}}>
-			{/* Search Username/> */}
-			<SearchUsername />
-				
-				{/* Write new article */}
-				<Button
-					variant="contained"
-					size="large"
-					style={{fontFamily: "SF Pro Rounded-Semibold", fontSize: "16px"}}
-					className={["createButton", classes.button]}
-					startIcon={<CreateRoundedIcon />}
-					onClick={() => {
-						setModalOpen(true);
-						setBlur(true);
-					}}
-				>
-				Write new article 
-				</Button>
+					<div>
+						<div className="home" style={{paddingLeft: "60px"}}>
+							{modalOpen && <WriteArticleModal setOpenModal={setModalOpen} setBlur={setBlur} />}
+							<div style={{ filter: blur? "blur(5px)" : "none"}}>
+								{/* Search Username/> */}
+								<SearchUsername />
+								
+								{/* Write new article */}
+								<Button
+									variant="contained"
+									size="large"
+									style={{fontFamily: "SF Pro Rounded-Semibold", fontSize: "16px"}}
+									className={["createButton", classes.button]}
+									startIcon={<CreateRoundedIcon />}
+									onClick={() => {
+										setModalOpen(true);
+										setBlur(true);
+									}}
+								>
+								Write new article 
+								</Button>
 
-				{/* Advertisement */}
-				<div className="ads-box">
-					<p className="ads">Ads</p>
-				</div>
-				<div id="ads-card">
-					<CardSlider adsArticles={adsArticles} />
-				</div>
-				
-				{/* Search bar */}
-				<SearchBar 
-					value= {searchKey} 
-					// clearSearch= {handleClearSearch}
-					formSubmit= {handleSearchSubmit}
-					handleSearchKey= { (event) => setSearchKey(event.target.value) }
-				/>
+								{/* Advertisement */}
+								<div className="ads-box">
+									<p className="ads">Ads</p>
+								</div>
+								<div id="ads-card">
+									<CardSlider adsArticles={adsArticles} />
+								</div>
+								
+								{/* Search bar */}
+								<SearchBar 
+									value= {searchKey} 
+									// clearSearch= {handleClearSearch}
+									formSubmit= {handleSearchSubmit}
+									handleSearchKey= { (event) => setSearchKey(event.target.value) }
+								/>
 
-				{/* Checkbox */}	
-				<input 
-					className="fav-category"
-					type="checkbox"
-					defaultChecked={unchecked}
-					onClick={handleFavourite}
-					onChange={() => setUnchecked(!unchecked)}
-				>
-				</input>
-				<span className='fav-category'>Show only your interested category</span>
+								{/* Checkbox */}	
+								<input 
+									className="fav-category"
+									type="checkbox"
+									defaultChecked={unchecked}
+									onClick={handleFavourite}
+									onChange={() => setUnchecked(!unchecked)}
+								>
+								</input>
+								<span className='fav-category'>Show only your interested category</span>
 
-				{/* Blog list & Empty List */}
-				{!blogs.length? <EmptyBlog /> : <BlogList blogs={blogs} />}
-			</div>
-		</div>
+								{/* Blog list & Empty List */}
+								{!blogs.length? <EmptyBlog /> : <BlogList blogs={blogs} />}
+							</div>
+						</div>
                     </div> 
                 </div>
             </div>

@@ -11,10 +11,11 @@ import "../css/pages_css/blog.css";
 const Blog = () => {
   const {id} = useParams();
   const [blog, setBlog] = useState(null);
+  const [blogs, setBlogs] = useState([]);
   const [like, setLike] = useState(likeArray[0].like);
   const [likeActive, setLikeActive] = useState(false);
   const startTime = new Date();
-  const twoMinutes = 60000;
+  const twoMinutes = 120000;
   const [read, setRead] = useState(false);
 
   let ismyprofile = false;
@@ -31,7 +32,7 @@ const Blog = () => {
       }
     }
     else {
-      alert("you must read the article before liking it")
+      alert("You must read the article before liking it");
     }
   }
 
@@ -54,12 +55,21 @@ const Blog = () => {
      }
   }
 
+  // useEffect(() => {
+	// 	Axios.get('http://localhost:8080/getbloglist').then((response) => {
+  //     console.log("======== " + response.data);
+	// 		setBlogs(response.data);
+	// 	});
+	// }, []);
+
+  console.log("===" + blogs);
+
   useEffect(() => {
-    let blog = blogList.find(blog => blog.id === parseInt(id));
+    let blog = blogs.find(blog => blog.article_id === parseInt(id));
     if (blog) {
       setBlog(blog);
     }
-  });
+  }, []);
 
   return (
     <div className="blog" style={{marginLeft: "60px"}}>
@@ -72,12 +82,12 @@ const Blog = () => {
       <br />
       {blog ? 
       <><div className="blog-wrap">
-          <img src={blog.cover} alt="cover img" />
-          <h4 className="blog-category">{blog.category}</h4>
+          <img src={blog.article_pic} alt="cover img" />
+          <h4 className="blog-category">{blog.category_id}</h4>
           <h1>{blog.title}</h1>
-          <p className="blog-author">Written by {blog.authorName}</p>
-          <p className="blog-date">Published on {blog.createdAt}</p>
-          <p className="blog-desc">{blog.description}</p>
+          <p className="blog-author">Written by {blog.author_id}</p>
+          <p className="blog-date">Published on {blog.created_at.substring(0,10)}</p>
+          <p className="blog-desc">{blog.content}</p>
         </div><div className="interect">
             <button
               onClick={likeMethod}
