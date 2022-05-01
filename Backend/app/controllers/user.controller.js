@@ -23,6 +23,7 @@ const userInfo = (req, res) => {
    });
 }
 
+
 const register = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
@@ -40,8 +41,6 @@ const register = (req, res) => {
         const DOB = req.body.DOB;
         const password = req.body.password;
         const hashPassword = bcrypt.hashSync(password, saltRounds);
-        console.log(hashPassword);
-        console.log(hashPassword.length);
         db.query("INSERT INTO userinfo (role_id, username, password, email, firstname, lastname, DOB, gender, phone_number, coin_balance, created_at, updated_at) VALUES (3,?,?,?,?,?,?,?,?,0,NOW(),NOW())",
         [username, hashPassword, email, firstname, lastname, DOB, gender, phone_number],
         (err,result) => {
@@ -71,7 +70,7 @@ const signin = (req, res) => {
         const password = req.body.password;
         let temp = "";
         console.log(username);
-        db.query("SELECT username,password,role_id FROM userinfo WHERE username = ?",[username], (err,result) => {
+        db.query("SELECT username,password,role_id,user_id FROM userinfo WHERE username = ?",[username], (err,result) => {
             let data = {temp: ""}
             if(err) {
                 console.log(err);
@@ -88,7 +87,7 @@ const signin = (req, res) => {
                     temp = "Success login USER";
                 }
                 if (bcrypt.compareSync(password, result[0].password)) {
-                    var token = jwt.sign({ username: result[0].username }, secret, {expiresIn: "10h"});
+                    var token = jwt.sign({ username: result[0].username , user_id: result[0].user_id}, secret, {expiresIn: "10h"});
                     res.json({temp: temp ,msg: "login success", token: token});
                 } else{
                     res.json({msg: "login failed"});
@@ -109,9 +108,53 @@ const auth = (req, res) => {
     }   
 }
 
+const getAllCategory = (req, res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            res.status(500).json({'error':err});
+            return;
+        }
+        db.query("SELECT * FROM category", (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+    });
+}
+
+const addCategory = (req,res) => {
+    console.log("123123");
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            res.status(500).json({'error':err});
+            return;
+        }
+        const user_id = req.body.user_id;
+        const category_id = req.body.category_id;
+        console.log(user_id);
+        console.log(category_id);
+        db.query("INSERT INTO userinterest (user_id,category_id) VALUES (?, ?)",
+        [user_id,category_id], (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+    });
+}
+
 module.exports = {
     register,
     userInfo,
     signin,
-    auth
+    auth,
+    getAllCategory,
+    addCategory
 };

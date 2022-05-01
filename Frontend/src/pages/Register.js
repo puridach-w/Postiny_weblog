@@ -46,6 +46,7 @@ export default function Register() {
                     password: password
                 }
             ]);
+            localStorage.setItem("username",username)
             navigate("/newcategory");
         });
     }
