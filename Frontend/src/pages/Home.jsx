@@ -41,8 +41,8 @@ function Home() {
 		}).then((response) => {
 			console.log(response.data);
 			if(response.data.status === 'ok'){
-				// alert("authen success");
-				alert(response.data.decoded.username);
+				const user_id = response.data.decoded.user_id;
+				localStorage.setItem("user_id",user_id);
 			} else{
 				alert("authen failed");
 				localStorage.removeItem("token");
