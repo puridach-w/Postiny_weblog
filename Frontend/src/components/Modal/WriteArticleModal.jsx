@@ -1,14 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./writeArticleModal.css";
 import DropPicture from '@material-ui/icons/WallpaperRounded';
-import { Switch } from "antd";
+import Switch from '@mui/material/Switch';
+import Axios from 'axios';
 
-function WriteArticleModal({ setOpenModal, setBlur }) {
+function WriteArticleModal({ setOpenModal, setBlur, user_id }) {
   const [select, setSelect] = useState([]);
-  const category = ["Technology", "Gaming", "Music", "Beauty", "Sports", "Art"];
-  
-  // find category
-  // write article
+  const [img, setImg] = useState("");
+  const [category, setCategory] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [lock, setLock] = useState(0);
+
+  alert("*********** " + user_id);
+
+  //get category list
+  useEffect( () => {
+    Axios.get('http://localhost:8080/getcategory').then((response) => {
+      setSelect(response.data);
+    });
+  }, []);
+
+  const addArticle = async () => {
+    Axios.post('http://localhost:8080/writearticle', {
+      category: category,
+      title: title,
+      content: content,
+      article_pic: "https://picsum.photos/1920/1080",
+      sub_required: lock
+    })
+  }
 
   return (
     <div className="modalBackground">
@@ -40,12 +61,14 @@ function WriteArticleModal({ setOpenModal, setBlur }) {
                 <p>Category <span style={{color: "red"}}>*</span>
                 <span>
                   <select 
-                          value={select}
-                          onChange={ e => setSelect(e.target.value)}
-                      >
-                          {category.map( item => (
-                              <option key={item} value={item}>{item}</option>
-                          ))}
+                      value={category}
+                      onChange={(event) => {
+                        setCategory(event.target.value);
+                    }}
+                  >
+                  {select.map( item => (
+                      <option key={item.category_id} value={item.category_id}>{item.category_name}</option>
+                  ))}
                   </select>
                 </span>
                 </p>
@@ -54,18 +77,27 @@ function WriteArticleModal({ setOpenModal, setBlur }) {
                   className="title" 
                   type="text" 
                   placeholder="Once upon a time..." 
-                  />
+                  onChange={(event) => {
+                    setTitle(event.target.value);
+                  }}
+                />
                 <p>Description <span style={{color: "red"}}>*</span></p>
                 <textarea  
                   className="des" 
-                  placeholder="The start of  a wonderful story..." />
+                  placeholder="The start of  a wonderful story..." 
+                  onChange={(event) => {
+                    setContent(event.target.value);
+                  }}
+                />
               </div>
             </span>
           </div>
         </div>
 
         <div className="footer">
-          <span><button>Post</button></span>
+          <label>{lock? "All subscribers" : "Public"}</label>
+          <Switch checked={lock} onChange={ () => {lock? setLock(0) : setLock(1)}} />
+          <button onClick={addArticle}>Post</button>
         </div>
       </div>
     </div>

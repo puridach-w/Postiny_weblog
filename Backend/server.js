@@ -20,18 +20,14 @@ var corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 
-
 app.use(bodyParser.json({ limit: "50mb" }));
-
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-
-// //initial route
-// app.get("/", (req, res) => {
-//   res.json({ data: "Welcome to Postiny" });
-// });
 
 //register, login
 require("./app/routes/user.routes")(app);
+
+//home
+require("./app/routes/home.routes")(app);
 
 
 //listening
@@ -39,14 +35,6 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Postiny Server is running on port ${PORT}.`);
 });
-
-
-//jwt secretkey
-// const secretKey = require("./app/config/auth.config").secret;
-
-
-// app.use(cookieParser(secretKey));
-
 
 
 // var publicDir = require("path").join(__dirname, "/data");
