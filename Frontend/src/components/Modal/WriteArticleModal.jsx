@@ -4,15 +4,14 @@ import DropPicture from '@material-ui/icons/WallpaperRounded';
 import Switch from '@mui/material/Switch';
 import Axios from 'axios';
 
-function WriteArticleModal({ setOpenModal, setBlur, user_id }) {
+function WriteArticleModal({ setOpenModal, setBlur}) {
   const [select, setSelect] = useState([]);
   const [img, setImg] = useState("");
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [lock, setLock] = useState(0);
-
-  alert("*********** " + user_id);
+  const user_id = localStorage.getItem("user_id");
 
   //get category list
   useEffect( () => {
@@ -23,6 +22,7 @@ function WriteArticleModal({ setOpenModal, setBlur, user_id }) {
 
   const addArticle = async () => {
     Axios.post('http://localhost:8080/writearticle', {
+      user_id: user_id,
       category: category,
       title: title,
       content: content,
@@ -30,6 +30,9 @@ function WriteArticleModal({ setOpenModal, setBlur, user_id }) {
       sub_required: lock
     })
   }
+
+  console.log(user_id);
+  console.log(category);
 
   return (
     <div className="modalBackground">
@@ -95,9 +98,13 @@ function WriteArticleModal({ setOpenModal, setBlur, user_id }) {
         </div>
 
         <div className="footer">
-          <label>{lock? "All subscribers" : "Public"}</label>
+          <label>{lock? "Only subscribers" : "Public"}</label>
           <Switch checked={lock} onChange={ () => {lock? setLock(0) : setLock(1)}} />
-          <button onClick={addArticle}>Post</button>
+          <button onClick={() => {
+              setOpenModal(false);
+              setBlur(false);
+			        addArticle();
+            }}>Post</button>
         </div>
       </div>
     </div>

@@ -6,7 +6,6 @@ const getCategory = (req, res) => {
         if (err) {
             console.log(err);
             res.status(500).json({'error':err});
-            db.release();
             return;
         }
         db.query("SELECT category_id, category_name FROM category", (err, result) => {
@@ -25,16 +24,16 @@ const writeArticle = (req, res) => {
         if (err) {
             console.log(err);
             res.status(500).json({'error':err});
-            db.release();
             return;
         }
+        const user_id = req.body.user_id;
         const category = req.body.category;
         const title = req.body.title;
         const content = req.body.content;
         const article_pic = req.body.article_pic;
         const sub_required = req.body.sub_required;
         db.query("INSERT INTO article (author_id, category_id, title, content, article_pic, sub_required) VALUES (?, ?, ?, ?, ?, ?)",
-        [ยังไม่ได้, category, title, content, article_pic, sub_required],
+        [user_id, category, title, content, article_pic, sub_required],
         (err,result) => {
             if (err) {
                 console.log(err);
