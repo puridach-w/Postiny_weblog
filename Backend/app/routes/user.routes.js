@@ -7,7 +7,7 @@ module.exports = function (app) {
     app.post("/register", controller.register);
     app.post("/signin", controller.signin);
 
-    // app.post("/auth",controller.auth);
+    app.post("/auth",controller.auth);
 
 //   app.post("/api/user/changePassword", auth, controller.changePassword);
 

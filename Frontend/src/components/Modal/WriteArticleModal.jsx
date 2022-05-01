@@ -64,11 +64,13 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
                 <p>Category <span style={{color: "red"}}>*</span>
                 <span>
                   <select 
+                      required
                       value={category}
                       onChange={(event) => {
                         setCategory(event.target.value);
                     }}
                   >
+                  <option value="" disabled selected hidden>Category</option>
                   {select.map( item => (
                       <option key={item.category_id} value={item.category_id}>{item.category_name}</option>
                   ))}
@@ -77,6 +79,7 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
                 </p>
                 <p>Title <span style={{color: "red"}}>*</span></p>
                 <input 
+                  required
                   className="title" 
                   type="text" 
                   placeholder="Once upon a time..." 
@@ -86,6 +89,7 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
                 />
                 <p>Description <span style={{color: "red"}}>*</span></p>
                 <textarea  
+                  required
                   className="des" 
                   placeholder="The start of  a wonderful story..." 
                   onChange={(event) => {
@@ -104,7 +108,7 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
               setOpenModal(false);
               setBlur(false);
 			        addArticle();
-            }}>Post</button>
+          }}>Post</button>
         </div>
       </div>
     </div>
