@@ -21,6 +21,8 @@ const getCategory = (req, res) => {
 }
 
 const writeArticle = (req, res) => {
+    console.log("1");
+    console.log(req.body);
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);

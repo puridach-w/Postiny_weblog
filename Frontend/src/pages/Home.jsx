@@ -35,19 +35,21 @@ function Home() {
 	const [modalOpen, setModalOpen] = useState(false);
 	const [blur, setBlur] = useState(false);
 	const token = localStorage.getItem('token');
-	var user_id = "";
 
 	Axios.post('http://localhost:8080/auth', {
 		authorization : "Bearer " + token
 		}).then((response) => {
+			console.log(response.data);
 			if(response.data.status === 'ok'){
-				user_id = response.data.decoded.user_id;
+				// alert("authen success");
+				alert(response.data.decoded.username);
 			} else{
 				alert("authen failed");
 				localStorage.removeItem("token");
 				window.location = "/";
 			}
-	})
+		})
+	
 
 	// Search submit
 	const handleSearchSubmit = (event) => {
@@ -67,6 +69,7 @@ function Home() {
 
 	const handleFavourite = () => {
 		const allBlogs = blogList;
+		// const favCat = favCategory[0].category.map
 		const filteredFav = allBlogs.filter( (blog) => 
 			blog.category.toLowerCase().includes(favCategory[0].category.toLowerCase().trim())
 		);
@@ -91,7 +94,7 @@ function Home() {
                     <SidebarUser role="user" />
                     <div>
                 <div className="home" style={{paddingLeft: "60px"}}>
-			{modalOpen && <WriteArticleModal user_id={user_id} setOpenModal={setModalOpen} setBlur={setBlur} />}
+			{modalOpen && <WriteArticleModal setOpenModal={setModalOpen} setBlur={setBlur} />}
 			<div style={{ filter: blur? "blur(5px)" : "none"}}>
 			{/* Search Username/> */}
 			<SearchUsername />
