@@ -49,7 +49,6 @@ const writeArticle = (req, res) => {
 }
 
 const blogList = (req, res) => {
-    console.log("bloglist");
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);

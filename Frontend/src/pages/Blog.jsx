@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { blogList, likeArray } from "../dummyData";
 import EmptyBlog from '../components/EmptyBlog';
 import Comments from "../components/Comment/Comments"
+import Axios from "axios";
 
 import "../css/pages_css/blog.css";
 
@@ -17,6 +18,11 @@ const Blog = () => {
   const startTime = new Date();
   const twoMinutes = 120000;
   const [read, setRead] = useState(false);
+
+  const [category, setCategory] = useState("");
+  const [username, setUsername] = useState("");
+  const [fName, setFName] = useState("");
+  const [lName, setLName] = useState("");
 
   let ismyprofile = false;
 
@@ -55,21 +61,34 @@ const Blog = () => {
      }
   }
 
-  // useEffect(() => {
-	// 	Axios.get('http://localhost:8080/getbloglist').then((response) => {
-  //     console.log("======== " + response.data);
-	// 		setBlogs(response.data);
-	// 	});
-	// }, []);
+  useEffect(async ()  => {
+		Axios.get('http://localhost:8080/getbloglist').then((response) => {
+			setBlogs(response.data);
+		});
 
-  console.log("===" + blogs);
-
-  useEffect(() => {
     let blog = blogs.find(blog => blog.article_id === parseInt(id));
     if (blog) {
       setBlog(blog);
     }
-  }, []);
+
+    Axios.get('http://localhost:8080/getcategory').then((response) => {
+        response.data.map( item => {
+            if (item.category_id === blog.category_id) {
+                setCategory(item.category_name);
+            }
+        })
+    });
+
+    Axios.get('http://localhost:8080/userinfo').then((response) => {
+      response.data.map( item => {
+          if (item.user_id === blog.author_id) {
+              setUsername(item.username);
+              setFName(item.firstname);
+              setLName(item.lastname);
+          }
+      });
+    });
+	}, []);
 
   return (
     <div className="blog" style={{marginLeft: "60px"}}>
@@ -83,9 +102,10 @@ const Blog = () => {
       {blog ? 
       <><div className="blog-wrap">
           <img src={blog.article_pic} alt="cover img" />
-          <h4 className="blog-category">{blog.category_id}</h4>
+          <h4 className="blog-category">{category}</h4>
           <h1>{blog.title}</h1>
-          <p className="blog-author">Written by {blog.author_id}</p>
+          <p className="blog-author">Written by {fName} {lName}</p>
+          <p className="blog-author">Username {username}</p>
           <p className="blog-date">Published on {blog.created_at.substring(0,10)}</p>
           <p className="blog-desc">{blog.content}</p>
         </div><div className="interect">
