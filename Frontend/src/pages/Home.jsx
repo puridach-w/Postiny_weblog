@@ -38,13 +38,14 @@ function Home() {
 	const [modalOpen, setModalOpen] = useState(false);
 	const [blur, setBlur] = useState(false);
 	const token = localStorage.getItem('token');
+	var user_id = localStorage.getItem("user_id");
 
 	Axios.post('http://localhost:8080/auth', {
 		authorization : "Bearer " + token
 		}).then((response) => {
 			if(response.data.status === 'ok'){
-				const user_id = response.data.decoded.user_id;
-				localStorage.setItem("user_id",user_id);
+				user_id = response.data.decoded.user_id;
+				localStorage.setItem("user_id", user_id);
 			} else{
 				alert("authen failed");
 				localStorage.removeItem("token");
@@ -52,23 +53,44 @@ function Home() {
 			}
 	});
 
+	const requestGetBlogList = Axios.get('http://localhost:8080/getbloglist')
+	const requestGetCategory = Axios.get('http://localhost:8080/getcategory')
+	const requestGetfavcategory = Axios.get('http://localhost:8080/getfavcategory',
+	{
+		params: {
+			user_id: user_id
+	  }
+	})
+
 	useEffect( () => {
-		Axios.get('http://localhost:8080/getbloglist').then((response) => {
-			setBlogs(response.data);
-			setInitBlogs(response.data);
+		Axios.all([requestGetBlogList, requestGetfavcategory, requestGetCategory]).then(Axios.spread((...responses) => {
+				
+				const responseOne = responses[0]
+				const responseTwo = responses[1]
+				const responesThree = responses[2]
+				
+				setBlogs(responseOne.data);
+				setInitBlogs(responseOne.data);
+				console.log(blogs);
+				console.log(initBlogs);
+
+				setGetFavCate(responseTwo.data);
+
+				setCategory(responesThree.data);
+				var temp = [];
+				responesThree.data.map( item => {
+					getFavCate.map( cate => {
+						if (item.category_id === cate.category_id) {
+							temp.push(item.category_name);
+						}
+						setFavCate(temp);
+					})
+				});
+
+			})).catch(errors => {
+				console.log(errors);
 		});
-
-		Axios.get('http://localhost:8080/getcategory').then((response) => {
-        	setCategory(response.data);
-   		});
-		  
-		Axios.get('http://localhost:8080/getfavcategory').then((response) => {
-        	setGetFavCate(response.data);
-   		});
 	}, []);
-
-	console.log(getFavCate);
-	console.log("====" + favCategory[0].category);
 
 	// Search submit
 	const handleSearchSubmit = (event) => {
@@ -95,14 +117,22 @@ function Home() {
 
 	const handleFavourite = () => {
 		const allBlogs = initBlogs;
-		const filteredFav = allBlogs.filter( (blog) => {
-				return blog.category.toLowerCase().includes(favCategory[0].category.toLowerCase().trim())
-			}
-		);
+		const filteredFav = [];
+		allBlogs.map( blog => {
+			getFavCate.map( item => {
+				if(item.category_id === blog.category_id) {
+					filteredFav.push(blog);
+				}
+			})
+		});
+
+		console.log(filteredFav);
+		console.log(initBlogs);
+
 		if (!unchecked) {
 			setBlogs(filteredFav);
 		} else {
-			setBlogs(blogs);
+			setBlogs(initBlogs);
 		}
 	}
 

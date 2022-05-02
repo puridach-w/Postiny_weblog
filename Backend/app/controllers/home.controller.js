@@ -8,7 +8,7 @@ const getFavCategory = (req, res) => {
             res.status(500).json({'error':err});
             return;
         }
-        const user_id = req.body.user_id;
+        const user_id = req.query.user_id;
         db.query("SELECT category_id FROM userinterest WHERE user_id = ?",
         [user_id], 
         (err, result) => {

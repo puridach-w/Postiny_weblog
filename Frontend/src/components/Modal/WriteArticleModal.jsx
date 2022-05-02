@@ -31,9 +31,6 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
     })
   }
 
-  console.log(user_id);
-  console.log(category);
-
   return (
     <div className="modalBackground">
       <div className="modalContainer">

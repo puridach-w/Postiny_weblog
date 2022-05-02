@@ -69,17 +69,19 @@ const Blog = () => {
     const responseOne = responses[0]
     const responseTwo = responses[1]
     const responesThree = responses[2]
-    // use/access the results 
+
     setBlogs(responseOne.data);
     let blog = blogs.find(blog => blog.article_id === parseInt(id));
     if (blog) {
       setBlog(blog);
     }
+
     responseTwo.data.map( item => {
       if (item.category_id === blog.category_id) {
           setCategory(item.category_name);
       }
     })
+    
     responesThree.data.map( item => {
       if (item.user_id === blog.author_id) {
           setUsername(item.username);
