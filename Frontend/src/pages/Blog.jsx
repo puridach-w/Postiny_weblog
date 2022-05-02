@@ -61,34 +61,35 @@ const Blog = () => {
      }
   }
 
-  useEffect(async ()  => {
-  Axios.get('http://localhost:8080/getbloglist').then((response) => {
-   setBlogs(response.data);
-  });
-
+  const requestGetBlogList = Axios.get('http://localhost:8080/getbloglist')
+  const requestGetCategory = Axios.get('http://localhost:8080/getcategory')
+  const requestUserInfo = Axios.get('http://localhost:8080/userinfo')
+ 
+  Axios.all([requestGetBlogList, requestGetCategory, requestUserInfo]).then(Axios.spread((...responses) => {
+    const responseOne = responses[0]
+    const responseTwo = responses[1]
+    const responesThree = responses[2]
+    // use/access the results 
+    setBlogs(responseOne.data);
     let blog = blogs.find(blog => blog.article_id === parseInt(id));
     if (blog) {
       setBlog(blog);
     }
-
-    Axios.get('http://localhost:8080/getcategory').then((response) => {
-        response.data.map( item => {
-            if (item.category_id === blog.category_id) {
-                setCategory(item.category_name);
-            }
-        })
+    responseTwo.data.map( item => {
+      if (item.category_id === blog.category_id) {
+          setCategory(item.category_name);
+      }
+    })
+    responesThree.data.map( item => {
+      if (item.user_id === blog.author_id) {
+          setUsername(item.username);
+          setFName(item.firstname);
+          setLName(item.lastname);
+      }
     });
-
-    Axios.get('http://localhost:8080/userinfo').then((response) => {
-      response.data.map( item => {
-          if (item.user_id === blog.author_id) {
-              setUsername(item.username);
-              setFName(item.firstname);
-              setLName(item.lastname);
-          }
-      });
-    });
- }, []);
+  })).catch(errors => {
+    console.log(errors);
+  })
 
   return (
     <div className="blog" style={{marginLeft: "60px"}}>
