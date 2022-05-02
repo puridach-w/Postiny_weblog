@@ -62,7 +62,7 @@ function Home() {
         	setCategory(response.data);
    		});
 		  
-		Axios.get('http://localhost:8080/getFavCategory').then((response) => {
+		Axios.get('http://localhost:8080/getfavcategory').then((response) => {
         	setGetFavCate(response.data);
    		});
 	}, []);
