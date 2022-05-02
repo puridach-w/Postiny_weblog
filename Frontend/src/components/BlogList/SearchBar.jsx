@@ -1,7 +1,7 @@
 import React from 'react'
 import './BlogList.css';
 
-const SearchBar = ({ value, handleSearchKey, clearSearch, formSubmit }) => {
+const SearchBar = ({ value, handleSearchKey, formSubmit }) => {
   return (
     <div className="searchBar-wrap">
         <form onSubmit={formSubmit}>
@@ -14,7 +14,6 @@ const SearchBar = ({ value, handleSearchKey, clearSearch, formSubmit }) => {
             <button>Go</button>
         </form>
         <br />
-        
     </div>
   )
 }

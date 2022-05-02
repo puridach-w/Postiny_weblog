@@ -12,7 +12,7 @@ import WriteArticleModal from "../components/Modal/WriteArticleModal";
 import SearchUsername from '../components/SearchUsername';
 
 import '../css/pages_css/home.css';
-import { adsArticles, blogList, favCategory } from "../dummyData";
+import { adsArticles, favCategory } from "../dummyData";
 
 import SidebarUser from "../components/Layout/SidebarUser";
 import Topbar from "../components/Layout/Topbar";
@@ -29,7 +29,10 @@ const useStyles = makeStyles((theme) => ({
 
 function Home() {
 	const classes = useStyles();
+	const [initBlogs, setInitBlogs] = useState([]);
 	const [blogs, setBlogs] = useState([]);
+	const [category, setCategory] = useState("");
+	const [getFavCate, setGetFavCate] = useState([]);
 	const [searchKey, setSearchKey] = useState(null);
 	const [unchecked, setUnchecked] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
@@ -52,8 +55,20 @@ function Home() {
 	useEffect( () => {
 		Axios.get('http://localhost:8080/getbloglist').then((response) => {
 			setBlogs(response.data);
+			setInitBlogs(response.data);
 		});
+
+		Axios.get('http://localhost:8080/getcategory').then((response) => {
+        	setCategory(response.data);
+   		});
+		  
+		Axios.get('http://localhost:8080/getFavCategory').then((response) => {
+        	setGetFavCate(response.data);
+   		});
 	}, []);
+
+	console.log(getFavCate);
+	console.log("====" + favCategory[0].category);
 
 	// Search submit
 	const handleSearchSubmit = (event) => {
@@ -63,21 +78,27 @@ function Home() {
 
 	// Search for blogs by category
 	const handleSearchResults = () => {
-		const allBlogs = blogs;
-		const filteredBlogs = allBlogs.filter( (blog) => 
-			blog.category.toLowerCase().includes(searchKey.toLowerCase().trim())
+		const allBlogs = initBlogs;
+		allBlogs.map( (blog) => {
+			category.map((item) => {
+				if (blog.category_id === item.category_id) {
+					blog.category_name = item.category_name;
+				}
+			})
+		});
+		const filteredBlogs = allBlogs.filter( (blog) => {
+				return blog.category_name.toLowerCase().includes(searchKey.toLowerCase().trim());
+			}
 		);
-
 		setBlogs(filteredBlogs);
 	}
 
 	const handleFavourite = () => {
-		const allBlogs = blogs;
-		// const favCat = favCategory[0].category.map
-		const filteredFav = allBlogs.filter( (blog) => 
-			blog.category.toLowerCase().includes(favCategory[0].category.toLowerCase().trim())
+		const allBlogs = initBlogs;
+		const filteredFav = allBlogs.filter( (blog) => {
+				return blog.category.toLowerCase().includes(favCategory[0].category.toLowerCase().trim())
+			}
 		);
-
 		if (!unchecked) {
 			setBlogs(filteredFav);
 		} else {
@@ -129,7 +150,6 @@ function Home() {
 								{/* Search bar */}
 								<SearchBar 
 									value= {searchKey} 
-									// clearSearch= {handleClearSearch}
 									formSubmit= {handleSearchSubmit}
 									handleSearchKey= { (event) => setSearchKey(event.target.value) }
 								/>

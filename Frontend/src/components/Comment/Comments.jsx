@@ -57,7 +57,7 @@ function checkTime() {
   addComment(text);
   }
   else {
-    alert("you must read the article before giving comment")
+    alert("You must read the article before giving comment")
   }
   
 }

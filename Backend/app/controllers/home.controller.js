@@ -1,6 +1,27 @@
 
 const pool = require("../config/db");
 
+const getFavCategory = (req, res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            res.status(500).json({'error':err});
+            return;
+        }
+        const user_id = req.body.user_id;
+        db.query("SELECT category_id FROM userinterest WHERE user_id = ?",
+        [user_id], 
+        (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+    });
+}
+
 const getCategory = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
@@ -69,5 +90,6 @@ const blogList = (req, res) => {
 module.exports = {
     writeArticle,
     getCategory,
-    blogList
+    blogList,
+    getFavCategory
 }

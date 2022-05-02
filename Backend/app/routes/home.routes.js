@@ -5,4 +5,5 @@ module.exports = function (app) {
     app.get("/getcategory", controller.getCategory);
     app.post("/writearticle", controller.writeArticle);
     app.get("/getbloglist", controller.blogList);
+    app.get("/getFavCategory", controller.getFavCategory);
 }
