@@ -11,4 +11,5 @@ module.exports = function (app) {
     app.post("/addCategory", controller.addCategory)
 
     app.post("/auth",controller.auth);
+    
 };

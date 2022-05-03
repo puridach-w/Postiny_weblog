@@ -486,11 +486,11 @@ INSERT INTO `status` (`status_id`, `status_name`) VALUES
 --
 
 INSERT INTO `userinfo` (`user_id`, `role_id`, `username`, `password`, `email`, `firstname`, `lastname`, `DOB`, `gender`, `phone_number`, `profile_pic`, `bio`, `coin_balance`, `created_at`, `updated_at`) VALUES
-(1, 1, 'testAdmin', 'testAdmin', 'ceo@gmail.com', 'poori', 'handsome', '2013-04-07', 'M', '0812345678', 'boy', 'single', 200, '2022-04-27 13:39:28', '2022-04-29 13:39:28'),
-(2, 2, 'testApprover', 'testAdmin', 'easysql@gmail.com', 'thamon', 'boonpa', '2012-05-20', 'F', '0957841234', 'girl', 'single', 100, '2022-04-26 13:44:35', '2022-04-27 13:44:35'),
-(3, 3, 'ryan', '456178', 'ryanisadog@gmail.com', 'ryan', 'seeha', '2022-01-14', 'M', '0889641234', 'dog', 'Hello I am a dog', 10, '2022-04-27 13:56:53', '2022-04-27 16:56:53'),
-(4, 3, 'kunpra', 'qwerty', 'kunpra@gmail.com', 'kunpra', 'waipra', '2022-01-14', 'M', '0889641234', 'dog', 'Hello I am a dog', 0, '2022-04-27 13:56:53', '2022-04-27 16:56:53'),
-(5, 3, 'kunjao', 'qwerty', 'kunjao@gmail.com', 'kunjao', 'waijao', '2022-01-14', 'F', '0889641234', 'dog', 'Hello I am a dog', 0, '2022-04-27 13:56:53', '2022-04-27 16:56:53');
+(1, 1, 'testAdmin', '$2b$10$f0lzJLAK45pN4bYs8tbpeOck0iRpBSH8qj/Vn8tfk7A/OJqPTVbe6', 'ceo@gmail.com', 'poori', 'handsome', '2013-04-07', 'M', '0812345678', 'boy', 'single', 200, '2022-04-27 13:39:28', '2022-04-29 13:39:28'),
+(2, 2, 'testApprover', '$2b$10$Kj595gxi3hT/XnMFKIuDlekNuv87YnOSjgPqgM4jlxtxYU2nwB00q', 'easysql@gmail.com', 'thamon', 'boonpa', '2012-05-20', 'F', '0957841234', 'girl', 'single', 100, '2022-04-26 13:44:35', '2022-04-27 13:44:35'),
+(3, 3, 'ryan', '$2b$10$n7CKPQOlpGWQwpe3OAnbAul8PETo33hWVf98sOz7zVtO.RaNzrcYy', 'ryanisadog@gmail.com', 'ryan', 'seeha', '2022-01-14', 'M', '0889641234', 'dog', 'Hello I am a dog', 10, '2022-04-27 13:56:53', '2022-04-27 16:56:53'),
+(4, 3, 'kunpra', '$2b$10$n7CKPQOlpGWQwpe3OAnbAul8PETo33hWVf98sOz7zVtO.RaNzrcYy', 'kunpra@gmail.com', 'kunpra', 'waipra', '2022-01-14', 'M', '0889641234', 'dog', 'Hello I am a dog', 0, '2022-04-27 13:56:53', '2022-04-27 16:56:53'),
+(5, 3, 'kunjao', '$2b$10$n7CKPQOlpGWQwpe3OAnbAul8PETo33hWVf98sOz7zVtO.RaNzrcYy', 'kunjao@gmail.com', 'kunjao', 'waijao', '2022-01-14', 'F', '0889641234', 'dog', 'Hello I am a dog', 0, '2022-04-27 13:56:53', '2022-04-27 16:56:53');
 
 
 --

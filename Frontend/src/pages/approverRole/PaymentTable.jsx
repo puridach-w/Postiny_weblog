@@ -33,9 +33,9 @@ function PaymentTable(props) {
 
           <TableBody>
             {props.data.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow key={row.payment_id}>
                 <TableCell className="cell">
-                  {row.id}
+                  {row.payment_id}
                 </TableCell>
                 <TableCell className="cell">
                   {row.username}
@@ -44,7 +44,7 @@ function PaymentTable(props) {
                   {row.amount}
                 </TableCell>
                 <TableCell className="cell">
-                  {row.date}
+                  {row.created_at.substring(0,10)}
                 </TableCell>
                 <TableCell className="cell">
                     <Typography 
@@ -52,12 +52,12 @@ function PaymentTable(props) {
                       style={{
                           backgroundColor: 
                           (
-                            (row.status === 'Approved' && '#189A25') ||
-                            (row.status === 'Pending' && '#EEBE16') ||
-                            (row.status === 'Rejected' && '#C12323')
+                            (row.status_name === 'Approved' && '#189A25') ||
+                            (row.status_name === 'Pending' && '#EEBE16') ||
+                            (row.status_name === 'Rejected' && '#C12323')
                           ),
                       }}
-                    >{row.status}
+                    >{row.status_name}
                     </Typography>
 				</TableCell>
 				<TableCell>

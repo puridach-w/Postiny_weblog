@@ -40,6 +40,7 @@ export default function NewCat() {
             addCategory(item);
         })
         window.location = '/';
+        localStorage.removeItem("username");
     }
 
     const handleChecked = (event) => {
@@ -95,7 +96,3 @@ export default function NewCat() {
         </div>
     );
 }
-
-
-
-
