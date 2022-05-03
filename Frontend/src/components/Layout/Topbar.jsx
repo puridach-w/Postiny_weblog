@@ -18,7 +18,12 @@ function Topbar({ user_id }) {
             </div>
             <div className="topbarRight">
                 <span className="topbarName">Hello, {user.username} </span>
-                <img className="topbarProfile" src={user.profile_pic} alt="profile" />
+                <img 
+                    onClick={ () => window.location="/profile"}
+                    className="topbarProfile" 
+                    src={user.profile_pic} 
+                    alt="profile" 
+                />
             </div>
         </div>
     </div>

@@ -23,8 +23,6 @@ function PaymentApprove() {
             authorization : "Bearer " + token
             }).then((response) => {
                 if(response.data.status === 'ok'){
-                    const user_id = response.data.decoded.user_id;
-                    localStorage.setItem("user_id",user_id);
                     if(response.data.decoded.role_id != 2){
                         alert("This page for only approver role.");
                         if(response.data.decoded.role_id === 3){
@@ -101,10 +99,6 @@ function PaymentApprove() {
             </span>
         );
     }
-    const dummy = {
-        username: "Jimmy",
-        profile_pic: "https://picsum.photos/400/600"
-    };
 
     return (
         <div>

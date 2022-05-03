@@ -89,14 +89,12 @@ const signin = (req, res) => {
         }
         const username = req.body.username;
         const password = req.body.password;
-        console.log(username,password);
         let temp = "";
         db.query("SELECT username,password,role_id,user_id FROM userinfo WHERE username = ?",[username], (err,result) => {
-            let data = {temp: ""}
             if(err) {
                 console.log(err);
             } else if(result.length === 0){
-                console.log("User not found");
+                res.json({msg: "User not found"});
             } 
             else {
                 const role_id = result[0].role_id;
@@ -108,10 +106,10 @@ const signin = (req, res) => {
                     temp = "Success login USER";
                 }
                 if (bcrypt.compareSync(password, result[0].password)) {
-                    var token = jwt.sign({ username: result[0].username , user_id: result[0].user_id, role_id: result[0].role_id}, secret, {expiresIn: "10h"});
-                    res.json({temp: temp ,msg: "login success", token: token});
+                    var token = jwt.sign({ username: result[0].username , role_id: result[0].role_id}, secret, {expiresIn: "10h"});
+                    res.json({temp: temp ,msg: "login success", token: token, user_id: result[0].user_id});
                 } else{
-                    res.json({msg: "login failed"});
+                    res.json({msg: "Wrong password"});
                 }
             db.release();
             }

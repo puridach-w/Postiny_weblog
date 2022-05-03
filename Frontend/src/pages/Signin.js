@@ -28,15 +28,19 @@ export default function Signin() {
             username: signinData.username,
             password: signinData.password
          }).then(function (response) {
-            localStorage.setItem('token', response.data.token)
-            const temp = response.data.temp;
-            if(temp === "Success login USER"){
-               navigate("/home");
-               // can use window.location = '/home';
-            } else if(temp=== "Success login APPROVER"){
-               navigate("/payment");
-            } else if(temp === "Success login ADMIN"){
-               navigate("/report-admin");
+            if(response.data.msg === "User not found" || response.data.msg === "Wrong password"){
+               alert(response.data.msg);
+            }else{
+               localStorage.setItem('token', response.data.token)
+               localStorage.setItem('user_id', response.data.user_id)
+               const temp = response.data.temp;
+               if(temp === "Success login USER"){
+                  navigate("/home");
+               } else if(temp=== "Success login APPROVER"){
+                  navigate("/payment");
+               } else if(temp === "Success login ADMIN"){
+                  navigate("/report-admin");
+               }
             }
          })
          }
