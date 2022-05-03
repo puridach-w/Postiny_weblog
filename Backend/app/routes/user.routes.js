@@ -3,6 +3,7 @@ const controller = require("../controllers/user.controller");
 module.exports = function (app) {
 
     app.get("/userinfo", controller.userInfo);
+    app.get("/currentuser/:id", controller.currentUser);
     app.get("/getAllCategory", controller.getAllCategory);
 
     app.post("/register", controller.register);
