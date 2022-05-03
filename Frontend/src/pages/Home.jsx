@@ -36,17 +36,17 @@ function Home() {
 	const [unchecked, setUnchecked] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
 	const [blur, setBlur] = useState(false);
-	// const [currentUser, setCurrentUser] = useState([]);
 	const token = localStorage.getItem('token');
-	var user_id = localStorage.getItem("user_id");
+	const user_id = localStorage.getItem('user_id');
+
+	console.log(user_id);
+	console.log(token);
 
 	useEffect( () => {
 		Axios.post('http://localhost:8080/auth', {
 		authorization : "Bearer " + token
 		}).then((response) => {
 			if(response.data.status === 'ok'){
-				const user_id = response.data.decoded.user_id;
-				localStorage.setItem("user_id",user_id);
 				if(response.data.decoded.role_id != 3){
 					alert("This page for only user role.");
 					if(response.data.decoded.role_id === 2){

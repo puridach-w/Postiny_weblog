@@ -23,7 +23,8 @@ import Wallet from "./pages/Wallet"
 import Report from "./pages/Report"
 import Page404 from "./pages/Page404";
 import Topup from "./pages/Topup";
-import TransactionUpload from "./pages/TransactionUpload"
+import TransactionUpload from "./pages/TransactionUpload";
+import Signout from "./pages/signout";
 
 
 import Layout from "./components/Layout/Layout";
@@ -53,6 +54,7 @@ export default function App() {
 					<Route path="/myblog/:id" element={<MyBlog />}/>
 					<Route path="/addapprover" element={<AddApprover />} />
 					<Route path="/createsummary" element={<AdminCreateSummary />} />
+					<Route path="/signout" element={<Signout />} />
 
 					<Route path="/payment" element={<PaymentApprove />} />
 
