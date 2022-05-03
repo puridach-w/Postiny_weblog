@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const saltRounds = 10;
 const secret = "secretNajaYarHaiFGroupPomNaKrub";
 
+// for getting all user info to insert previous user (client) while regist the new user
 const userInfo = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
@@ -23,7 +24,28 @@ const userInfo = (req, res) => {
    });
 }
 
+ // for getting a username and profile picture to show on each page
+const currentUser = (req, res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            db.release();
+            return;
+        }
+        const current_id = req.params.id;
+        db.query("SELECT username, profile_pic FROM userinfo WHERE user_id = ?",
+        [current_id], (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+    });
+}
 
+// insert data into userinfo table for regist
 const register = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
@@ -57,7 +79,7 @@ const register = (req, res) => {
    });
 }
 
-
+// login with separate role
 const signin = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
@@ -126,6 +148,7 @@ const getAllCategory = (req, res) => {
     });
 }
 
+// insert to userinterest entity when user regist the account
 const addCategory = (req,res) => {
     console.log("123123");
     pool.getConnection((err, db) => {
@@ -153,6 +176,7 @@ const addCategory = (req,res) => {
 module.exports = {
     register,
     userInfo,
+    currentUser,
     signin,
     auth,
     getAllCategory,

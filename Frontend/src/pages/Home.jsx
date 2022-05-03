@@ -12,7 +12,7 @@ import WriteArticleModal from "../components/Modal/WriteArticleModal";
 import SearchUsername from '../components/SearchUsername';
 
 import '../css/pages_css/home.css';
-import { adsArticles, favCategory } from "../dummyData";
+import { adsArticles } from "../dummyData";
 
 import SidebarUser from "../components/Layout/SidebarUser";
 import Topbar from "../components/Layout/Topbar";
@@ -31,12 +31,12 @@ function Home() {
 	const classes = useStyles();
 	const [initBlogs, setInitBlogs] = useState([]);
 	const [blogs, setBlogs] = useState([]);
-	const [category, setCategory] = useState("");
 	const [getFavCate, setGetFavCate] = useState([]);
 	const [searchKey, setSearchKey] = useState(null);
 	const [unchecked, setUnchecked] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
 	const [blur, setBlur] = useState(false);
+	// const [currentUser, setCurrentUser] = useState([]);
 	const token = localStorage.getItem('token');
 	var user_id = localStorage.getItem("user_id");
 
@@ -53,40 +53,24 @@ function Home() {
 			}
 	});
 
-	const requestGetBlogList = Axios.get('http://localhost:8080/getbloglist')
-	const requestGetCategory = Axios.get('http://localhost:8080/getcategory')
-	const requestGetfavcategory = Axios.get('http://localhost:8080/getfavcategory',
+	const requestGetBlogList = Axios.get('http://localhost:8080/getbloglist');
+	// const requestGetUserInfo = Axios.get(`http://localhost:8080/currentuser/${user_id}`);
+	const requestGetFavCategory = Axios.get('http://localhost:8080/getfavcategory',
 	{
 		params: {
 			user_id: user_id
-	  }
-	})
-
+	  	}
+	});
 	useEffect( () => {
-		Axios.all([requestGetBlogList, requestGetfavcategory, requestGetCategory]).then(Axios.spread((...responses) => {
-				
+		Axios.all([requestGetBlogList, requestGetFavCategory]).then(Axios.spread((...responses) => {
 				const responseOne = responses[0]
 				const responseTwo = responses[1]
-				const responesThree = responses[2]
+				// const responseThree = responses[2]
 				
 				setBlogs(responseOne.data);
 				setInitBlogs(responseOne.data);
-				console.log(blogs);
-				console.log(initBlogs);
-
+				// setCurrentUser(responseThree.data);
 				setGetFavCate(responseTwo.data);
-
-				setCategory(responesThree.data);
-				var temp = [];
-				responesThree.data.map( item => {
-					getFavCate.map( cate => {
-						if (item.category_id === cate.category_id) {
-							temp.push(item.category_name);
-						}
-						setFavCate(temp);
-					})
-				});
-
 			})).catch(errors => {
 				console.log(errors);
 		});
@@ -101,13 +85,6 @@ function Home() {
 	// Search for blogs by category
 	const handleSearchResults = () => {
 		const allBlogs = initBlogs;
-		allBlogs.map( (blog) => {
-			category.map((item) => {
-				if (blog.category_id === item.category_id) {
-					blog.category_name = item.category_name;
-				}
-			})
-		});
 		const filteredBlogs = allBlogs.filter( (blog) => {
 				return blog.category_name.toLowerCase().includes(searchKey.toLowerCase().trim());
 			}
@@ -119,15 +96,12 @@ function Home() {
 		const allBlogs = initBlogs;
 		const filteredFav = [];
 		allBlogs.map( blog => {
-			getFavCate.map( item => {
-				if(item.category_id === blog.category_id) {
+			getFavCate.map( fav => {
+				if(fav.category_id === blog.category_id) {
 					filteredFav.push(blog);
 				}
 			})
 		});
-
-		console.log(filteredFav);
-		console.log(initBlogs);
 
 		if (!unchecked) {
 			setBlogs(filteredFav);
@@ -135,16 +109,11 @@ function Home() {
 			setBlogs(initBlogs);
 		}
 	}
-
-	const dummy = {
-		username: "Jimmy",
-		profile_pic: "https://picsum.photos/400/600"
-	};
 	
 	return (
 		<div>
             <div className="topbar-color">
-                <Topbar name={dummy.username} img={dummy.profile_pic}/>
+                <Topbar user_id={user_id}/>
                 <div style={{display: "flex"}}>
                     <SidebarUser role="user" />
 					<div>
