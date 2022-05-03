@@ -14,6 +14,7 @@ import Topbar from "../components/Layout/Topbar";
 
 function Wallet() {
 	const balance = walletData[0].coinBalance;
+	var user_id = localStorage.getItem("user_id");
 
 	let navigate = useNavigate(); 
   	const routeChange = () =>{ 
@@ -29,7 +30,7 @@ function Wallet() {
 	return (
 		<div>
             <div className="topbar-color">
-                <Topbar name={dummy.username} img={dummy.profile_pic}/>
+                <Topbar user_id={user_id}/>
                 <div style={{display: "flex"}}>
                     <SidebarUser role="user" />
                     <div>

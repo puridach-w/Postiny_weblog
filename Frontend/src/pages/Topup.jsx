@@ -7,6 +7,7 @@ import SidebarUser from "../components/Layout/SidebarUser";
 import Topbar from "../components/Layout/Topbar";
 
 function Topup(){
+    var user_id = localStorage.getItem("user_id");
 
     const [amount,setAmount] = React.useState("");
     const [type,setType] = React.useState(false);
@@ -39,7 +40,7 @@ function Topup(){
     return (
         <div>
             <div className="topbar-color">
-                <Topbar name={dummy.username} img={dummy.profile_pic}/>
+                <Topbar user_id={user_id}/>
                 <div style={{display: "flex"}}>
                     <SidebarUser role="user" />
                     <div>

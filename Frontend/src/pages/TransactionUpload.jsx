@@ -47,7 +47,7 @@ function TransactionUpload(){
     return (
         <div>
             <div className="topbar-color">
-                <Topbar name={dummy.username} img={dummy.profile_pic}/>
+                <Topbar user_id={user_id}/>
                 <div style={{display: "flex"}}>
                     <SidebarUser role="user" />
                     <div>

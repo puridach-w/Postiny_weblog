@@ -22,6 +22,8 @@ import TopArticle  from "../components/Dashboard/TopArticle";
 import TopSubscribed  from "../components/Dashboard/TopSubscribed";
 function Dashboard() {
 
+    var user_id = localStorage.getItem("user_id");
+
     const dummy = {
 		username: "Jimmy",
 		profile_pic: "https://picsum.photos/400/600"
@@ -29,7 +31,7 @@ function Dashboard() {
     
     return (
         <div className="topbar-color">
-            <Topbar name={dummy.username} img={dummy.profile_pic}/>
+            <Topbar user_id={user_id}/>
             <div style={{display: "flex"}}>
                 <SidebarUser role="user" />
                 <div style={{marginLeft: "110px"}} className="dashboard" >
