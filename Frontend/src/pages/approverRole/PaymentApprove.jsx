@@ -15,6 +15,7 @@ function PaymentApprove() {
     const [data,setData] = useState();
     const [allData,setAllData] = useState([]);
     const token = localStorage.getItem('token');
+    const approver_id = localStorage.getItem("user_id");
     
 
     useEffect( () => {
@@ -51,7 +52,7 @@ function PaymentApprove() {
         Axios.patch('http://localhost:8080/updateStatus', {
             payment_id: data.payment_id,
             status: status,
-            approver_id: localStorage.getItem("user_id")
+            approver_id: approver_id
         }).then(res => console.log(res.data));
 
         if(status === 2){
@@ -67,7 +68,7 @@ function PaymentApprove() {
         Axios.patch('http://localhost:8080/updateStatus', {
             payment_id: data.payment_id,
             status: status,
-            approver_id: localStorage.getItem("user_id")
+            approver_id: approver_id
         }).then(res => console.log(res.data));
 
         Axios.patch('http://localhost:8080/updateChangeApproveToReject', {
@@ -108,7 +109,7 @@ function PaymentApprove() {
     return (
         <div>
             <div className="topbar-color">
-                <Topbar name={dummy.username} img={dummy.profile_pic}/>
+                <Topbar user_id={approver_id}/>
                 <div style={{display: "flex"}}>
                     <SidebarUser role="approver" />
                     <div>

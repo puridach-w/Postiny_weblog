@@ -16,6 +16,7 @@ function AdminRP() {
     const [catModalOpen, setCatModalOpen] = useState(false);
     const [data,setData] = useState();
     const token = localStorage.getItem('token');
+    const admin_id = localStorage.getItem('user_id');
 
     Axios.post('http://localhost:8080/auth', {
 		authorization : "Bearer " + token
@@ -69,7 +70,7 @@ function AdminRP() {
     return (
         <div>
             <div className="topbar-color">
-                <Topbar name={dummy.username} img={dummy.profile_pic}/>
+                <Topbar user_id={admin_id}/>
                 <div style={{display: "flex"}}>
                     <SidebarUser role="admin"/>
                     <div>
