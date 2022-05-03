@@ -15,6 +15,7 @@ function Report() {
     const [modalOpen, setModalOpen] = React.useState(false);
     const [type,setType] = React.useState("");
     const [blur,setBlur] = React.useState(false);
+    var user_id = localStorage.getItem("user_id");
 
     const dummy = {
         username: "Jimmy",
@@ -24,7 +25,7 @@ function Report() {
 	return (
     <div>
         <div className="topbar-color">
-            <Topbar name={dummy.username} img={dummy.profile_pic}/>
+            <Topbar user_id={user_id}/>
             <div style={{display: "flex"}}>
                 <SidebarUser role="user" />
                 <div>
