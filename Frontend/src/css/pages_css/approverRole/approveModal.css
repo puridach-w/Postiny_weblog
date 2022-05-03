@@ -64,21 +64,22 @@
     margin-left: 2rem;
 }
 
-.body .info span {
+.body .info .data{
     color: #1572A1;
     margin-left: 200px;
     float: right;
+    margin-top: 12px;
 }
   
-.body .footer {
+.body .info .footer {
     flex: 20%;
     display: flex;
-    margin-top: 16rem;
+    margin-top: 14rem;
     margin-left: 100px;
     float: bottom;
 }
   
-.body .footer button {
+.body .info .footer button {
     width: 150px;
     height: 45px;
     border: none;
@@ -89,15 +90,15 @@
     float: right;
 }
 
-.body .footer button:hover {
+.body .info .footer button:hover {
     background-color: #666666;
 }
 
-.footer .approve {
+.body .info .footer .approve {
     background-color: #27B636;
 }
 
-.footer .reject {
+.body .info .footer .reject {
     background-color: #D82020;
     margin-left: 20px;
 }

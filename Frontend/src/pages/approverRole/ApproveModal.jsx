@@ -1,7 +1,8 @@
 import React from 'react'
 import "../../css/pages_css/approverRole/approveModal.css"
 
-const ApproveModal = ({ data, setOpenModal, setBlur }) => {
+const ApproveModal = ({approveToReject, update, data, setOpenModal, setBlur }) => {
+
     return (
         <div className="modalApprove">
             <div className="approveContainer">
@@ -21,28 +22,33 @@ const ApproveModal = ({ data, setOpenModal, setBlur }) => {
                 </div>
                     
                 <div className="body"> 
-                    <img src={data.receipt} />
+                    <img src={data.payment_slip} />
                     <div className="info">
-                            {/* จริงๆอันนี้ต้อง id ของ payment ไม่ใช่ user id */}
-                            <p>Payment ID: <span>{data.id}</span></p>
-                            <p>Username: <span>{data.username}</span></p> 
-                            <p>Amount money: <span>{data.amount}฿</span></p>
+                            <p>Payment ID: <span className="data">{data.payment_id}</span></p>
+                            <p>Username: <span className="data">{data.username}</span></p> 
+                            <p>Amount money: <span className="data">{data.amount}฿</span></p>
                             <div className="footer">
                                 <button 
                                     className="approve"
                                     onClick={() => {
-                                        data.status = "Approved"
+                                        update(2,data);
                                         // then tranfer coin into 'that' user
                                         setOpenModal(false);
                                         setBlur(false);
+                                        window.location.reload(true);
                                     }}
                                 >Approve</button>
                                 <button 
                                     className="reject"
                                     onClick={() => {
-                                        data.status = "Rejected"
+                                        if(data.status_id === 2){
+                                            approveToReject(3,data);
+                                        } else{
+                                            update(3,data);
+                                        }
                                         setOpenModal(false);
                                         setBlur(false);
+                                        window.location.reload(true);
                                     }}
                                 >Reject</button>
                             </div>

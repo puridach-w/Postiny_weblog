@@ -1,4 +1,3 @@
-
 const pool = require("../config/db");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -68,8 +67,8 @@ const signin = (req, res) => {
         }
         const username = req.body.username;
         const password = req.body.password;
+        console.log(username,password);
         let temp = "";
-        console.log(username);
         db.query("SELECT username,password,role_id,user_id FROM userinfo WHERE username = ?",[username], (err,result) => {
             let data = {temp: ""}
             if(err) {
@@ -87,7 +86,7 @@ const signin = (req, res) => {
                     temp = "Success login USER";
                 }
                 if (bcrypt.compareSync(password, result[0].password)) {
-                    var token = jwt.sign({ username: result[0].username , user_id: result[0].user_id}, secret, {expiresIn: "10h"});
+                    var token = jwt.sign({ username: result[0].username , user_id: result[0].user_id, role_id: result[0].role_id}, secret, {expiresIn: "10h"});
                     res.json({temp: temp ,msg: "login success", token: token});
                 } else{
                     res.json({msg: "login failed"});
@@ -127,7 +126,6 @@ const getAllCategory = (req, res) => {
 }
 
 const addCategory = (req,res) => {
-    console.log("123123");
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
@@ -136,8 +134,6 @@ const addCategory = (req,res) => {
         }
         const user_id = req.body.user_id;
         const category_id = req.body.category_id;
-        console.log(user_id);
-        console.log(category_id);
         db.query("INSERT INTO userinterest (user_id,category_id) VALUES (?, ?)",
         [user_id,category_id], (err, result) => {
             if (err) {

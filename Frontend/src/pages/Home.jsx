@@ -39,20 +39,28 @@ function Home() {
 	const [blur, setBlur] = useState(false);
 	const token = localStorage.getItem('token');
 
-	Axios.post('http://localhost:8080/auth', {
+	useEffect( () => {
+		Axios.post('http://localhost:8080/auth', {
 		authorization : "Bearer " + token
 		}).then((response) => {
 			if(response.data.status === 'ok'){
 				const user_id = response.data.decoded.user_id;
 				localStorage.setItem("user_id",user_id);
+				if(response.data.decoded.role_id != 3){
+					alert("This page for only user role.");
+					if(response.data.decoded.role_id === 2){
+						window.location = "/payment";
+					} else if(response.data.decoded.role_id === 1){
+						window.location = "/report-admin";
+					}
+				}
 			} else{
 				alert("authen failed");
 				localStorage.removeItem("token");
 				window.location = "/";
 			}
-	});
+		});
 
-	useEffect( () => {
 		Axios.get('http://localhost:8080/getbloglist').then((response) => {
 			setBlogs(response.data);
 			setInitBlogs(response.data);

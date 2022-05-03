@@ -29,6 +29,9 @@ require("./app/routes/user.routes")(app);
 //home
 require("./app/routes/home.routes")(app);
 
+//wallet
+require("./app/routes/wallet.routes")(app);
+
 
 //listening
 const PORT = process.env.PORT || 8080;

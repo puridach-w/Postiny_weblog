@@ -7,6 +7,7 @@ import AdminModal from './AdminModal';
 import SidebarUser from "../../components/Layout/SidebarUser";
 import Topbar from "../../components/Layout/Topbar";
 import AdminAddData  from "./AdminAddData";
+import Axios from "axios";
 
 
 function AdminRP() {
@@ -14,6 +15,28 @@ function AdminRP() {
     const [modalOpen, setModalOpen] = useState(false);
     const [catModalOpen, setCatModalOpen] = useState(false);
     const [data,setData] = useState();
+    const token = localStorage.getItem('token');
+
+    Axios.post('http://localhost:8080/auth', {
+		authorization : "Bearer " + token
+		}).then((response) => {
+			if(response.data.status === 'ok'){
+				const user_id = response.data.decoded.user_id;
+				localStorage.setItem("user_id",user_id);
+				if(response.data.decoded.role_id != 1){
+                    alert("This page for only admin role.");
+                    if(response.data.decoded.role_id === 2){
+                        window.location = "/payment";
+                    } else if(response.data.decoded.role_id === 3){
+                        window.location = "/home"
+                    }
+                }
+			} else{
+				alert("authen failed");
+				localStorage.removeItem("token");
+				window.location = "/";
+			}
+		});
 
     const pendings = reports.filter( (item) => {
         return item.status === "Pending";
