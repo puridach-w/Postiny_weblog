@@ -39,7 +39,7 @@ function PaymentApprove() {
             });
 
 
-        Axios.get('http://localhost:8080/getAllPayment').then((response) => {
+    Axios.get('http://localhost:8080/getAllPayment').then((response) => {
             setAllData(response.data);
         });
     }, []);
@@ -62,7 +62,6 @@ function PaymentApprove() {
     }
 
     const approveToReject = (status,data) => {
-        console.log("status ator" + status);
         Axios.patch('http://localhost:8080/updateStatus', {
             payment_id: data.payment_id,
             status: status,

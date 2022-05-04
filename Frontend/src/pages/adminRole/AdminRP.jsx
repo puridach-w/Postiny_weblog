@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../css/pages_css/adminRole/adminRP.css"
-import {reports} from "../../dummyData"
 import AdminTable  from "./AdminTable";
 import AdminModal from './AdminModal';
 import SidebarUser from "../../components/Layout/SidebarUser";
@@ -15,14 +14,16 @@ function AdminRP() {
     const [modalOpen, setModalOpen] = useState(false);
     const [catModalOpen, setCatModalOpen] = useState(false);
     const [data,setData] = useState();
+    const [allData,setAllData] = useState([]);
     const token = localStorage.getItem('token');
     const admin_id = localStorage.getItem('user_id');
 
-    Axios.post('http://localhost:8080/auth', {
-		authorization : "Bearer " + token
-		}).then((response) => {
-			if(response.data.status === 'ok'){
-				if(response.data.decoded.role_id != 1){
+    useEffect( () => {
+        Axios.post('http://localhost:8080/auth', {
+        authorization : "Bearer " + token
+        }).then((response) => {
+            if(response.data.status === 'ok'){
+                if(response.data.decoded.role_id != 1){
                     alert("This page for only admin role.");
                     if(response.data.decoded.role_id === 2){
                         window.location = "/payment";
@@ -30,19 +31,40 @@ function AdminRP() {
                         window.location = "/home"
                     }
                 }
-			} else{
-				alert("authen failed");
-				localStorage.removeItem("token");
-				window.location = "/";
-			}
-		});
+            } else{
+                alert("authen failed");
+                localStorage.removeItem("token");
+                window.location = "/";
+            }
+        });
 
-    const pendings = reports.filter( (item) => {
-        return item.status === "Pending";
+        Axios.get('http://localhost:8080/getallreport').then((response) => {
+                setAllData(response.data);
+            });
+    }, []);
+
+    const manageReport = (status , data) => {
+        Axios.patch('http://localhost:8080/updateReportStatus', {
+            report_id: data.report_id,
+            status: status,
+            admin_id: admin_id
+        });
+
+        // delete row data (article/comment)
+        if(status === 2) {
+            if(data.report_type_id === 1 || data.report_type_id === 3) {
+                Axios.delete(`http://localhost:8080/acceptDelete/${data.report_id}`)
+                .then(res => {console.log(res)})
+            }
+        }
+    }
+
+    const pendings = allData.filter( (item) => {
+        return item.status_name === "Pending";
      });
     
-    const exceptPending = reports.filter( (item) => {
-        return item.status !== "Pending";
+    const exceptPending = allData.filter( (item) => {
+        return item.status_name !== "Pending";
      });
      
      function callForModal(data){
@@ -57,7 +79,7 @@ function AdminRP() {
        let path = `/addapprover`; 
        navigate(path);
  
-     }
+    }
 
     return (
         <div>
@@ -67,36 +89,32 @@ function AdminRP() {
                     <SidebarUser role="admin"/>
                     <div>
                        <div style={{marginLeft: "110px"}} className="reportPage" >
-        {modalOpen && <AdminModal data={data} setOpenModal={setModalOpen} setBlur={setBlur}/>}
-        {catModalOpen && <AdminAddData setOpenModal={setCatModalOpen} setBlur={setBlur}/>}
-        <div style={{ filter: blur ? "blur(5px)" : "none" }}>
-        <button className="btn-addData addData" onClick={() => {
-						setCatModalOpen(true);
-						setBlur(true);
-					}}>
-                <h1>Add data</h1>
-                <p>report type / category</p>
-            </button>
-            <button className="btn-create create" onClick={routeChange}>
-                <h1>Create new account</h1>
-                <p>approver role</p>
-            </button>
+                            {modalOpen && <AdminModal data={data} manageReport={manageReport} setOpenModal={setModalOpen} setBlur={setBlur}/>}
+                            {catModalOpen && <AdminAddData setOpenModal={setCatModalOpen} setBlur={setBlur}/>}
+                            <div style={{ filter: blur ? "blur(5px)" : "none" }}>
+                            <button className="btn-addData addData" onClick={() => {
+                                setCatModalOpen(true);
+                                setBlur(true);
+                            }}>
+                            <h1>Add data</h1>
+                            <p>report type / category</p>
+                            </button>
+                            <button className="btn-create create" onClick={routeChange}>
+                                <h1>Create new account</h1>
+                                <p>approver role</p>
+                            </button>
                 
-            {/* มันไม่ใช้ array นะอีหนูเดี่ยวต้อง count แบบใหม่ */}
-            <h1 className="pending">Pending reports <span className="redCircle">{pendings.length}</span></h1>
-            <AdminTable report={pendings} callModal={callForModal} />
+                            <h1 className="pending">Pending reports <span className="redCircle">{pendings.length}</span></h1>
+                            <AdminTable report={pendings} callModal={callForModal} />
 
-            <h1 className="complete">Completed reports <span className="greenCircle">{exceptPending.length}</span></h1>
-            <AdminTable report={exceptPending} callModal={callForModal} />
-        </div>
-            
-
-        </div> 
+                            <h1 className="complete">Completed reports <span className="greenCircle">{exceptPending.length}</span></h1>
+                            <AdminTable report={exceptPending} callModal={callForModal} />
+                        </div>
                     </div> 
-                </div>
+                </div> 
             </div>
         </div>
-        
+    </div>    
     )
 }
 

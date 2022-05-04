@@ -2,13 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-// const controller = require("./app/controllers/user.controller");
-// import * as controller from "./app/controllers/user.controller"
-// const path = require("path");
-// const cookieParser = require("cookie-parser");
-// const multer = require("multer");
-
-
 const app = express();
 cors
 var corsOptions = {
@@ -31,6 +24,12 @@ require("./app/routes/home.routes")(app);
 
 //wallet
 require("./app/routes/wallet.routes")(app);
+
+//report
+require("./app/routes/report.routes")(app);
+
+//admin
+require("./app/routes/admin.routes")(app);
 
 
 //listening

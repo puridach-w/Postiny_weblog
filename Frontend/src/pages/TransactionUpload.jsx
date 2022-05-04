@@ -29,11 +29,6 @@ function TransactionUpload(){
         setHaveImg(true);
     }
 
-    const dummy = {
-        username: "Jimmy",
-        profile_pic: "https://picsum.photos/400/600"
-    };
-
     const handleClicked = (e) => {
         e.preventDefault()
         Axios.post("http://localhost:8080/transaction",{
