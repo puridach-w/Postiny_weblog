@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import {walletData} from "../dummyData";
 import '../css/pages_css/wallet.css';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
@@ -9,23 +9,27 @@ import { useNavigate } from "react-router-dom";
 
 import SidebarUser from "../components/Layout/SidebarUser";
 import Topbar from "../components/Layout/Topbar";
-
+import Axios from 'axios';
 
 
 function Wallet() {
 	const balance = walletData[0].coinBalance;
 	var user_id = localStorage.getItem("user_id");
+	const [userData,setUserData] = useState([]);
 
 	let navigate = useNavigate(); 
   	const routeChange = () =>{ 
     let path = '/topup'; 
     navigate(path);
   	}
+
+	useEffect( () => {
+		Axios.get(`http://localhost:8080/currentuser/${user_id}`).then((response) => {
+			setUserData(response.data[0]);
+		})
+	}, []);
 	
-	const dummy = {
-		username: "Jimmy",
-		profile_pic: "https://picsum.photos/400/600"
-	};
+	console.log(userData);
 
 	return (
 		<div>
@@ -42,7 +46,7 @@ function Wallet() {
 						<span><AccountBalanceWalletIcon style={{ fontSize: 80 }}/></span>
 						<div className="coin-balance">
 							<p>Current Balance</p>
-							<p>{balance} COIN </p>
+							<p>{userData.coin_balance} COIN </p>
 						</div>
 					</div>
 					<br/> <br/> <br/> <br/>

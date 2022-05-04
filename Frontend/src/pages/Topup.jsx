@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import SidebarUser from "../components/Layout/SidebarUser";
 import Topbar from "../components/Layout/Topbar";
 
+
 function Topup(){
     var user_id = localStorage.getItem("user_id");
 
@@ -30,11 +31,6 @@ function Topup(){
             alert("minimum: THB 100");
         }
     }
-
-    const dummy = {
-        username: "Jimmy",
-        profile_pic: "https://picsum.photos/400/600"
-    };
 
 
     return (

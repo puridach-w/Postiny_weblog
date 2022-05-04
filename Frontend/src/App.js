@@ -38,7 +38,7 @@ export default function App() {
 					<Route path="/signin" element={<Signin/>}/>
 					<Route path="/register" element={<Register/>}/>
 					<Route path="/newcategory" element={<NewCat/>}/>
-					<Route path="/profile" element={<Profile 
+					<Route path="/profile/:profile_id" element={<Profile 
 						fname="Puridach"
 						lname="Wutthihathaithamrong"
 						sub="245"
