@@ -8,7 +8,6 @@ export default function ProfileSideButton(props) {
     
 
     let navigate = useNavigate(); 
-
     function routeChange(option) { 
       let path = `/profile`; 
 

@@ -32,7 +32,7 @@ const currentUser = (req, res) => {
             return;
         }
         const current_id = req.params.id;
-        db.query("SELECT username, profile_pic FROM userinfo WHERE user_id = ?",
+        db.query("SELECT * FROM userinfo WHERE user_id = ?",
         [current_id], (err, result) => {
             if (err) {
                 console.log(err);

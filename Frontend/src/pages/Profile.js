@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import "../css/profile.css"
 import profile from "../images/profilesample.jpg"
 import subicon from "../images/sub.jpg"
@@ -16,64 +16,102 @@ import GoBackBtn from "../components/gobackbtn";
 // import EmptyBlog from "../components/EmptyBlog";
 import ProfileArticleList from "../components/ProfileArticleList";
 import ProfileSideBtn from "../components/ProfileSideButton";
+import { useParams } from "react-router";
+import Axios from "axios";
+
 
 export default function Profile(props) {
 
+    const {profile_id} = useParams();
+    const user_id = localStorage.getItem("user_id");
+    const [subUser,setSubUser] = useState([]);
+    const [blogList, setBlogList] = useState([]);
+    const [profileData,setProfileData] = useState([]);
+    const [interestCategory,setInterestCategory] = useState([]);
+    var type = ""
 
-    // let navigate = useNavigate(); 
-
-    // function routeChange() { 
-    //   let path = `/editprofile`; 
-    //   navigate(path);
-    // }
+    const requestgetSubscribed = Axios.get(`http://localhost:8080/getSubscribed/${user_id}/${profile_id}`)
+    const requestgetAllArticle = Axios.get(`http://localhost:8080/getAllArticle/${profile_id}`);
+    const requestgetProfileData = Axios.get(`http://localhost:8080/getProfileData/${profile_id}`);
+    const requestgetInterestCategory = Axios.get(`http://localhost:8080/getInterestCategory/${profile_id}`);
+    useEffect( () => {
+        Axios.all([requestgetSubscribed, requestgetAllArticle,requestgetProfileData,requestgetInterestCategory]).then(Axios.spread((...responses) => {
+                const responseOne = responses[0]
+                const responseTwo = responses[1]
+                const responseThree = responses[2]
+                const responseFour = responses[3]
+                setSubUser(responseOne.data);
+                setBlogList(responseTwo.data);
+                setProfileData(responseThree.data[0]);
+                setInterestCategory(responseFour.data);
+            })).catch(errors => {   
+                console.log(errors);
+        });
+    }, []);
+    
+    console.log(interestCategory);
+    if(profile_id === user_id){
+        type = "myprofile";
+    } else if(subUser.length > 0){
+        type = "subprofile";
+    } else {
+        type = "nosubprofile";
+    }
 
     return ( 
-        <div className="profile"> 
-            <GoBackBtn 
-            path="./home"/>
+        <div>
+            <div className="profile"> 
+            
+            <GoBackBtn />
             <div className="profileSummary">
                 <div className="profileimg">
-                    <img alt="" src={profile}/>
+                    <img alt="" src={profileData.profile_pic}/>
                 </div>
                 <div className="summary">
                     <div className="sub">
                         <img src={subicon} alt="" />
-                        <h3>{props.sub}</h3>
+                        <h3>{profileData.totalSub}</h3>
                         <h5>Subscribers</h5>
                     </div>
                     <div className="article">
                         <img src={articleicon} alt="" />
-                        <h3>{props.article}</h3>
+                        <h3>{profileData.totalArticle}</h3>
                         <h5>Articles</h5>
                     </div>
                     <div className="like">
                         <img src={likeicon} alt="" />
-                        <h3>{props.like}</h3>
+                        <h3>{profileData.totalLike}</h3>
                         <h5>Likes</h5>
                     </div>
                 </div>
             </div>
             <div className="profileDetail">
-            <h2 className="fullname">{props.fname} {props.lname}</h2>
+            <h2 className="fullname">{profileData.firstname} {profileData.lastname} ({profileData.username})</h2>
             <div className="besideprofilebtn">
-              {/* <button onClick={routeChange} className="btn-modal">
+                {/* <button onClick={routeChange} className="btn-modal">
                 Edit profile
-              </button> */}
-              <ProfileSideBtn
-              id="1"
-              type="myprofile"/>
-              </div>
-            <h3 className="bio">{props.bio}</h3>
-            <h4 className="favcat">{props.category.join("/")}</h4>
+                </button> */}
+                <ProfileSideBtn
+                id={profile_id}
+                type={type}/>
+                </div>
+            <h3 className="bio">{profileData.bio}</h3>
+            <h4 className="favcat">
+                {interestCategory.map((item) => (
+                <span>{item.category_name}&ensp;</span>
+              ))}
+            </h4>
             {/* <div className="myarticles">
-              {!blogs.length? <EmptyBlog /> : <BlogList blogs={blogs} />}
+                {!blogs.length? <EmptyBlog /> : <BlogList blogs={blogs} />}
             </div> */}
             <ProfileArticleList
-            type="myprofile"/>
+            type={type}
+            id={profile_id}
+            blogList={blogList}
+            />
             </div>
-
-              
-           
+            </div>
         </div>
-        );
-    }
+    );
+}
+
