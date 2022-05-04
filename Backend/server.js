@@ -31,6 +31,9 @@ require("./app/routes/report.routes")(app);
 //admin
 require("./app/routes/admin.routes")(app);
 
+//profile
+require("./app/routes/profile.routes")(app);
+
 
 //listening
 const PORT = process.env.PORT || 8080;

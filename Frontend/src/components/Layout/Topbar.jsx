@@ -19,7 +19,7 @@ function Topbar({ user_id }) {
             <div className="topbarRight">
                 <span className="topbarName">Hello, {user.username} </span>
                 <img 
-                    onClick={ () => window.location="/profile"}
+                    onClick={ () => window.location=`/profile/${user_id}`}
                     className="topbarProfile" 
                     src={user.profile_pic} 
                     alt="profile" 

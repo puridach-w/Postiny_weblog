@@ -105,6 +105,7 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
               setOpenModal(false);
               setBlur(false);
 			        addArticle();
+              window.location.reload(true);
           }}>Post</button>
         </div>
       </div>
