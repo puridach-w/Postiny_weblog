@@ -23,7 +23,7 @@ const MyBlog = () => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [promoteModalOpen, setPromoteModalOpen] = useState(false);
 	const [blur, setBlur] = useState(false);
-  const [blogData,setBlogData] = useState([]);
+  const [blogData,setBlogData] = useState(null);
   const [fullAd,setFullAd] = useState([]);
   const [balance,setBalance] = useState([]);
   const user_id = localStorage.getItem("user_id");
@@ -172,7 +172,7 @@ const MyBlog = () => {
           </IconButton>
           <h1>{blogData.title}</h1>
           <p className="article-author">Written by {blogData.username}</p>
-          <p className="article-date">Published on {blogData.updated_at}</p>
+          <p className="article-date">Published on {blogData.updated_at.substring(0,10)}</p>
           <p className="article-desc">{blogData.content}</p>
         </div>
         <div className="articleinterect">
