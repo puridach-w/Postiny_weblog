@@ -14,7 +14,6 @@ export default function Signin() {
 
    function handleChange(event) {
       setSigninData(prevSigninData => {
-         console.log("event.target.value")
          return {
             ...prevSigninData,
             [event.target.name]: event.target.value

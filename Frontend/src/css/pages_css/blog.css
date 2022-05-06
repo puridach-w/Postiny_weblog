@@ -4,8 +4,8 @@
 }
 
 .blog-wrap {
-    max-width: 1080px;
-    margin-left: 2rem;
+    max-width: 1400px;
+    padding-left: 24rem;
 }
 
 .blog-goBack {
@@ -64,7 +64,11 @@
 }
 
 .interect {
-    margin-left: 2rem;
+    padding-left: 24rem;
+    background-color: white;
+    width: 1500px;
+    padding-right: 7rem;
+    padding-bottom: 10px;
 }
 
 .active-like {
