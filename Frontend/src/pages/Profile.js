@@ -49,7 +49,6 @@ export default function Profile(props) {
         });
     }, []);
     
-    console.log(interestCategory);
     if(profile_id === user_id){
         type = "myprofile";
     } else if(subUser.length > 0){

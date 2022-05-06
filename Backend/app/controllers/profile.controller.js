@@ -9,7 +9,9 @@ const getSubscribed = (req, res) => {
         }
         const user_id = req.params.user_id;
         const profile_id = req.params.profile_id;
-        db.query("SELECT subscribed_user_id FROM subscription WHERE subscriber_id = ? AND subscribed_user_id=?",
+        db.query(`SELECT subscribed_user_id 
+        FROM subscription 
+        WHERE subscriber_id = ? AND subscribed_user_id=?`,
         [user_id,profile_id], 
         (err, result) => {
             if (err) {
@@ -238,6 +240,30 @@ const checkAmount = (req,res) => {
    });
 }
 
+const getAdsBlog = (req,res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            db.release();
+            return;
+        }
+        const date = req.params.date;
+        db.query(`SELECT article.*
+        FROM advertisement
+        JOIN article
+        ON advertisement.article_id = article.article_id
+        WHERE publish_date = ?`,
+        [date], (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+   });
+}
+
 module.exports = {
     getSubscribed,
     getAllArticle,
@@ -248,5 +274,6 @@ module.exports = {
     getFullAdDay,
     getArticleData,
     addAdvertise,
-    checkAmount
+    checkAmount,
+    getAdsBlog
 }

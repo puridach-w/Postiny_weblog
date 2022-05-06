@@ -111,7 +111,8 @@ const Blog = () => {
           <p className="blog-author">Username {username}</p>
           <p className="blog-date">Published on {blog.created_at.substring(0,10)}</p>
           <p className="blog-desc">{blog.content}</p>
-        </div><div className="interect">
+        </div>
+        <div className="interect">
             <button
               onClick={likeMethod}
               className={[likeActive ? "active-like" : "inactive-like"].join(' ')}

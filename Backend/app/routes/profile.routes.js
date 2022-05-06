@@ -8,6 +8,7 @@ module.exports = function (app) {
     app.get("/getFullAdDay/:article_id", controller.getFullAdDay)
     app.get("/getArticleData/:article_id", controller.getArticleData);
     app.get("/checkAmount/:user_id", controller.checkAmount);
+    app.get("/getAdsBlog/:date",controller.getAdsBlog);
 
     app.post("/subscribe",controller.subscribe);
     app.post("/addAdvertise", controller.addAdvertise);

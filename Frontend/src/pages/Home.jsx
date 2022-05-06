@@ -39,9 +39,6 @@ function Home() {
 	const token = localStorage.getItem('token');
 	const user_id = localStorage.getItem('user_id');
 
-	console.log(user_id);
-	console.log(token);
-
 	useEffect( () => {
 		Axios.post('http://localhost:8080/auth', {
 		authorization : "Bearer " + token
