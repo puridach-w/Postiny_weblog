@@ -10,6 +10,7 @@ import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import EditArticleModal from "../components/Modal/EditArticleModal";
 import PromoteArticleModal from "../components/Modal/PromoteArticleModal";
 import "../css/myblog.css";
+import Axios from 'axios';
 
 
 const MyBlog = () => {
@@ -22,10 +23,94 @@ const MyBlog = () => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [promoteModalOpen, setPromoteModalOpen] = useState(false);
 	const [blur, setBlur] = useState(false);
+  const [blogData,setBlogData] = useState([]);
+  const [fullAd,setFullAd] = useState([]);
+  const [balance,setBalance] = useState([]);
+  const user_id = localStorage.getItem("user_id");
+  const COSTPERDAY = 5;
+  // const MAXPROMOTEPOST = 6;
 
-  let blog = blogList.find(blog => blog.id === parseInt(id));
+  // let blog = blogList.find(blog => blog.id === parseInt(id));
 
-  let ismyprofile = true;
+  // let ismyprofile = true;
+
+
+  useEffect( () => {
+    Axios.get(`http://localhost:8080/getArticleData/${id}`).then((response) => {
+      setBlogData(response.data[0]);
+    })
+
+    Axios.get(`http://localhost:8080/getFullAdDay/${id}`).then((response) => {
+      setFullAd(response.data);
+    })
+
+    Axios.get(`http://localhost:8080/checkAmount/${user_id}`).then((response) => {
+      setBalance(response.data[0]); 
+    })
+
+  }, []);
+
+
+  const addAdvertise = (date) => {
+    Axios.post(`http://localhost:8080/addAdvertise`,{
+      article_id: id,
+      date: date
+    })
+  }
+
+  const updateBalanceUser = (amount) => {
+    Axios.patch("http://localhost:8080/updateBalanceUser",{
+        user_id: user_id,
+        amount: amount
+    }).then((response) => {
+        console.log(response.data);
+    })
+}
+
+  const promote = (startDate,period) => {
+    var unreserved = [];
+    var allDate = [startDate];
+
+    const startday = new Date(startDate);
+    var temp = startday;
+
+    fullAd.map(item => {
+      item.publish_date = item.publish_date.substring(0,10)
+      const date = new Date(item.publish_date);
+      const tmrDate = new Date(date.getTime() + (24 * 60 * 60 * 1000));
+      var day = tmrDate.getDate();
+      var month = tmrDate.getMonth() + 1;
+      const year = tmrDate.getFullYear();
+      if (month < 10) month = "0" + month;
+      if (day < 10) day = "0" + day;
+      unreserved.push(year + "-" + month + "-" + day);
+    })
+
+    for(let i = 0;i < period-1;i++){
+      var tomorrow = new Date(temp.getTime() + (24 * 60 * 60 * 1000));
+      temp = tomorrow;
+      var reserveday = tomorrow.getDate();
+      var reservemonth = tomorrow.getMonth() + 1;
+      const reserveyear = tomorrow.getFullYear();
+      if (reservemonth < 10) reservemonth = "0" + reservemonth;
+      if (reserveday < 10) reserveday = "0" + reserveday;
+      allDate.push(reserveyear + "-" + reservemonth + "-" + reserveday);
+    }
+
+    var reserve = allDate.filter(item => !unreserved.includes(item));
+
+    const needCoin = reserve.length * COSTPERDAY;
+    if(balance.coin_balance >= needCoin){
+      reserve.map(item => {
+        addAdvertise(item)
+      })
+      updateBalanceUser(needCoin);
+      alert("Promote success")
+    } else{
+      alert("Your balance is not enough. To promote need " + needCoin + " coin");
+      window.location = "/topup";
+    }
+  }
 
   
   function likeMethod() {
@@ -65,17 +150,18 @@ const MyBlog = () => {
 
   return (
     <>
-    {ismyprofile && <div>
+    {/* {ismyprofile &&  */}
+    <div>
     {editModalOpen && <EditArticleModal setOpenModal={setEditModalOpen} setBlur={setBlur}/>}
-    {promoteModalOpen && <PromoteArticleModal setOpenModal={setPromoteModalOpen} setBlur={setBlur} />}
+    {promoteModalOpen && <PromoteArticleModal setOpenModal={setPromoteModalOpen} setBlur={setBlur} promote={promote}/>}
     <div style={{ filter: blur? "blur(5px)" : "none"}}>
     <Gobackbtn path="/profile"/>
     <div className="articledisplay" style={{marginLeft: "60px"}}>      
       <br />
-      {blog ? 
+      {blogData ? 
       <><div className="article-wrap">
-          <img src={blog.cover} alt="cover img" />
-          <h4 className="article-category">{blog.category}</h4>
+          <img src={blogData.article_pic} alt="cover img" />
+          <h4 className="article-category">{blogData.category_name}</h4>
           <IconButton style={{color: '#1D1D2B', borderColor: "#E3E3E6", marginLeft: "980px", marginTop: "-70px"}}
           // onClick={routeChange}
           onClick={() => {
@@ -84,10 +170,10 @@ const MyBlog = () => {
 					}}>
             <CreateOutlinedIcon />
           </IconButton>
-          <h1>{blog.title}</h1>
-          <p className="article-author">Written by {blog.authorName}</p>
-          <p className="article-date">Published on {blog.createdAt}</p>
-          <p className="article-desc">{blog.description}</p>
+          <h1>{blogData.title}</h1>
+          <p className="article-author">Written by {blogData.username}</p>
+          <p className="article-date">Published on {blogData.updated_at}</p>
+          <p className="article-desc">{blogData.content}</p>
         </div>
         <div className="articleinterect">
             <button
@@ -96,10 +182,12 @@ const MyBlog = () => {
             >
               ❤︎ {like} Like
             </button>
+
             <button className="promotebtn"  onClick={() => {
 						setPromoteModalOpen(true);
 						setBlur(true);
-					}}>Promote</button>
+					  }}>Promote</button>
+
             <Comments
               commentsUrl="http://localhost:3000/comments"
               currentUserId="1" />
@@ -111,9 +199,11 @@ const MyBlog = () => {
       }
     </div>
     </div>
-    </div>}
+    </div>
+    {/* } */}
 
-    {!ismyprofile && <div>
+
+    {/* {!ismyprofile && <div>
       
     <Gobackbtn path="/profile"/>
     <div className="articledisplay" style={{marginLeft: "60px"}}>      
@@ -144,7 +234,7 @@ const MyBlog = () => {
       <EmptyBlog />
       }
     </div>
-    </div>}
+    </div>} */}
     </>
   )
 }

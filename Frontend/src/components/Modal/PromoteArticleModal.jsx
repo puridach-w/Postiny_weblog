@@ -3,7 +3,7 @@ import "./pePopup.css";
 
 
 
-function PromoteArticleModal({ setOpenModal, setBlur }) {
+function PromoteArticleModal({ setOpenModal, setBlur ,promote}) {
   
   var date = new Date();
 
@@ -27,14 +27,30 @@ function PromoteArticleModal({ setOpenModal, setBlur }) {
     setEndDate(e.target.value);
   };
 
+  const checkPeriod = () => {
+    const date1 = new Date(startDate);
+    const date2 = new Date(endDate);
+    
+    var Difference_In_Time = date2.getTime() - date1.getTime();
+    var Difference_In_Days = (Difference_In_Time / (1000 * 3600 * 24)) + 1; // +1 for include startdate
+
+    if(Difference_In_Days > 7){
+      alert("Can reserve only 7 days per 1 transaction");
+    }else{
+      setOpenModal(false);
+			setBlur(false);
+      promote(startDate,Difference_In_Days);
+    }
+  }
+
   return (
     <div className="pmodalBackground">
       <div className="pmodalContainer">
         <div className="ptitleCloseBtn">
           <button
             onClick={() => {
-              setOpenModal(false);
-			  setBlur(false);
+            setOpenModal(false);
+			      setBlur(false);
             }}
           >
 			    ✕
@@ -55,7 +71,9 @@ function PromoteArticleModal({ setOpenModal, setBlur }) {
               <input id="enddate" name="enddate" type="date" value={endDate} onChange={assignToDate} min={startDate} required/>
             </div> 
         <div className="p-footer">
-          <button className="p-btn">Promote</button>
+          <button type = "button" className="p-btn" onClick={() => {
+            checkPeriod();
+          }}>Promote</button>
         </div>
         </form>
       </div>

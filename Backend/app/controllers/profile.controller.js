@@ -30,7 +30,10 @@ const getAllArticle = (req, res) => {
             return;
         }
         const profile_id = req.params.profile_id;
-        db.query("SELECT article.*, category_name FROM article JOIN category ON article.category_id=category.category_id WHERE author_id = ?",
+        db.query(`SELECT article.*, category_name
+                FROM article 
+                JOIN category ON article.category_id=category.category_id 
+                WHERE author_id = ?`,
         [profile_id], 
         (err, result) => {
             if (err) {
@@ -42,6 +45,32 @@ const getAllArticle = (req, res) => {
         });
     });
 }
+
+const getArticleData = (req, res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            res.status(500).json({'error':err});
+            return;
+        }
+        const article_id = req.params.article_id;
+        db.query(`SELECT article.*, category_name, username 
+                FROM article 
+                JOIN category ON article.category_id=category.category_id 
+                JOIN userinfo ON article.author_id = userinfo.user_id
+                WHERE article_id = ?`,
+        [article_id], 
+        (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+    });
+}
+
 
 const getProfileData = (req,res) => {
     pool.getConnection((err, db) => {
@@ -130,11 +159,94 @@ const updateBalanceUser = (req,res) => {
    });
 }
 
+const getFullAdDay = (req,res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            db.release();
+            return;
+        }
+        const article_id = req.params.article_id;
+        db.query(`SELECT publish_date
+        FROM advertisement
+        WHERE publish_date > CURRENT_DATE
+        GROUP BY publish_date
+        INTERSECT
+        ((SELECT publish_date
+        FROM advertisement
+        GROUP BY publish_date
+        HAVING COUNT(article_id) >= 6)
+        UNION
+        (SELECT publish_date
+        FROM advertisement
+        WHERE article_id = ?)
+        )`,
+        [article_id], (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+   });
+    
+    
+}
+
+const addAdvertise = (req,res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            db.release();
+            return;
+        }
+        const article_id = req.body.article_id;
+        const date = req.body.date;
+        db.query(`INSERT INTO advertisement (article_id, publish_date) 
+        VALUES (?, ?)`,
+        [article_id,date], (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+   });
+}
+
+const checkAmount = (req,res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            db.release();
+            return;
+        }
+        const user_id = req.params.user_id;
+        db.query(`SELECT coin_balance 
+        FROM userinfo
+        WHERE user_id = ?`,
+        [user_id], (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+   });
+}
+
 module.exports = {
     getSubscribed,
     getAllArticle,
     getProfileData,
     getInterestCategory,
     subscribe,
-    updateBalanceUser
+    updateBalanceUser,
+    getFullAdDay,
+    getArticleData,
+    addAdvertise,
+    checkAmount
 }
