@@ -26,9 +26,6 @@ import Topup from "./pages/Topup";
 import TransactionUpload from "./pages/TransactionUpload";
 import Signout from "./pages/signout";
 
-
-import Layout from "./components/Layout/Layout";
-
 export default function App() {
 	return (
 		<div className="App">

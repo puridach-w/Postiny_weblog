@@ -18,7 +18,7 @@ function ReportPopUp({ report, setOpenModal, setBlur, user_id }) {
         payment_id: paymentId,
         comment_id: commentId,
         description: description
-    }).then(response => { 
+    }).then( () => { 
       alert("The report was sent successfully.");
     })
     .catch(error => {

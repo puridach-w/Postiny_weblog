@@ -15,6 +15,7 @@ function AdminRP() {
     const [catModalOpen, setCatModalOpen] = useState(false);
     const [data,setData] = useState();
     const [allData,setAllData] = useState([]);
+    const [count, setCount] = useState([]);
     const token = localStorage.getItem('token');
     const admin_id = localStorage.getItem('user_id');
 
@@ -39,8 +40,12 @@ function AdminRP() {
         });
 
         Axios.get('http://localhost:8080/getallreport').then((response) => {
-                setAllData(response.data);
-            });
+            setAllData(response.data);
+        });
+
+        Axios.get('http://localhost:8080/getReportCount').then((response) => {
+            setCount(response.data[0]);
+        });
     }, []);
 
     const manageReport = (status , data) => {
@@ -73,12 +78,11 @@ function AdminRP() {
         setData(data);
      }
 
-     let navigate = useNavigate(); 
+    let navigate = useNavigate(); 
 
-     function routeChange() { 
-       let path = `/addapprover`; 
-       navigate(path);
- 
+    function routeChange() { 
+        let path = `/addapprover`; 
+        navigate(path);
     }
 
     return (
@@ -104,10 +108,10 @@ function AdminRP() {
                                 <p>approver role</p>
                             </button>
                 
-                            <h1 className="pending">Pending reports <span className="redCircle">{pendings.length}</span></h1>
+                            <h1 className="pending">Pending reports <span className="redCircle">{count.pendingCount}</span></h1>
                             <AdminTable report={pendings} callModal={callForModal} />
 
-                            <h1 className="complete">Completed reports <span className="greenCircle">{exceptPending.length}</span></h1>
+                            <h1 className="complete">Completed reports <span className="greenCircle">{count.completeCount}</span></h1>
                             <AdminTable report={exceptPending} callModal={callForModal} />
                         </div>
                     </div> 

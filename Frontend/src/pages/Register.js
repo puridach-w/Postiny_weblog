@@ -14,7 +14,6 @@ export default function Register() {
     const [gender, setGender] = useState("");
     const [DOB, setDOB] = useState("");
     const [password, setPassword] = useState("");
-
     const [userInfo, setUserInfo] = useState([]);
 
     Axios.get('http://localhost:8080/userinfo').then((response) => {
@@ -23,6 +22,7 @@ export default function Register() {
     
     const addUser = async () => {
         Axios.post('http://localhost:8080/register', {
+            role_id: 3,
             username: username,
             email: email,
             firstname: firstname,

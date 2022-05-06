@@ -4,24 +4,40 @@ import "../../components/Modal/pePopup.css";
 import "../../components/Modal/writeArticleModal.css";
 import { optionGroupUnstyledClasses } from "@mui/base";
 
-
+import Axios from "axios";
 
 function AdminAddData({ setOpenModal, setBlur }) {
 
-    function handleAddCategory(){
-        setOpenModal(false);
-			  setBlur(false);
-              alert("added new category!");
-    }
+  const [reportType, setReportType] = useState("");
+  const [category, setCategory] = useState("");
+  
+  function handleAddCategory(){
+    setOpenModal(false);
+    setBlur(false);
+    Axios.post('http://localhost:8080/addCategoryType', {
+      category_name: category,
+      category_icon: "https://picsum.photos/100"
+    }).then(() => {
+      alert("Added new category!");
+    }).catch(error => {
+      alert(error + " - Cannot add category");
+  });
+  }
 
-    function handleAddReportType(){
-        setOpenModal(false);
-			  setBlur(false);
-              alert("added new report type!");
-    }
+  console.log(reportType);
 
-    const [reportType, setReportType] = useState("");
-    const [category, setCategory] = useState("");
+  function handleAddReportType(){
+      setOpenModal(false);
+      setBlur(false);
+      Axios.post('http://localhost:8080/addReportType', {
+        report_type_name: reportType,
+        report_type_icon: "https://picsum.photos/100"
+      }).then(() => {
+        alert("Added new report type!");
+      }).catch(error => {
+        alert(error + " - Cannot add report");
+    });
+  }
 
   return (
     <div className="rmodalBackground">
@@ -56,7 +72,8 @@ function AdminAddData({ setOpenModal, setBlur }) {
                         </div>
                         <div className="detailadd">   
                                 <p className="rptn">Report type name </p>
-                                <input className="addrptname" type="text" placeholder="Enter report type name" onChange={ e => setReportType(e.target.value)}/>
+                                <input className="addrptname" type="text" placeholder="Enter report type name" 
+                                  onChange={ e => setReportType(e.target.value)}/>
                                 <button className="r-btn" onClick={handleAddReportType}>Add report type</button>
                             </div>
                     </div>
@@ -74,7 +91,8 @@ function AdminAddData({ setOpenModal, setBlur }) {
                         </div>
                         <div className="detailadd">
                                 <p className="cname">Category name </p>
-                                <input className="addcatname" type="text" placeholder="Enter category name" onChange={ e => setCategory(e.target.value)}/>
+                                <input className="addcatname" type="text" placeholder="Enter category name" 
+                                  onChange={ e => setCategory(e.target.value)}/>
                                 <button className="r-btn" onClick={handleAddCategory}>Add category</button>
                             </div>
                     </div>

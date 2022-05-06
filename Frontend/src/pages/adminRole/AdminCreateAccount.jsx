@@ -3,47 +3,75 @@ import ponyreg from "../../images/ponyreg.png"
 import "../../css/register.css"
 import Axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import AdminCreateSummary from "./AdminCreateSummary";
 
 export default function AdminCreateAccount() {
 
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
+    const [phone_number, setPhone_number] = useState("");
+    const [gender, setGender] = useState("");
+    const [DOB, setDOB] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmpassword, setConfirmPassword] = useState("");
+    const [userInfo, setUserInfo] = useState([]);
 
-    // const [username, setUsername] = useState("");
-    // const [email, setEmail] = useState("");
-    // const [firstname, setFirstname] = useState("");
-    // const [lastname, setLastname] = useState("");
-    // const [phone_number, setPhonenumber] = useState("");
-    // const [gender, setEmail] = useState("");
-    // const [DOB, setFirstname] = useState("");
-     const [password, setPassword] = useState("");
-     const [confirmpassword, setConfirmPassword] = useState("");
 
+    const navigate = useNavigate();
+    // const showSummary = () => navigate('/createsummary');
+    // const showSummary = () => {
+    //     <AdminCreateSummary 
+    //         username= {username}
+    //         email= {email}
+    //         firstname= {firstname}
+    //         lastname= {lastname}
+    //         password= {confirmpassword}
+    //     />
+    // }
 
-     const navigate = useNavigate();
-     const showSummary = () => navigate('/createsummary');
+    Axios.get('http://localhost:8080/userinfo').then((response) => {
+        setUserInfo(response.data);
+    });
 
-     const addNewUser = () => {
+    const addNewUser = async () => {
         const confirm = document.querySelector('input[name=confirmpw]');
         if (confirmpassword !== password) {
             confirm.setCustomValidity('Password do not match');
         } else {
             confirm.setCustomValidity('');
-          
-              //     Axios.post('http://localhost:3333/register', {
-                //         username: username,
-                //         email: email,
-                //         firstname: firstname,
-                //         lastname: lastname,
-                //         phone_number: phone_number,
-                //         gender: gender,
-                //         DOB: DOB,
-                //         password: password,
-                //     }).then(() => {
-                //         
-                //     })
-                // }
-                showSummary();
+            
+            Axios.post('http://localhost:8080/register', {
+            role_id: 2,
+            username: username,
+            email: email,
+            firstname: firstname,
+            lastname: lastname,
+            phone_number: phone_number,
+            gender: gender,
+            DOB: DOB,
+            password: confirmpassword
+            }).then(() => {
+                console.log("Register approver success");
+                setUserInfo([
+                    ...userInfo,
+                    {
+                        username: username,
+                        email: email,
+                        firstname: firstname,
+                        lastname: lastname,
+                        phone_number: phone_number,
+                        gender: gender,
+                        DOB: DOB,
+                        password: password
+                    }
+                ]);
+                alert("Created approver account!");
+                window.location = "/report-admin";
+            });
         }
-         }
+    }
 
     var date = new Date();
 
@@ -76,40 +104,51 @@ export default function AdminCreateAccount() {
                         </section>
                         <div className="input-container username">
                             <label>Username</label>
-                            <input id="username" name="username" type="text" className="textinput" placeholder="Enter a unique username" required/>
+                            <input id="username" name="username" type="text" className="textinput" placeholder="Enter a unique username" required
+                                onChange={(event) => {
+                                    setUsername(event.target.value);
+                                }}
+                            />
                         </div>
                         <div className="input-container email">
                             <label>Email address</label>
                             <input id="email" name="email" type="email" placeholder="Enter your email" required pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
-                            // onChange={(event) => {
-                            //     setEmail(event.target.value)
-                            // }}
+                                onChange={(event) => {
+                                    setEmail(event.target.value)
+                                }}
                             />
                         </div>
                         <div className="input-container firstname">
                             <label>First name</label>
                             <input id="fname" name="fname" type="text" className="textinput" placeholder="Enter your first name" required
-                            // onChange={(event) => {
-                            //     setFname(event.target.value)
-                            // }}
+                                onChange={(event) => {
+                                    setFirstname(event.target.value)
+                                }}
                             />
                         </div>
                         <div className="input-container lastname">
                             <label>Last name</label>
                             <input id="lname" name="lname" type="text" className="textinput" placeholder="Enter your last name" required
-                            // onChange={(event) => {
-                            //     setLname(event.target.value)
-                            // }}
+                                onChange={(event) => {
+                                    setLastname(event.target.value)
+                                }}
                             />
                         </div>
                         <div className="input-container phonenum">
                             <label>Phone number</label>
                             <input id="telnum" name="telnum" type="tel" minLength={10} maxLength={10} placeholder="Enter your phone number" required
-                            pattern="[0]{1}[0-9]{9}"/>
+                                pattern="[0]{1}[0-9]{9}"
+                                onChange={(event) => {
+                                    setPhone_number(event.target.value);
+                                }}
+                            />
                         </div>
                         <div className="input-container gender">
                             <label>Gender</label>
-                            <select id="gender" name="gender" required>
+                            <select id="gender" name="gender" required
+                                onChange={(event) => {
+                                    setGender(event.target.value);
+                                }}>
                                 <option value="" disabled selected hidden>Gender</option>
                                 <option value="M">Male</option>
                                 <option value="F">Female</option>
@@ -119,7 +158,11 @@ export default function AdminCreateAccount() {
                         <div className="dateofbirth">
                             <div className="input-container dob">
                                 <label>Date of birth</label>
-                                <input id="dob" name="dob" type="date" min={maxage} max={minage} required/>
+                                <input id="dob" name="dob" type="date" min={maxage} max={minage} required
+                                    onChange={ (event) => {
+                                        setDOB(event.target.value);
+                                    }}
+                                />
                             </div> 
                         </div>
                         <div className="input-container password">
@@ -139,8 +182,12 @@ export default function AdminCreateAccount() {
                             />
                         </div>
     
-                    <button className="signupbtn" type="submit" onClick={addNewUser}
-                    >Create account</button>
+                    <button 
+                        className="signupbtn" 
+                        type="button" 
+                        onClick={addNewUser}
+                    >Create account
+                    </button>
                 </form>
             </div>
 

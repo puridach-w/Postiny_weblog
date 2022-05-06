@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import '../css/pages_css/report.css';
-import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
-import ChatRoundedIcon from '@material-ui/icons/ChatRounded';
 import ReportRoundedIcon from '@material-ui/icons/ReportRounded';
-import MonetizationOnRoundedIcon from '@material-ui/icons/MonetizationOnRounded';
-import Popup from "../components/Modal/reportPopUp";
 
+import Popup from "../components/Modal/reportPopUp";
 import SidebarUser from "../components/Layout/SidebarUser";
 import Topbar from "../components/Layout/Topbar";
 import Axios from "axios";

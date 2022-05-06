@@ -53,6 +53,7 @@ const register = (req, res) => {
             db.release();
             return;
         }
+        const role_id = req.body.role_id;
         const username = req.body.username;
         const email = req.body.email;
         const firstname = req.body.firstname;
@@ -62,8 +63,8 @@ const register = (req, res) => {
         const DOB = req.body.DOB;
         const password = req.body.password;
         const hashPassword = bcrypt.hashSync(password, saltRounds);
-        db.query("INSERT INTO userinfo (role_id, username, password, email, firstname, lastname, DOB, gender, phone_number, coin_balance, created_at, updated_at) VALUES (3,?,?,?,?,?,?,?,?,0,NOW(),NOW())",
-        [username, hashPassword, email, firstname, lastname, DOB, gender, phone_number],
+        db.query("INSERT INTO userinfo (role_id, username, password, email, firstname, lastname, DOB, gender, phone_number, coin_balance, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?,0,NOW(),NOW())",
+        [role_id, username, hashPassword, email, firstname, lastname, DOB, gender, phone_number],
         (err,result) => {
             if (err) {
                 console.log(err);
