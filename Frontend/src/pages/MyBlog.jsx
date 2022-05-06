@@ -168,11 +168,11 @@ const MyBlog = () => {
 						setEditModalOpen(true);
 						setBlur(true);
 					}}>
-          <CreateOutlinedIcon />
+            <CreateOutlinedIcon />
           </IconButton>
           <h1>{blogData.title}</h1>
           <p className="article-author">Written by {blogData.username}</p>
-          <p className="article-date">Published on {blogData.updated_at.substring(0, 10)}</p>
+          <p className="article-date">Published on {blogData.updated_at}</p>
           <p className="article-desc">{blogData.content}</p>
         </div>
         <div className="articleinterect">
