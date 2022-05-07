@@ -48,31 +48,6 @@ const getAllArticle = (req, res) => {
     });
 }
 
-const getArticleData = (req, res) => {
-    pool.getConnection((err, db) => {
-        if (err) {
-            console.log(err);
-            res.status(500).json({'error':err});
-            return;
-        }
-        const article_id = req.params.article_id;
-        db.query(`SELECT article.*, category_name, username 
-                FROM article 
-                JOIN category ON article.category_id=category.category_id 
-                JOIN userinfo ON article.author_id = userinfo.user_id
-                WHERE article_id = ?`,
-        [article_id], 
-        (err, result) => {
-            if (err) {
-                console.log(err);
-            } else {
-                res.send(result);
-            }
-            db.release();
-        });
-    });
-}
-
 
 const getProfileData = (req,res) => {
     pool.getConnection((err, db) => {
@@ -272,7 +247,6 @@ module.exports = {
     subscribe,
     updateBalanceUser,
     getFullAdDay,
-    getArticleData,
     addAdvertise,
     checkAmount,
     getAdsBlog

@@ -10,7 +10,7 @@ const MyBlogList = ({blogs,type,author_id}) => {
 		return (
 			<MyBlogItem
 					blog= {blog}
-					key= {blog.id}
+					key= {blog.article_id}
 				/>
 		)
 	}

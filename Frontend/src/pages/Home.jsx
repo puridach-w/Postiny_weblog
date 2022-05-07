@@ -61,22 +61,20 @@ function Home() {
 	})
 
 	const requestGetBlogList = Axios.get('http://localhost:8080/getbloglist');
-	// const requestGetUserInfo = Axios.get(`http://localhost:8080/currentuser/${user_id}`);
 	const requestGetFavCategory = Axios.get('http://localhost:8080/getfavcategory',
 	{
 		params: {
 			user_id: user_id
 	  	}
 	});
+	
 	useEffect( () => {
 		Axios.all([requestGetBlogList, requestGetFavCategory]).then(Axios.spread((...responses) => {
 				const responseOne = responses[0]
 				const responseTwo = responses[1]
-				// const responseThree = responses[2]
 				
 				setBlogs(responseOne.data);
 				setInitBlogs(responseOne.data);
-				// setCurrentUser(responseThree.data);
 				setGetFavCate(responseTwo.data);
 			})).catch(errors => {
 				console.log(errors);

@@ -5,53 +5,34 @@ import './BlogList.css';
 import LockIcon from '@mui/icons-material/Lock';
 
 const BlogItem = ({ blog }) => {
-    let loginUID = 1;
-    let value = false;
-    let sublaew = false;
-    const [category, setCategory] = useState(blog.category_id);
-    const [username, setUsername] = useState("");
-    const [profile, setProfile] = useState("");
+    const user_id = localStorage.getItem('user_id');
+    let unlock = false;
+    const [subscribed, setSubscribed] = useState(0);
+    
+    useEffect( () => {
+        Axios.get(`http://localhost:8080/getSubscribed/${user_id}/${blog.author_id}`).then(response => {
+            setSubscribed(response.data);
+        }) 
+    }, []);
 
-    if ((blog.author_id === loginUID) || (blog.sub_required === 0) || (sublaew)){
-        value = true;
+    if ((blog.author_id === user_id) || (blog.sub_required === 0) || (subscribed.length > 0)) {
+        unlock = true;
     }
-
-    useEffect( () => {
-        Axios.get('http://localhost:8080/getcategory').then((response) => {
-            response.data.map( item => {
-                if (item.category_id === category) {
-                    setCategory(item.category_name);
-                }
-            })
-        });
-    }, []);
-
-    useEffect( () => {
-        Axios.get('http://localhost:8080/userinfo').then((response) => {
-            response.data.map( item => {
-                if (item.user_id === blog.author_id) {
-                    setUsername(item.username);
-                    setProfile(item.profile_pic);
-                }
-            });
-        });
-    }, []);
 
     return (
       <div>
-        {value? 
+        {unlock? 
         <div className='blogItem-wrap'>
             <img className="blogItem-cover" src={blog.article_pic} alt="coverImage" />
-            <h5 className="blogItem-category">{category}</h5>
+            <h5 className="blogItem-category">{blog.category_name}</h5>
             <h3>{blog.title}</h3>
             <p className="blogItem-desc">{blog.content}</p>
 
             <footer>
                 <div className="blogItem-author">
-                    {/* ยังเอาโปรไฟล์มาไม่ได้ */}
-                    <img src={profile} alt="author pic" />
+                    <img src={blog.profile_pic} alt="author pic" />
                     <div className="blogItem-info">
-                        <h6>{username}</h6>
+                        <h6>{blog.username}</h6>
                         <p>{blog.created_at.substring(0, 10)}</p>
                     </div>
                 </div>
@@ -68,15 +49,15 @@ const BlogItem = ({ blog }) => {
         <div class="bloglockArticle">
         <div className='blogItem-wrap'>
         <img className="blogItem-cover" src={blog.article_pic} alt="coverImage" />
-        <h5 className="blogItem-category">{category}</h5>
+        <h5 className="blogItem-category">{blog.category_name}</h5>
         <h3>{blog.title}</h3>
         <p className="blogItem-desc">{blog.content}</p>
 
         <footer>
             <div className="blogItem-author">
-                <img src={profile} alt="author pic" />
+                <img src={blog.profile_pic} alt="author pic" />
                 <div className="blogItem-info">
-                    <h6>{username}</h6>
+                    <h6>{blog.username}</h6>
                     <p>{blog.created_at.substring(0, 10)}</p>
                 </div>
             </div>
@@ -84,9 +65,9 @@ const BlogItem = ({ blog }) => {
                 Read more ➜
             </Link>
         </footer>
-</div>
-</div>
-</div>}
+        </div>
+        </div>
+        </div>}
       </div>
 
   );

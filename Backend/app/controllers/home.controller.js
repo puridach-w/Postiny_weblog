@@ -69,14 +69,38 @@ const writeArticle = (req, res) => {
     });
 }
 
-const blogList = (req, res) => {
+const getBlogList = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
             res.status(500).json({'error':err});
             return;
         }
-        db.query("SELECT article.*, category_name FROM article JOIN category ON article.category_id = category.category_id ", (err, result) => {
+        db.query(`SELECT article.*, category_name, userinfo.username, userinfo.firstname, userinfo.lastname, userinfo.profile_pic, COUNT(likearticle.user_id) AS totalLike
+                    FROM article JOIN category ON article.category_id = category.category_id 
+                    JOIN userinfo ON article.author_id = userinfo.user_id 
+                    LEFT JOIN likearticle ON likearticle.article_id = article.article_id
+                    GROUP BY article_id`,
+            (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+    });
+}
+
+const getSubscription = (req, res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            res.status(500).json({'error':err});
+            return;
+        }
+        db.query(`SELECT * FROM subscription`,
+            (err, result) => {
             if (err) {
                 console.log(err);
             } else {
@@ -90,6 +114,7 @@ const blogList = (req, res) => {
 module.exports = {
     writeArticle,
     getCategory,
-    blogList,
-    getFavCategory
+    getBlogList,
+    getFavCategory,
+    getSubscription
 }

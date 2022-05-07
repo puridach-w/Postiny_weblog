@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from "react-router";
 import Gobackbtn from "../components/gobackbtn";
-// import { Link } from "react-router-dom";
-import { blogList, likeArray } from "../dummyData";
+import { likeArray } from "../dummyData";
 import EmptyBlog from '../components/EmptyBlog';
 import Comments from "../components/Comment/Comments"
 import IconButton from '@mui/material/IconButton';
@@ -23,33 +22,35 @@ const MyBlog = () => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [promoteModalOpen, setPromoteModalOpen] = useState(false);
 	const [blur, setBlur] = useState(false);
-  const [blogData,setBlogData] = useState(null);
+  const [blogs, setBlogs] = useState([]);
+  const [blogData,setBlogData] = useState();
   const [fullAd,setFullAd] = useState([]);
   const [balance,setBalance] = useState([]);
   const user_id = localStorage.getItem("user_id");
   const COSTPERDAY = 5;
-  // const MAXPROMOTEPOST = 6;
 
-  // let blog = blogList.find(blog => blog.id === parseInt(id));
+  const requestGetBlogList = Axios.get('http://localhost:8080/getbloglist');
+  const requestGetFullAdDay = Axios.get(`http://localhost:8080/getFullAdDay/${id}`);
+  const requestCheckAmount = Axios.get(`http://localhost:8080/checkAmount/${user_id}`);
 
-  // let ismyprofile = true;
+  Axios.all([requestGetBlogList, requestGetFullAdDay, requestCheckAmount]).then(Axios.spread((...responses) => {
+    const responseOne = responses[0]
+    const responseTwo = responses[1]
+    const responseThree = responses[2]
 
+    setBlogs(responseOne.data);
+    let blog = blogs.find(blog => blog.article_id === parseInt(id));
+    if (blog) {
+      setBlogData(blog);
+    }
 
-  useEffect( () => {
-    Axios.get(`http://localhost:8080/getArticleData/${id}`).then((response) => {
-      setBlogData(response.data[0]);
-    })
+    setFullAd(responseTwo.data);
 
-    Axios.get(`http://localhost:8080/getFullAdDay/${id}`).then((response) => {
-      setFullAd(response.data);
-    })
-
-    Axios.get(`http://localhost:8080/checkAmount/${user_id}`).then((response) => {
-      setBalance(response.data[0]); 
-    })
-
-  }, []);
-
+    setBalance(responseThree.data[0]); 
+    
+  })).catch(errors => {
+    console.log(errors);
+  });
 
   const addAdvertise = (date) => {
     Axios.post(`http://localhost:8080/addAdvertise`,{
@@ -125,7 +126,7 @@ const MyBlog = () => {
       }
     }
     else {
-      alert("you must read the article before liking it")
+      alert("You must read the article before liking it");
     }
   }
 
@@ -150,7 +151,6 @@ const MyBlog = () => {
 
   return (
     <>
-    {/* {ismyprofile &&  */}
     <div>
     {editModalOpen && <EditArticleModal setOpenModal={setEditModalOpen} setBlur={setBlur}/>}
     {promoteModalOpen && <PromoteArticleModal setOpenModal={setPromoteModalOpen} setBlur={setBlur} promote={promote}/>}
@@ -172,7 +172,7 @@ const MyBlog = () => {
           </IconButton>
           <h1>{blogData.title}</h1>
           <p className="article-author">Written by {blogData.username}</p>
-          <p className="article-date">Published on {blogData.updated_at}</p>
+          <p className="article-date">Published on {blogData.updated_at.substring(0,10)}</p>
           <p className="article-desc">{blogData.content}</p>
         </div>
         <div className="articleinterect">
@@ -180,7 +180,7 @@ const MyBlog = () => {
               onClick={likeMethod}
               className={[likeActive ? "active-like" : "inactive-like"].join(' ')}
             >
-              ❤︎ {like} Like
+              ❤︎ {blogData.totalLike} Like
             </button>
 
             <button className="promotebtn"  onClick={() => {
@@ -200,41 +200,6 @@ const MyBlog = () => {
     </div>
     </div>
     </div>
-    {/* } */}
-
-
-    {/* {!ismyprofile && <div>
-      
-    <Gobackbtn path="/profile"/>
-    <div className="articledisplay" style={{marginLeft: "60px"}}>      
-      <br />
-      {blog ? 
-      <><div className="article-wrap">
-          <img src={blog.cover} alt="cover img" />
-          <h4 className="article-category">{blog.category}</h4>
-          <h1>{blog.title}</h1>
-          <p className="article-author">Written by {blog.authorName}</p>
-          <p className="article-date">Published on {blog.createdAt}</p>
-          <p className="article-desc">{blog.description}</p>
-        </div>
-        <div className="articleinterect">
-            <button
-              onClick={likeMethod}
-              className={[likeActive ? "active-like" : "inactive-like"].join(' ')}
-            >
-              ❤︎ {like} Like
-            </button>
-            <Comments
-              commentsUrl="http://localhost:3000/comments"
-              currentUserId="1" />
-          </div>
-          
-          </>
-      : 
-      <EmptyBlog />
-      }
-    </div>
-    </div>} */}
     </>
   )
 }
