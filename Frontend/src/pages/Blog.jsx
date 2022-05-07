@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from "react-router";
 import Gobackbtn from "../components/gobackbtn";
-import { Link } from "react-router-dom";
-import { likeArray } from "../dummyData";
 import EmptyBlog from '../components/EmptyBlog';
 import Comments from "../components/Comment/Comments"
 import Axios from "axios";
@@ -11,24 +9,55 @@ import "../css/pages_css/blog.css";
 
 const Blog = () => {
   const {id} = useParams();
-  const [blog, setBlog] = useState(null);
+  const [blog, setBlog] = useState("");
   const [blogs, setBlogs] = useState([]);
-  const [like, setLike] = useState(likeArray[0].like);
   const [likeActive, setLikeActive] = useState(false);
   const startTime = new Date();
-  const twoMinutes = 120000;
+  const oneMinute = 60000;
   const [read, setRead] = useState(false);
+  const [isLiked, setIsLiked] = useState(0);
+  const user_id = localStorage.getItem('user_id');
 
   let ismyprofile = false;
+
+
+  function addtodb(){
+    console.log("add laew mae")
+  }
+ 
+  function checkTime() {
+   var timePassed = new Date() - startTime > oneMinute;
+     if (timePassed && !read){
+       setRead(true);
+       addtodb();
+       return true;
+     }
+     else if (read){
+       return true;
+     }
+     else {
+       return false;
+     }
+  }
 
   function likeMethod() {
     var canLike = checkTime();
     if (canLike) {
       if(likeActive) {
-        setLike(like-1);
         setLikeActive(false);
-      } else {
-        setLike(like+1);
+        Axios.delete(`http://localhost:8080/unlike`,
+        {
+          params: {
+            user_id: user_id,
+            article_id: blog.article_id
+            }
+        })
+      } else { 
+        Axios.post(`http://localhost:8080/like`,
+        {
+          user_id: user_id,
+          article_id: blog.article_id
+        })
         setLikeActive(true);
       }
     }
@@ -37,42 +66,35 @@ const Blog = () => {
     }
   }
 
-  function addtodb(){
-    console.log("add laew mae")
-  }
- 
-  function checkTime() {
-   var timePassed = new Date() - startTime > twoMinutes;
-     if (timePassed && !read){
-       setRead(true);
-       addtodb();
-       return true;
-     }
-     else if (read || ismyprofile){
-       return true;
-     }
-     else {
-       return false;
-     }
-  }
-
-  useEffect( () => {
+  // useEffect( () => {
     Axios.get('http://localhost:8080/getbloglist').then((response) => {
       setBlogs(response.data);
-      let blog = blogs.find(blog => blog.article_id === parseInt(id));
+      const blog = blogs.find(blog => blog.article_id === parseInt(id));
       if (blog) {
         setBlog(blog);
       }
     });
-  })
+    Axios.get('http://localhost:8080/isLiked',
+    {
+      params: {
+        user_id: user_id,
+        article_id: blog.article_id
+        }
+    }).then((response) => {
+      setIsLiked(response.data[0].isLiked);
+      if(isLiked === 1) {
+        setLikeActive(true);
+      } else {
+        setLikeActive(false);
+      }
+    });
+  // }, [])
 
 
   return (
     <div className="blog" style={{marginLeft: "60px"}}>
       <div className="fix-goback">
-        <Link to= '/home' >
-          <Gobackbtn />
-        </Link>
+      <Gobackbtn/>
       </div>
       
       <br />

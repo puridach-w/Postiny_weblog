@@ -15,38 +15,53 @@ import Axios from 'axios';
 const MyBlog = () => {
   const {id} = useParams();
   const startTime = new Date();
-  const twoMinutes = 60000;
-  const [read, setRead] = useState(false);
-  const [like, setLike] = useState(likeArray[0].like);
+  const oneMinute = 60000;
+  const [read, setRead] = useState(true); // MyBlog for only owner the blog => (read = true)
   const [likeActive, setLikeActive] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [promoteModalOpen, setPromoteModalOpen] = useState(false);
 	const [blur, setBlur] = useState(false);
   const [blogs, setBlogs] = useState([]);
-  const [blogData,setBlogData] = useState();
+  const [blogData,setBlogData] = useState("");
   const [fullAd,setFullAd] = useState([]);
   const [balance,setBalance] = useState([]);
+  const [isLiked, setIsLiked] = useState(0);
   const user_id = localStorage.getItem("user_id");
   const COSTPERDAY = 5;
 
   const requestGetBlogList = Axios.get('http://localhost:8080/getbloglist');
   const requestGetFullAdDay = Axios.get(`http://localhost:8080/getFullAdDay/${id}`);
   const requestCheckAmount = Axios.get(`http://localhost:8080/checkAmount/${user_id}`);
+  const requestIsLiked = Axios.get('http://localhost:8080/isLiked',
+  {
+    params: {
+      user_id: user_id,
+      article_id: blogData.article_id
+      }
+  });
 
-  Axios.all([requestGetBlogList, requestGetFullAdDay, requestCheckAmount]).then(Axios.spread((...responses) => {
+  Axios.all([requestGetBlogList, requestGetFullAdDay, requestCheckAmount, requestIsLiked]).then(Axios.spread((...responses) => {
     const responseOne = responses[0]
     const responseTwo = responses[1]
     const responseThree = responses[2]
+    const responseFour = responses[3]
 
     setBlogs(responseOne.data);
-    let blog = blogs.find(blog => blog.article_id === parseInt(id));
-    if (blog) {
-      setBlogData(blog);
+    let blogData = blogs.find(blogData => blogData.article_id === parseInt(id));
+    if (blogData) {
+      setBlogData(blogData);
     }
 
     setFullAd(responseTwo.data);
 
     setBalance(responseThree.data[0]); 
+
+    setIsLiked(responseFour.data[0].isLiked);
+    if(isLiked === 1) {
+      setLikeActive(true);
+    } else {
+      setLikeActive(false);
+    }
     
   })).catch(errors => {
     console.log(errors);
@@ -117,11 +132,21 @@ const MyBlog = () => {
   function likeMethod() {
     var canLike = checkTime();
     if (canLike) {
-    if(likeActive) {
-      setLike(like-1);
-      setLikeActive(false);
-      } else {
-        setLike(like+1);
+      if(likeActive) {
+        setLikeActive(false);
+        Axios.delete(`http://localhost:8080/unlike`,
+        {
+          params: {
+            user_id: user_id,
+            article_id: blogData.article_id
+            }
+        })
+      } else { 
+        Axios.post(`http://localhost:8080/like`,
+        {
+          user_id: user_id,
+          article_id: blogData.article_id
+        })
         setLikeActive(true);
       }
     }
@@ -135,13 +160,13 @@ const MyBlog = () => {
  }
 
  function checkTime() {
-  var timePassed = new Date() - startTime > twoMinutes;
+  var timePassed = new Date() - startTime > oneMinute;
     if (timePassed && !read){
       setRead(true);
       addtodb();
       return true;
     }
-    else if (read || ismyprofile){
+    else if (read){
       return true;
     }
     else {
@@ -163,7 +188,6 @@ const MyBlog = () => {
           <img src={blogData.article_pic} alt="cover img" />
           <h4 className="article-category">{blogData.category_name}</h4>
           <IconButton style={{color: '#1D1D2B', borderColor: "#E3E3E6", marginLeft: "980px", marginTop: "-70px"}}
-          // onClick={routeChange}
           onClick={() => {
 						setEditModalOpen(true);
 						setBlur(true);
