@@ -36,7 +36,7 @@ function ReportPopUp({ report, setOpenModal, setBlur, user_id }) {
               setBlur(false);
             }}
           >
-            X
+          ✕
           </button>
         </div>
 

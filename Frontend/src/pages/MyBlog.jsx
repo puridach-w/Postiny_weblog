@@ -5,6 +5,7 @@ import { likeArray } from "../dummyData";
 import EmptyBlog from '../components/EmptyBlog';
 import Comments from "../components/Comment/Comments"
 import IconButton from '@mui/material/IconButton';
+import EventRoundedIcon from '@material-ui/icons/EventRounded';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import EditArticleModal from "../components/Modal/EditArticleModal";
 import PromoteArticleModal from "../components/Modal/PromoteArticleModal";
@@ -231,9 +232,11 @@ const MyBlog = () => {
 
             <Comments
               read={read}
+              setRead={setRead}
               article_id= {id}
-              commentsUrl="http://localhost:3000/comments"
-              currentUserId="1" />
+              addtodb= {addtodb} 
+              user_id = {user_id}
+            />
           </div>
           
           </>

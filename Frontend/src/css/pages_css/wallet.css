@@ -2,12 +2,12 @@
 .balance{
     color: white;
     background-color: #1572A1;
-    margin: 0 10% 0 10%;
-    padding: 5% 5%;
+    margin: 0 80px;
+    margin-top: 80px;
+    padding: 40px 40px;
     border-radius: 10px;
     width: 27rem;
     height: 10rem;
-    margin-top: 10%;
     font-size: 28px;
     display: flex;
     align-items: center;
@@ -28,10 +28,10 @@
 
 .transaction{
     background-color: #DFDFDF;
-    padding: 3% 2%;
+    padding: 40px 40px;
     width: 30rem;
-    margin-left: 5%;
-    margin-top: 5%;
+    margin-left: 50px;
+    margin-top: 80px;
     border-radius: 20px;
 }
 
@@ -41,8 +41,8 @@
 }
 
 .btn_claim{
-    padding: 0% 5% 0% 2%;
-    margin: 0 10%;
+    padding: 0% 40px 0% 25px;
+    margin: 0 80px;
     border: 2px solid #1572A1;
     color: #1572A1;
     border-radius: 10px;
@@ -58,11 +58,11 @@
     background-color: #1572A1;
     height: 70px;
     width: 35%;
-    padding: 0% 3% 0% 2%;
+    padding: 0% 30px 0% 25px;
     text-align: center;
     align-items: center;
     border-radius: 10px;
-    margin: 0 10%;
+    margin: 0 80px;
     font-size: 24px;
     border: none;
 }

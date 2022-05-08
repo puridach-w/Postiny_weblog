@@ -94,7 +94,7 @@ const Blog = () => {
   useEffect( () => {
     Axios.all([requestGetBlogList,requestGetViewing]).then(Axios.spread((...responses) => {
       const responseOne = responses[0]
-      const responseThree = responses[1]
+      const responseTwo = responses[1]
 
       setBlogs(responseOne.data);
       const blog = blogs.find(blog => blog.article_id === parseInt(id));
@@ -103,7 +103,7 @@ const Blog = () => {
         getLike(blog.article_id);
       }
 
-      setViewing(responseThree.data);
+      setViewing(responseTwo.data);
       if(viewing.length > 0){
         setRead(true);
       }
@@ -141,7 +141,7 @@ const Blog = () => {
               onClick={likeMethod}
               className={[likeActive ? "active-like" : "inactive-like"].join(' ')}
             >
-              ❤️ {blog.totalLike} Like
+              ❤︎ {blog.totalLike} Like
             </button>
             <Comments
               read={read}

@@ -50,8 +50,8 @@ function TransactionUpload(){
         <div className="content row">
             <div className="col-lg-6 total">
                 <h1>Total payment: <span className="amount">{amount}฿</span></h1> <br/>
-                <h3>Kasikorn Bank</h3> <br/>
-                <p>Account name:    Postiny CO.LTD.</p>
+                <h3>🏦 Kasikorn Bank</h3> <br/>
+                <p>Account name: Postiny CO.LTD.</p>
                 <p>Account number:  <span className="accountNumber">123-4567-890</span></p>
             </div> 
             <div className="col-lg-6 slip">
@@ -61,14 +61,16 @@ function TransactionUpload(){
                     <br/>
                         {haveimg?
                         <img width="150px" height="150px" src={imagesURLs[0]}/> 
-                        : <WallpaperRoundedIcon style={{fontSize: "90px"}}/> }
+                        : 
+                        <WallpaperRoundedIcon style={{fontSize: "55px"}}/> }
+
                         { !haveimg && "Drop your image" }
                         <br/>
                         <input className="inputFile" type="file" name="slip" onChange={onImageChange} accept="image/*"></input>
                         
                     </label>
                 </div>
-                <button className="btn-upload" onClick={handleClicked}>upload now</button>
+                <button className="btn-upload" onClick={handleClicked}>Upload now</button>
             </div> 
         </div>
     </div>

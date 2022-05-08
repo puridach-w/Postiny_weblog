@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./writeArticleModal.css";
 import DropPicture from '@material-ui/icons/WallpaperRounded';
 import Switch from '@mui/material/Switch';
+import LockOpen from '@material-ui/icons/LockOpenRounded';
+import Lock from '@material-ui/icons/LockRounded';
 import Axios from 'axios';
 
 function WriteArticleModal({ setOpenModal, setBlur}) {
@@ -99,7 +101,7 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
         </div>
 
         <div className="footer">
-          <label>{lock? "Only subscribers" : "Public"}</label>
+          <label>{lock? "Only subscribers 🔒" : "Public 🔓"}</label>
           <Switch checked={lock} onChange={ () => {lock? setLock(0) : setLock(1)}} />
           <button onClick={() => {
               setOpenModal(false);
