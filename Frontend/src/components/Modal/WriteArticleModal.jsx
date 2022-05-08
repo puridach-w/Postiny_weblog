@@ -69,7 +69,7 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
                         setCategory(event.target.value);
                     }}
                   >
-                  <option value="" disabled selected hidden>Category</option>
+                  <option value="" disabled selected hidden>Unselect</option>
                   {select.map( item => (
                       <option key={item.category_id} value={item.category_id}>{item.category_name}</option>
                   ))}

@@ -37,6 +37,9 @@ require("./app/routes/profile.routes")(app);
 //blog
 require("./app/routes/blog.routes")(app);
 
+//dashboard
+require("./app/routes/dashboard.routes")(app);
+
 
 //listening
 const PORT = process.env.PORT || 8080;

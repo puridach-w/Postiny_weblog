@@ -1,8 +1,5 @@
 import React, {useState} from 'react';
 import "../../css/topsubscribed.css"
-
-
-
 import { 
     Table,
     TableBody,
@@ -42,13 +39,13 @@ function TopSubscribed(props) {
                     <div className="tssubcount">
                         + {row.newSubCount} Subscribers
                     </div>
+                    <div className="tscategory">
+                        {row.category}
+                    </div>
                 </TableCell >
               </TableRow>
             ))}
-
           </TableBody>
-
-         
         </Table>
       </TableContainer>
       </div>

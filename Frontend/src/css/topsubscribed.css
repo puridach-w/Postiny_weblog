@@ -36,7 +36,7 @@
     font-family: "SF Pro Rounded-Medium";
     font-size: medium;
     padding-left: 2rem;
-    padding-top: 25px;
+    padding-top: 20px;
     width: 10px;
     color: #676767;
 }
@@ -49,9 +49,14 @@
 
 .table-topsc .tscell .tsname {
     margin-right: 200px;
-    margin-top: -62px;
+    margin-top: -70px;
     color: #454545;
     font-size: 19px;
+}
+
+.table-topsc .tscell .tscategory {
+    color: #9c9c9c;
+    font-size: 12px;
 }
 
 .table-topsc .tscell .tssubcount {
@@ -62,7 +67,7 @@
 .topsubscribedTitle h2 {
     color: #1572A1;
     margin-bottom: 22px;
-    padding-top: 50px;
+    padding-top: 40px;
     margin-left: 44px;
     font-weight: bold;
     font-size: xx-large;

@@ -509,6 +509,7 @@ const topSubscribedUser = [{
   firstname: 'Christina',
   lastname: 'Koch',
   newSubCount: '89',
+  category: 'Technology',
   authorAvatar: 'https://picsum.photos/200/500',
 },
 {
@@ -517,6 +518,7 @@ const topSubscribedUser = [{
   firstname: 'Ethan',
   lastname: 'Allen',
   newSubCount: '70',
+  category: 'Art',
 },
 {
   id: 3,
@@ -524,6 +526,7 @@ const topSubscribedUser = [{
   firstname: 'Lily',
   lastname: 'Watson',
   newSubCount: '34',
+  category: 'Music',
 },
 {
   id: 4,
@@ -531,6 +534,7 @@ const topSubscribedUser = [{
   firstname: 'Dewayne',
   lastname: 'Bancroft',
   newSubCount: '21',
+  category: 'Technology',
 },
 {
   id: 5,
@@ -538,6 +542,7 @@ const topSubscribedUser = [{
   firstname: 'Issac',
   lastname: 'Hambleton',
   newSubCount: '12',
+  category: 'Game',
 },
 ];
 
