@@ -30,6 +30,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    /* margin-bottom: -500px; */
     /* height: 100%; */
 }
 
@@ -86,15 +87,14 @@
     justify-content: space-between;
     background-color: transparent;
     margin-left: -40px;
-    padding-bottom: 540px;
     width: 880px;
     background-color: white;
+    margin-top: -80px;
 }
 
 .right h2 {
     color: #1572A1;
     width: 700px;
-    padding-top: 480px;
     padding-bottom: 20px;
     text-align: left;
     font-family: SF Pro Rounded-Semibold;
@@ -132,6 +132,7 @@
     font-family: SF Pro Rounded-Medium;
     font-size: 15px;
     min-height: 200px;
+    max-height: 330px;
 }
 
 
@@ -219,4 +220,8 @@
         width: auto;
         height: auto;
     }
+}
+
+.editpage {
+    margin-top: 80px;
 }
