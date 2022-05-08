@@ -9,14 +9,14 @@ import {
 } from "../../dummyData";
 
 import './comment.css';
+import Axios from "axios";
 
-const Comments = ({ commentsUrl, currentUserId }) => {
+const Comments = ({read, setRead, article_id, addtodb, user_id}) => {
   const [backendComments, setBackendComments] = useState([]);
   const [activeComment, setActiveComment] = useState(null);
   const startTime = new Date();
-  const twoMinutes = 5000;
-  const [read, setRead] = useState(false);
-  let ismyprofile = false;
+  const oneMinute = 60000;
+
 //   const rootComments = backendComments.filter(
 //     (backendComment) => backendComment.parentId === null
 //   );
@@ -31,30 +31,28 @@ const Comments = ({ commentsUrl, currentUserId }) => {
 //     );
 // ลบ (text, parentId) -> (text)
 
-function addtodb(){
-  console.log("add laew mae")
-}
+
 
 function checkTime() {
-  var timePassed = new Date() - startTime > twoMinutes;
-    if (timePassed && !read){
-      setRead(true);
-      addtodb();
-      return true;
-    }
-    else if (read || ismyprofile){
-      return true;
-    }
-    else {
-      return false;
-    }
+  var timePassed = new Date() - startTime > oneMinute;
+   if (timePassed && !read){
+     setRead(true);
+     addtodb();
+     return true;
+   }
+   else if (read){
+     return true;
+   }
+   else {
+     return false;
+   }
  }
 
- 
+
  const handleSubmit = (text) => {
   var canComment = checkTime();
   if (canComment) {
-  addComment(text);
+    addComment(text);
   }
   else {
     alert("You must read the article before giving comment")
@@ -63,41 +61,74 @@ function checkTime() {
 }
 
   const addComment = (text) => {
-        createCommentApi(text).then((comment) => {
-            setBackendComments([comment, ...backendComments]);
-            setActiveComment(null);
-    });
+    Axios.post(`http://localhost:8080/addComment`,{
+      article_id: article_id,
+      user_id: user_id,
+      content: text
+    }).then((comment) => {
+      location.reload();
+      setActiveComment(null);
+    })
+    //     createCommentApi(text).then((comment) => {
+    //         setBackendComments([comment, ...backendComments]);
+    //         setActiveComment(null);
+    // });
   };
 
 
   const updateComment = (text, commentId) => {
-    updateCommentApi(text).then(() => {
-      const updatedBackendComments = backendComments.map((backendComment) => {
-        if (backendComment.id === commentId) {
-          return { ...backendComment, body: text };
-        }
-        return backendComment;
-      });
-      setBackendComments(updatedBackendComments);
+    Axios.patch("http://localhost:8080/updateComment",{
+      content: text,
+      comment_id: commentId 
+    }).then((response) => {
+      location.reload();
       setActiveComment(null);
-    });
+    })
+    // updateCommentApi(text).then(() => {
+    //   const updatedBackendComments = backendComments.map((backendComment) => {
+    //     if (backendComment.id === commentId) {
+    //       return { ...backendComment, body: text };
+    //     }
+    //     return backendComment;
+    //   });
+    //   setBackendComments(updatedBackendComments);
+    //   setActiveComment(null);
+    // });
   };
+
   const deleteComment = (commentId) => {
+    console.log(commentId);
     if (window.confirm("Are you sure you want to remove comment?")) {
-      deleteCommentApi().then(() => {
-        const updatedBackendComments = backendComments.filter(
-          (backendComment) => backendComment.id !== commentId
-        );
-        setBackendComments(updatedBackendComments);
-      });
+      Axios.delete(`http://localhost:8080/deleteComment`,
+        {
+          params: {
+            comment_id: commentId,
+            }
+        }).then((response) => {
+          location.reload();
+        })
+      // deleteCommentApi().then(() => {
+      //   const updatedBackendComments = backendComments.filter(
+      //     (backendComment) => backendComment.id !== commentId
+      //   );
+      //   setBackendComments(updatedBackendComments);
+      // });
     }
   };
 
-  useEffect(() => {
-    getCommentsApi().then((data) => {
-      setBackendComments(data);
-    });
-  }, []);
+
+  // useEffect(() => {
+  //   getCommentsApi().then((data) => {
+  //     setBackendComments(data);
+  //   });
+  // }, []);
+
+  useEffect( () => {
+    Axios.get(`http://localhost:8080/getAllComment/${article_id}`).then((response) => {
+      setBackendComments(response.data);
+    })
+  }, [])
+
 
   return (
     <div className="comments">
@@ -111,13 +142,12 @@ function checkTime() {
             <Comment
                 key={rootComment.id}
                 comment={rootComment}
-                // replies={getReplies(rootComment.id)}
                 activeComment={activeComment}
                 setActiveComment={setActiveComment}
                 addComment={addComment}
                 deleteComment={deleteComment}
                 updateComment={updateComment}
-                currentUserId={currentUserId}
+                currentUserId={user_id}
             />
             ))}
         </div>

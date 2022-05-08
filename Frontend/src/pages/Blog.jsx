@@ -15,29 +15,31 @@ const Blog = () => {
   const startTime = new Date();
   const oneMinute = 60000;
   const [read, setRead] = useState(false);
-  const [isLiked, setIsLiked] = useState(0);
+  const [viewing,setViewing] = useState([]);
+  const [change,setChange] = useState(false);
   const user_id = localStorage.getItem('user_id');
-
-  let ismyprofile = false;
 
 
   function addtodb(){
-    console.log("add laew mae")
+    Axios.post("http://localhost:8080/addviewing",{
+      article_id: id,
+      user_id: user_id
+    })
   }
  
   function checkTime() {
    var timePassed = new Date() - startTime > oneMinute;
-     if (timePassed && !read){
-       setRead(true);
-       addtodb();
-       return true;
-     }
-     else if (read){
-       return true;
-     }
-     else {
-       return false;
-     }
+    if (timePassed && !read){
+      setRead(true);
+      addtodb();
+      return true;
+    }
+    else if (read){
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
   function likeMethod() {
@@ -52,6 +54,7 @@ const Blog = () => {
             article_id: blog.article_id
             }
         })
+        location.reload();
       } else { 
         Axios.post(`http://localhost:8080/like`,
         {
@@ -59,6 +62,7 @@ const Blog = () => {
           article_id: blog.article_id
         })
         setLikeActive(true);
+        location.reload();
       }
     }
     else {
@@ -66,29 +70,53 @@ const Blog = () => {
     }
   }
 
-  // useEffect( () => {
-    Axios.get('http://localhost:8080/getbloglist').then((response) => {
-      setBlogs(response.data);
+  const getLike = (article_id) => {
+      Axios.get('http://localhost:8080/isLiked',
+      {
+        params: {
+          user_id: user_id,
+          article_id: article_id
+          }
+      }).then((response) => {
+          if(response.data[0].isLiked === 1) {
+            setLikeActive(true);
+          } else {
+            setLikeActive(false);
+          }
+      })
+  }
+
+  
+  const requestGetBlogList = Axios.get('http://localhost:8080/getbloglist');
+  const requestGetViewing = Axios.get(`http://localhost:8080/getViewing/${id}/${user_id}`);
+
+
+  useEffect( () => {
+    Axios.all([requestGetBlogList,requestGetViewing]).then(Axios.spread((...responses) => {
+      const responseOne = responses[0]
+      const responseThree = responses[1]
+
+      setBlogs(responseOne.data);
       const blog = blogs.find(blog => blog.article_id === parseInt(id));
       if (blog) {
         setBlog(blog);
+        getLike(blog.article_id);
       }
-    });
-    Axios.get('http://localhost:8080/isLiked',
-    {
-      params: {
-        user_id: user_id,
-        article_id: blog.article_id
-        }
-    }).then((response) => {
-      setIsLiked(response.data[0].isLiked);
-      if(isLiked === 1) {
-        setLikeActive(true);
-      } else {
-        setLikeActive(false);
+
+      setViewing(responseThree.data);
+      if(viewing.length > 0){
+        setRead(true);
       }
+
+      if(blogs && viewing){
+        setChange(true);
+      }
+
+      })).catch(errors => {
+        console.log(errors);
     });
-  // }, [])
+  }, [change])
+
 
 
   return (
@@ -116,8 +144,12 @@ const Blog = () => {
               ❤️ {blog.totalLike} Like
             </button>
             <Comments
-              commentsUrl="http://localhost:3000/comments"
-              currentUserId="1" />
+              read={read}
+              setRead={setRead}
+              article_id= {id}
+              addtodb= {addtodb} 
+              user_id = {user_id}
+              />
           </div></>
       : 
       <EmptyBlog />

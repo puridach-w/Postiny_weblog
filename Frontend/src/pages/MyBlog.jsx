@@ -25,47 +25,57 @@ const MyBlog = () => {
   const [blogData,setBlogData] = useState("");
   const [fullAd,setFullAd] = useState([]);
   const [balance,setBalance] = useState([]);
-  const [isLiked, setIsLiked] = useState(0);
+  const [change,setChange] = useState(false);
   const user_id = localStorage.getItem("user_id");
   const COSTPERDAY = 5;
 
   const requestGetBlogList = Axios.get('http://localhost:8080/getbloglist');
   const requestGetFullAdDay = Axios.get(`http://localhost:8080/getFullAdDay/${id}`);
   const requestCheckAmount = Axios.get(`http://localhost:8080/checkAmount/${user_id}`);
-  const requestIsLiked = Axios.get('http://localhost:8080/isLiked',
-  {
-    params: {
-      user_id: user_id,
-      article_id: blogData.article_id
-      }
-  });
 
-  Axios.all([requestGetBlogList, requestGetFullAdDay, requestCheckAmount, requestIsLiked]).then(Axios.spread((...responses) => {
+
+  useEffect( () => {
+  Axios.all([requestGetBlogList, requestGetFullAdDay, requestCheckAmount]).then(Axios.spread((...responses) => {
     const responseOne = responses[0]
     const responseTwo = responses[1]
     const responseThree = responses[2]
-    const responseFour = responses[3]
-
+    
     setBlogs(responseOne.data);
     let blogData = blogs.find(blogData => blogData.article_id === parseInt(id));
     if (blogData) {
       setBlogData(blogData);
+      getLike(blogData.article_id);
     }
 
     setFullAd(responseTwo.data);
 
     setBalance(responseThree.data[0]); 
 
-    setIsLiked(responseFour.data[0].isLiked);
-    if(isLiked === 1) {
-      setLikeActive(true);
-    } else {
-      setLikeActive(false);
+    if(blogs && fullAd && balance){
+      setChange(true);
     }
     
   })).catch(errors => {
     console.log(errors);
   });
+  }, [change])
+
+
+  const getLike = (article_id) => {
+    Axios.get('http://localhost:8080/isLiked',
+    {
+      params: {
+        user_id: user_id,
+        article_id: article_id
+        }
+    }).then((response) => {
+        if(response.data[0].isLiked === 1) {
+          setLikeActive(true);
+        } else {
+          setLikeActive(false);
+        }
+    })
+  }
 
   const addAdvertise = (date) => {
     Axios.post(`http://localhost:8080/addAdvertise`,{
@@ -141,6 +151,7 @@ const MyBlog = () => {
             article_id: blogData.article_id
             }
         })
+        location.reload();
       } else { 
         Axios.post(`http://localhost:8080/like`,
         {
@@ -148,6 +159,7 @@ const MyBlog = () => {
           article_id: blogData.article_id
         })
         setLikeActive(true);
+        location.reload();
       }
     }
     else {
@@ -155,24 +167,29 @@ const MyBlog = () => {
     }
   }
 
- function addtodb(){
-   console.log("add laew mae")
- }
+  
 
- function checkTime() {
-  var timePassed = new Date() - startTime > oneMinute;
-    if (timePassed && !read){
-      setRead(true);
-      addtodb();
-      return true;
-    }
-    else if (read){
-      return true;
-    }
-    else {
-      return false;
-    }
- }
+  function addtodb(){
+    Axios.post("http://localhost:8080/addviewing",{
+      article_id: id,
+      user_id: user_id
+    })
+  }
+
+  function checkTime() {
+    var timePassed = new Date() - startTime > oneMinute;
+     if (timePassed && !read){
+       setRead(true);
+       addtodb();
+       return true;
+     }
+     else if (read){
+       return true;
+     }
+     else {
+       return false;
+     }
+   }
 
   return (
     <>
@@ -213,6 +230,8 @@ const MyBlog = () => {
 					  }}>Promote</button>
 
             <Comments
+              read={read}
+              article_id= {id}
               commentsUrl="http://localhost:3000/comments"
               currentUserId="1" />
           </div>
