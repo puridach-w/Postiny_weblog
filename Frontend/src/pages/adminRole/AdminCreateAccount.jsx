@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import ponyreg from "../../images/ponyreg.png"
 import "../../css/register.css"
 import Axios from 'axios'
@@ -18,18 +18,30 @@ export default function AdminCreateAccount() {
     const [confirmpassword, setConfirmPassword] = useState("");
     const [userInfo, setUserInfo] = useState([]);
 
-
     const navigate = useNavigate();
-    // const showSummary = () => navigate('/createsummary');
-    // const showSummary = () => {
-    //     <AdminCreateSummary 
-    //         username= {username}
-    //         email= {email}
-    //         firstname= {firstname}
-    //         lastname= {lastname}
-    //         password= {confirmpassword}
-    //     />
-    // }
+    const token = localStorage.getItem('token');
+	
+
+	useEffect( () => {
+		Axios.post('http://localhost:8080/auth', {
+		authorization : "Bearer " + token
+		}).then((response) => {
+			if(response.data.status === 'ok'){
+                if(response.data.decoded.role_id != 1){
+                    alert("This page for only admin role.");
+                    if(response.data.decoded.role_id === 2){
+                        window.location = "/payment";
+                    } else if(response.data.decoded.role_id === 3){
+                        window.location = "/home"
+                    }
+                }
+            } else{
+                alert("authen failed");
+                localStorage.removeItem("token");
+                window.location = "/";
+            }
+		});
+	})
 
     Axios.get('http://localhost:8080/userinfo').then((response) => {
         setUserInfo(response.data);

@@ -36,8 +36,9 @@ function Home() {
 	const [unchecked, setUnchecked] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
 	const [blur, setBlur] = useState(false);
-	const token = localStorage.getItem('token');
 	const user_id = localStorage.getItem('user_id');
+	const token = localStorage.getItem('token');
+	
 
 	useEffect( () => {
 		Axios.post('http://localhost:8080/auth', {

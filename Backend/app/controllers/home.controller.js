@@ -111,10 +111,34 @@ const getSubscription = (req, res) => {
     });
 }
 
+const getSearchId = (req, res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            res.status(500).json({'error':err});
+            return;
+        }
+        const username = req.params.username;
+        db.query(`SELECT user_id 
+        FROM userinfo
+        WHERE username=?`,
+        [username],
+            (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+    });
+}
+
 module.exports = {
     writeArticle,
     getCategory,
     getBlogList,
     getFavCategory,
-    getSubscription
+    getSubscription,
+    getSearchId
 }
