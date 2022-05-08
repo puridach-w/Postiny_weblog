@@ -11,8 +11,7 @@ import {
  } from '@material-ui/core';
 
 
-function TopSubscribed(props) {
-
+function TopSubscribed() {
   const [topsub, setTopsub] = useState([]);
 
   useEffect( () => {
