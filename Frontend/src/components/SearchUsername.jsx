@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import Select from 'react-select';
 import { userInfo } from '../dummyData';
 import { useNavigate } from "react-router-dom";
 import "../css/searchusername.css"
+import Axios from 'axios';
 
 const customStyles = {
   control: base => ({
@@ -12,22 +13,30 @@ const customStyles = {
 };
 
 function SearchUsername() {
-    const [selectedOption, setSelectedOption] = useState(null);
-    var usernames = userInfo.map(user => ({label: user.username, value: user.user_id}))
+    const [username,setUserName] = useState("");
     let navigate = useNavigate();
 
-    function routeChange() {
-        let path = `/profile/${selectedOption.value}`; 
-        navigate(path);
+
+    const getSearchId = () => {
+      Axios.get(`http://localhost:8080/getSearchId/${username}`).then((response) => {
+      if(response.data.length > 0){
+        navigate(`/profile/${response.data[0].user_id}`);
+      }else{
+        alert("User not found");
       }
+    })
+      
+    }
+
+    function handleChange(event) {
+        setUserName(event.target.value);
+     }
     
     return (
       <div className="sucontainer">
-          
-            <Select  styles={customStyles} placeholder={"Search username"} options={usernames}
-             defaultValue={selectedOption} onChange={setSelectedOption}
-        />
-           <button className="searchusernamebtn" onClick={routeChange}>Search</button>
+            <input type="text" className='searchUser' styles={customStyles} placeholder="Search username"
+            onChange={handleChange} name="username" value={username}/>
+           <button className="searchusernamebtn" onClick={getSearchId}>Search</button>
           
       </div>
     );

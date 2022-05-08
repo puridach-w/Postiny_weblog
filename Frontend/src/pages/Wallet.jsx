@@ -1,5 +1,4 @@
 import React, {useState,useEffect} from 'react';
-import {walletData} from "../dummyData";
 import '../css/pages_css/wallet.css';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import CreditCardOutlinedIcon from '@material-ui/icons/CreditCardOutlined';
@@ -13,9 +12,31 @@ import Axios from 'axios';
 
 
 function Wallet() {
-	const balance = walletData[0].coinBalance;
 	var user_id = localStorage.getItem("user_id");
 	const [userData,setUserData] = useState([]);
+	const token = localStorage.getItem('token');
+	
+
+	useEffect( () => {
+		Axios.post('http://localhost:8080/auth', {
+		authorization : "Bearer " + token
+		}).then((response) => {
+			if(response.data.status === 'ok'){
+				if(response.data.decoded.role_id != 3){
+					alert("This page for only user role.");
+					if(response.data.decoded.role_id === 2){
+						window.location = "/payment";
+					} else if(response.data.decoded.role_id === 1){
+						window.location = "/report-admin";
+					}
+				}
+			} else{
+				alert("authen failed");
+				localStorage.removeItem("token");
+				window.location = "/";
+			}
+		});
+	})
 
 	let navigate = useNavigate(); 
   	const routeChange = () =>{ 
@@ -29,7 +50,6 @@ function Wallet() {
 		})
 	}, []);
 	
-	console.log(userData);
 
 	return (
 		<div>
@@ -65,13 +85,14 @@ function Wallet() {
 				<div className='transaction col-lg-6'>
 					<h1>Transaction history</h1>
 					<br/>
-					{walletData.map(item => (
+					{/* //alltransaction history */}
+					{/* {walletData.map(item => (
 						<ListTransaction
 							userId={item.userId}
 							payment={item.payment}
 							subscription={item.subscription}
 						/>
-					))}
+					))} */}
 				</div>
 			</div>
 		</div>

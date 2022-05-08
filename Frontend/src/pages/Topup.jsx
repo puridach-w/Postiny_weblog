@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Pony from "../images/ponyreg.png"
 import '../css/pages_css/topup.css';
 import { useNavigate } from "react-router-dom";
 
 import SidebarUser from "../components/Layout/SidebarUser";
 import Topbar from "../components/Layout/Topbar";
+import Axios from "axios";
 
 
 function Topup(){
@@ -13,6 +14,29 @@ function Topup(){
     const [amount,setAmount] = React.useState("");
     const [type,setType] = React.useState(false);
     let navigate = useNavigate(); 
+    const token = localStorage.getItem('token');
+	
+
+	useEffect( () => {
+		Axios.post('http://localhost:8080/auth', {
+		authorization : "Bearer " + token
+		}).then((response) => {
+			if(response.data.status === 'ok'){
+				if(response.data.decoded.role_id != 3){
+					alert("This page for only user role.");
+					if(response.data.decoded.role_id === 2){
+						window.location = "/payment";
+					} else if(response.data.decoded.role_id === 1){
+						window.location = "/report-admin";
+					}
+				}
+			} else{
+				alert("authen failed");
+				localStorage.removeItem("token");
+				window.location = "/";
+			}
+		});
+	})
 
     function handleChanged(event){
         const {value} = event.target;

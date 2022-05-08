@@ -30,7 +30,9 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
       content: content,
       article_pic: "https://picsum.photos/1920/1080",
       sub_required: lock
-    })
+    }).catch(err => {
+      alert("Write article failed")
+    }) 
   }
 
   return (

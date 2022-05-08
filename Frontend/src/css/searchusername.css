@@ -16,6 +16,20 @@
     font-size: 16px;
     cursor: pointer;
     margin-top: -44px;
-    margin-left: 420px;
+    margin-left: 350px;
     margin-bottom: 20px;
+}
+
+.sucontainer .searchUser{
+    background-color: white;
+    width: 20rem;
+    height: 3rem;
+    outline: none;
+    border: none;
+    margin: 0;
+    border: 0;
+    padding-right: 5rem;
+    padding-left: 1rem;
+    border-radius: 5px;
+    display: block;
 }

@@ -35,14 +35,7 @@ export default function App() {
 					<Route path="/signin" element={<Signin/>}/>
 					<Route path="/register" element={<Register/>}/>
 					<Route path="/newcategory" element={<NewCat/>}/>
-					<Route path="/profile/:profile_id" element={<Profile 
-						fname="Puridach"
-						lname="Wutthihathaithamrong"
-						sub="245"
-						article="21"
-						like="910"
-						bio="Deadline is faster than karma :("
-						category={["Technology", "Sports", "Gaming"]}/>}/>
+					<Route path="/profile/:profile_id" element={<Profile />}/>
 					<Route path="/editprofile" element={<EditProfile/>}/>
 					<Route path="/editpersonal" element={<EditPersonal />}/>
 					<Route path="/changecategory" element={<ChangeCategory />}/>
