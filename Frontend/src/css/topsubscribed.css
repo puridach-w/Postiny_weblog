@@ -42,33 +42,38 @@
 }
 
 .table-topsc .tscell .tsimg img {
-    width: 70px;
-    height: 70px;
+    width: 75px;
+    height: 75px;
     border-radius: 8px;
 }
 
 .table-topsc .tscell .tsname {
     margin-right: 200px;
-    margin-top: -70px;
+    margin-top: -78px;
     color: #454545;
     font-size: 19px;
 }
 
 .table-topsc .tscell .tscategory {
-    color: #9c9c9c;
+    margin-top: 3px;
     font-size: 12px;
+    background: linear-gradient(to right, #1572A1, #80b7d3);
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 5px;
+    width: fit-content;
 }
 
 .table-topsc .tscell .tssubcount {
     color: #189A25;
-    font-size: 19px;
+    font-size: 16px;
 }
 
 .topsubscribedTitle h2 {
     color: #1572A1;
     margin-bottom: 22px;
-    padding-top: 40px;
-    margin-left: 44px;
+    padding-top: 60px;
+    margin-left: 30px;
     font-weight: bold;
     font-size: xx-large;
 }
