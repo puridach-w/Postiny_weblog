@@ -47,14 +47,14 @@ function Report() {
                             </div>
                             <div className="row">
                                 {type.map( report => (
-                                    <div className="col-lg-3">
+                                    <div className="col-lg-3 reporttype">
                                         <button onClick={() => {
                                             setSelectedType(report);
                                             setModalOpen(true);
                                             setBlur(true);
                                             }} 
                                             className='box margin-fBox'>
-                                        <img src={report.report_type_icon} />
+                                        <img src={"http://localhost:8080" + `/image/${report.report_type_icon}`} />
                                         <p className='btn-text'>{report.report_type_name}</p>
                                         </button>
                                     </div>

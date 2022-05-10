@@ -80,7 +80,7 @@ export default function NewCat() {
                         handleChecked(e);
                     }} className="checkbox" />
                     <div className="option_inner">
-                        <img alt="" src={category.category_icon}/>
+                        <img alt="" width="20px" height="20px" src={"http://localhost:8080" + `/image/${category.category_icon}`}/>
                         <div className="name">{category.category_name}</div>
                     </div>
                 </label>

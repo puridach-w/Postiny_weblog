@@ -22,7 +22,7 @@ const ApproveModal = ({approveToReject, update, data, setOpenModal, setBlur }) =
                 </div>
                     
                 <div className="body"> 
-                    <img src={data.payment_slip} />
+                    <img src={"http://localhost:8080" + `/image/${data.payment_slip}` } alt = "Employee-img" />
                     <div className="info">
                             <p>Payment ID: <span className="data">{data.payment_id}</span></p>
                             <p>Username: <span className="data">{data.username}</span></p> 
