@@ -17,7 +17,7 @@ function SubBlogItem({blog}) {
 
     return(
         <div className='blogItem-wrap'>
-            <img className="blogItem-cover" src={blog.article_pic} alt="coverImage" />
+            <img className="blogItem-cover" src={"http://localhost:8080" + `/image/${blog.article_pic}`} alt="coverImage" />
             <h5 className="blogItem-category">{blog.category_name}</h5>
             <h3>{blog.title}</h3>
             <p className="blogItem-desc">{blog.content}</p>

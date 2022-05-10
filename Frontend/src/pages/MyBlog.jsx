@@ -203,7 +203,7 @@ const MyBlog = () => {
       <br />
       {blogData ? 
       <><div className="article-wrap">
-          <img src={blogData.article_pic} alt="cover img" />
+          <img src={"http://localhost:8080" + `/image/${blogData.article_pic}`} alt="cover img" />
           <h4 className="article-category">{blogData.category_name}</h4>
           <IconButton style={{color: '#1D1D2B', borderColor: "#E3E3E6", marginLeft: "980px", marginTop: "-70px"}}
           onClick={() => {

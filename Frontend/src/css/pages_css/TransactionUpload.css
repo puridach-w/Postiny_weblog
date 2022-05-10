@@ -12,7 +12,7 @@
     background-color: #DFDFDF;
     padding: 40px 40px;
     width: 480px;
-    height: 320px;
+    height: 340px;
     margin: 120px 0 0 120px;
     border-radius: 20px;
     color: #1572A1;
@@ -31,7 +31,7 @@
     background-color: #DFDFDF;
     padding: 60px 50px;
     width: 500px;
-    height: 320px;
+    height: 340px;
     margin: 120px 0 0 120px;
     border-radius: 20px;
     color: #1572A1;
@@ -80,6 +80,7 @@
     font-size: large;
     padding-bottom: 3%;
     color:#696969;
+    text-align: center;
 }
 
 .amount{

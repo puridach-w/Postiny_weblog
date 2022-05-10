@@ -56,7 +56,6 @@ export default function Profile(props) {
     } else {
         type = "nosubprofile";
     }
-
     return ( 
         <div>
             <div className="profile"> 
@@ -64,7 +63,10 @@ export default function Profile(props) {
             <GoBackBtn />
             <div className="profileSummary">
                 <div className="profileimg">
-                    <img alt="" src={profileData.profile_pic}/>
+                    <img alt="" src={profileData.role_id === 1 ? "/admin.jpg" :
+                        profileData.role_id === 2 ? "/approver.jpg" :
+                        profileData.profile_pic === null ? 
+                        "/pony-profile.jpg" : "http://localhost:8080" + `/image/${profileData.profile_pic}`}/>
                 </div>
                 <div className="summary">
                     <div className="sub">
@@ -90,9 +92,10 @@ export default function Profile(props) {
                 {/* <button onClick={routeChange} className="btn-modal">
                 Edit profile
                 </button> */}
-                <ProfileSideBtn
+                {profileData.role_id === 3 && <ProfileSideBtn
                 id={profile_id}
-                type={type}/>
+                type={type}/>}
+                
                 </div>
             <h3 className="bio">{profileData.bio}</h3>
             <h4 className="favcat">

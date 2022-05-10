@@ -8,12 +8,16 @@ import Axios from 'axios';
 
 function WriteArticleModal({ setOpenModal, setBlur}) {
   const [select, setSelect] = useState([]);
-  const [img, setImg] = useState("");
+  const [image, setImage] = useState({});
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [lock, setLock] = useState(0);
   const user_id = localStorage.getItem("user_id");
+
+  const onImageChange = (e) => {
+    setImage(e.target.files[0]);
+  }
 
   //get category list
   useEffect( () => {
@@ -23,16 +27,34 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
   }, []);
 
   const addArticle = async () => {
-    Axios.post('http://localhost:8080/writearticle', {
-      user_id: user_id,
-      category: category,
-      title: title,
-      content: content,
-      article_pic: "https://picsum.photos/1920/1080",
-      sub_required: lock
-    }).catch(err => {
-      alert("Write article failed")
-    }) 
+      const formData = new FormData();
+      formData.append('image',image);
+    /// alert when write article fail is not success
+        try {
+            const response = await Axios({
+            method: "post",
+            url: "http://localhost:8080/upload",
+            data: formData,
+            headers: { "Content-Type": "multipart/form-data" },
+            });
+            try{
+              Axios.post('http://localhost:8080/writearticle', {
+                user_id: user_id,
+                category: category,
+                title: title,
+                content: content,
+                article_pic: response.data.filename,
+                sub_required: lock
+              }).catch(()=> {
+                alert("eeeee");
+              })
+            }
+            catch(err){
+                console.log("err:",err);
+            }
+          } catch(error) {
+            console.log("err on upload photo",error);
+          }
   }
 
   return (
@@ -58,7 +80,7 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
             <label className="img-frame">
               <DropPicture className="drop-picture" style={{ fontSize: "70px" }} />
 			        <p>Drop your image here</p>
-              <input className="input-file" type="file" name="slip" accept="image/png, image/jpeg"></input>
+              <input className="input-file" type="file" name="slip" onChange={onImageChange} accept="image/*" required></input>
             </label>
             <span>
               <div className="detail">

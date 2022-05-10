@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const multer = require('multer');
+const path = require('path');
 
 const app = express();
 cors
@@ -15,6 +17,25 @@ app.use(cors(corsOptions));
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+
+app.use("/image",express.static(path.join(__dirname, 'uploads')));
+
+
+const storage = multer.diskStorage({
+  destination: function(req, file, callback) {
+    callback(null, path.join(__dirname, 'uploads'));
+  },
+  filename: function (req, file, callback) {
+    callback(null, Date.now() + "-" + file.originalname);
+  }
+  });
+
+const upload = multer({storage});
+
+app.post('/upload', upload.single('image'), (req, res) => {
+  console.log("file Uploaded sucessfully");
+  res.send(req.file);
+});
 
 //register, login
 require("./app/routes/user.routes")(app);

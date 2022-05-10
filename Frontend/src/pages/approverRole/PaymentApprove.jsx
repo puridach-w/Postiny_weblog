@@ -99,6 +99,8 @@ function PaymentApprove() {
         );
     }
 
+    console.log(data);
+
     return (
         <div>
             <div className="topbar-color">
@@ -106,7 +108,7 @@ function PaymentApprove() {
                 <div style={{display: "flex"}}>
                     <SidebarUser role="approver" />
                     <div>
-                    <div style={{paddingLeft: "60px"}}>
+                    <div style={{paddingLeft: "60px",paddingBottom: "50px"}}>
             {modalOpen && <ApproveModal approveToReject={approveToReject} update={updateStatus} data={data} setOpenModal={setModalOpen} setBlur={setBlur} />}
             <div style={{ filter: blur? "blur(5px)" : "none"}}>
                 <h1 className="payment-header">Payment approve &emsp;
