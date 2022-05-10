@@ -9,9 +9,9 @@ const getAllReport = (req, res) => {
             return;
         }
         db.query(`SELECT report.*, username, status_name, report_type_name FROM report 
-                    INNER JOIN userinfo ON report.reporter_id = userinfo.user_id 
-                    INNER JOIN status ON report.status_id=status.status_id 
-                    INNER JOIN reporttype ON report.report_type_id = reporttype.report_type_id`, 
+                INNER JOIN userinfo ON report.reporter_id = userinfo.user_id 
+                INNER JOIN status ON report.status_id=status.status_id 
+                INNER JOIN reporttype ON report.report_type_id = reporttype.report_type_id`, 
         (err, result) => {
             if (err) {
                 console.log(err);
@@ -34,7 +34,7 @@ const updateReportStatus = (req,res) => {
         const newStatus = req.body.status;
         const admin_id = req.body.admin_id;
         db.query(`UPDATE report SET status_id = ?, admin_id = ?, updated_at = CURRENT_TIMESTAMP
-                    WHERE report_id = ?`,
+                WHERE report_id = ?`,
         [newStatus, admin_id, report_id], (err, result) => {
             if (err) {
                 console.log(err);
@@ -74,13 +74,13 @@ const getReportCount = (req, res) => {
             return;
         }
         db.query(`SELECT completed.completeCount, pending.pendingCount
-                    FROM 
-                        (SELECT COUNT(*) as completeCount, s.status_name
-                            FROM report JOIN status s ON report.status_id = s.status_id
-                            WHERE s.status_name = "approved" OR s.status_name = "rejected") AS completed,
-                        (SELECT COUNT(*) as pendingCount, s.status_name
-                            FROM report JOIN status s ON report.status_id = s.status_id
-                            WHERE s.status_name = "pending") AS pending`, 
+                FROM 
+                (SELECT COUNT(*) as completeCount, s.status_name
+                FROM report JOIN status s ON report.status_id = s.status_id
+                WHERE s.status_name = "approved" OR s.status_name = "rejected") AS completed,
+                (SELECT COUNT(*) as pendingCount, s.status_name
+                FROM report JOIN status s ON report.status_id = s.status_id
+                WHERE s.status_name = "pending") AS pending`, 
         (err, result) => {
             if (err) {
                 console.log(err);

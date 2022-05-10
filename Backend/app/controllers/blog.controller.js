@@ -11,9 +11,9 @@ const isLiked = (req, res) => {
         const user_id = req.query.user_id;
         const article_id = req.query.article_id;
         db.query(`SELECT EXISTS 
-                    (SELECT *
-                    FROM likearticle
-                    WHERE user_id = ? AND article_id = ?) AS isLiked`,
+                (SELECT *
+                FROM likearticle
+                WHERE user_id = ? AND article_id = ?) AS isLiked`,
         [user_id, article_id], 
         (err, result) => {
             if (err) {
@@ -36,7 +36,7 @@ const like = (req, res) => {
         const user_id = req.body.user_id;
         const article_id = req.body.article_id;
         db.query(`INSERT INTO likearticle (user_id, article_id)
-                    VALUES (?, ?)`,
+                VALUES (?, ?)`,
         [user_id, article_id],
         (err,result) => {
             if (err) {
@@ -62,7 +62,7 @@ const unlike = (req, res) => {
         const user_id = req.query.user_id;
         const article_id = req.query.article_id;
         db.query(`DELETE FROM likearticle
-                    WHERE user_id = ? AND article_id = ?`,
+                WHERE user_id = ? AND article_id = ?`,
         [user_id, article_id], (err, result) => {
             if (err) {
                 console.log(err);
@@ -83,10 +83,9 @@ const getAllComment = (req, res) => {
         }
         const article_id = req.params.article_id;
         db.query(`SELECT c.comment_id, c.content, c.created_at, u.user_id, u.username
-        FROM comment c JOIN userinfo u ON c.user_id = u.user_id
-        WHERE c.article_id = ?
-        ORDER BY created_at DESC
-        `,
+                FROM comment c JOIN userinfo u ON c.user_id = u.user_id
+                WHERE c.article_id = ?
+                ORDER BY created_at DESC`,
         [article_id], (err, result) => {
             if (err) {
                 console.log(err);
@@ -109,8 +108,7 @@ const addComment = (req, res) => {
         const user_id = req.body.user_id;
         const content = req.body.content;
         db.query(`INSERT INTO comment (user_id, article_id, content)
-        VALUES (?, ?, ?)        
-        `,
+                VALUES (?, ?, ?)`,
         [user_id, article_id, content], (err, result) => {
             if (err) {
                 console.log(err);
@@ -132,8 +130,8 @@ const updateComment = (req, res) => {
         const content = req.body.content;
         const comment_id = req.body.comment_id;
         db.query(`UPDATE comment
-        SET content = ?, updated_at = CURRENT_TIMESTAMP
-        WHERE comment_id = ?`,
+                SET content = ?, updated_at = CURRENT_TIMESTAMP
+                WHERE comment_id = ?`,
         [content, comment_id], (err, result) => {
             if (err) {
                 console.log(err);
@@ -154,7 +152,7 @@ const deleteComment = (req, res) => {
         }
         const comment_id = req.query.comment_id;
         db.query(`DELETE FROM comment
-        WHERE comment_id = ?`,
+                WHERE comment_id = ?`,
         [comment_id], (err, result) => {
             if (err) {
                 console.log(err);
@@ -176,7 +174,7 @@ const addViewing = (req, res) => {
         const article_id = req.body.article_id;
         const user_id = req.body.user_id;
         db.query(`INSERT INTO articleviewing (user_id, article_id)
-        VALUES (?, ?)`,
+                VALUES (?, ?)`,
         [user_id, article_id], (err, result) => {
             if (err) {
                 console.log(err);
@@ -198,7 +196,7 @@ const getViewing = (req, res) => {
         const article_id = req.params.article_id;
         const user_id = req.params.user_id;
         db.query(`SELECT * From articleviewing 
-        WHERE article_id=? AND user_id=?`,
+                WHERE article_id=? AND user_id=?`,
         [article_id,user_id], (err, result) => {
             if (err) {
                 console.log(err);

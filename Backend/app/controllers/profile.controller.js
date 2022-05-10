@@ -10,8 +10,8 @@ const getSubscribed = (req, res) => {
         const user_id = req.params.user_id;
         const profile_id = req.params.profile_id;
         db.query(`SELECT subscribed_user_id 
-        FROM subscription 
-        WHERE subscriber_id = ? AND subscribed_user_id=?`,
+                FROM subscription 
+                WHERE subscriber_id = ? AND subscribed_user_id=?`,
         [user_id,profile_id], 
         (err, result) => {
             if (err) {
@@ -57,10 +57,23 @@ const getProfileData = (req,res) => {
             return;
         }
         const profile_id = req.params.profile_id;
-        const query = "SELECT username,firstname, lastname, profile_pic, bio, (SELECT COUNT(*) FROM likearticle WHERE article_id IN (SELECT article_id FROM article WHERE author_id = ?)) AS totalLike, (SELECT COUNT(*) FROM subscription WHERE subscribed_user_id = ?) AS totalSub, (SELECT COUNT(*) FROM article WHERE author_id = ?) AS totalArticle FROM userInfo WHERE user_id = ?"
+        const query = `SELECT username, firstname, lastname, profile_pic, bio,
+        (SELECT COUNT(*) 
+        FROM likearticle 
+        WHERE article_id IN (
+                            SELECT article_id
+                            FROM article
+                            WHERE author_id = u.user_id)) AS totalLike,
+        (SELECT COUNT(*) 
+        FROM subscription
+        WHERE subscribed_user_id = u.user_id) AS totalSub,
+        (SELECT COUNT(*)
+        FROM article
+        WHERE author_id = u.user_id) AS totalArticle
+        FROM userInfo u
+        WHERE user_id = ?`
         
-        db.query(query,
-        [profile_id,profile_id,profile_id,profile_id], 
+        db.query(query,[profile_id], 
         (err, result) => {
             if (err) {
                 console.log(err);
@@ -80,7 +93,8 @@ const getInterestCategory = (req,res) => {
             return;
         }
         const profile_id = req.params.profile_id;
-        db.query("SELECT c.category_name FROM userinterest u JOIN category c ON u.category_id = c.category_id WHERE u.user_id = ?",
+        db.query(`SELECT c.category_name FROM userinterest u JOIN category c ON u.category_id = c.category_id 
+                WHERE u.user_id = ?`,
         [profile_id], 
         (err, result) => {
             if (err) {
@@ -145,19 +159,18 @@ const getFullAdDay = (req,res) => {
         }
         const article_id = req.params.article_id;
         db.query(`SELECT publish_date
-        FROM advertisement
-        WHERE publish_date > CURRENT_DATE
-        GROUP BY publish_date
-        INTERSECT
-        ((SELECT publish_date
-        FROM advertisement
-        GROUP BY publish_date
-        HAVING COUNT(article_id) >= 6)
-        UNION
-        (SELECT publish_date
-        FROM advertisement
-        WHERE article_id = ?)
-        )`,
+            FROM advertisement
+            WHERE publish_date > CURRENT_DATE
+            GROUP BY publish_date
+            INTERSECT
+            ((SELECT publish_date
+            FROM advertisement
+            GROUP BY publish_date
+            HAVING COUNT(article_id) >= 6)
+            UNION
+            (SELECT publish_date
+            FROM advertisement
+            WHERE article_id = ?))`,
         [article_id], (err, result) => {
             if (err) {
                 console.log(err);
@@ -167,8 +180,6 @@ const getFullAdDay = (req,res) => {
             db.release();
         });
    });
-    
-    
 }
 
 const addAdvertise = (req,res) => {
@@ -181,7 +192,7 @@ const addAdvertise = (req,res) => {
         const article_id = req.body.article_id;
         const date = req.body.date;
         db.query(`INSERT INTO advertisement (article_id, publish_date) 
-        VALUES (?, ?)`,
+            VALUES (?, ?)`,
         [article_id,date], (err, result) => {
             if (err) {
                 console.log(err);
@@ -202,8 +213,8 @@ const checkAmount = (req,res) => {
         }
         const user_id = req.params.user_id;
         db.query(`SELECT coin_balance 
-        FROM userinfo
-        WHERE user_id = ?`,
+            FROM userinfo
+            WHERE user_id = ?`,
         [user_id], (err, result) => {
             if (err) {
                 console.log(err);
@@ -224,10 +235,10 @@ const getAdsBlog = (req,res) => {
         }
         const date = req.params.date;
         db.query(`SELECT article.*
-        FROM advertisement
-        JOIN article
-        ON advertisement.article_id = article.article_id
-        WHERE publish_date = ?`,
+            FROM advertisement
+            JOIN article
+            ON advertisement.article_id = article.article_id
+            WHERE publish_date = ?`,
         [date], (err, result) => {
             if (err) {
                 console.log(err);
