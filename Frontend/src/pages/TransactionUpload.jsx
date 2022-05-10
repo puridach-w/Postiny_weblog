@@ -1,6 +1,7 @@
-import React, {useState,useEffect} from "react";
+import React, {useState} from "react";
 import '../css/pages_css/TransactionUpload.css';
 import WallpaperRoundedIcon from '@material-ui/icons/WallpaperRounded';
+import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import {useLocation} from 'react-router-dom';
 import Axios from "axios";
 
@@ -12,30 +13,40 @@ import Topbar from "../components/Layout/Topbar";
 function TransactionUpload(){
     const location = useLocation();
     const amount = location.state.value;
-    const [images, setImages] = useState([]);
-    const [imagesURLs, setImagesURLs] = useState([]);
+    const [image, setImage] = useState({});
     const [haveimg,setHaveImg] = useState(false);
     const user_id = localStorage.getItem("user_id");
 
-    useEffect(() => {
-        if(images.length < 1) return;
-        const newImageURLs = [];
-        images.forEach(image => newImageURLs.push(URL.createObjectURL(image)));
-        setImagesURLs(newImageURLs);
-    }, [images])
-
     const onImageChange = (e) => {
-        setImages([...e.target.files]);
+        setImage(e.target.files[0]);
         setHaveImg(true);
     }
 
-    const handleClicked = (e) => {
-        e.preventDefault()
-        Axios.post("http://localhost:8080/transaction",{
-            user_id: user_id,
-            amount: amount,
-            receipt: "https://picsum.photos/150"
-        })
+    const handleClicked = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('image',image);
+
+        try {
+            const response = await Axios({
+            method: "post",
+            url: "http://localhost:8080/upload",
+            data: formData,
+            headers: { "Content-Type": "multipart/form-data" },
+            });
+            try{
+                Axios.post("http://localhost:8080/transaction",{
+                user_id: user_id,
+                amount: amount,
+                receipt: response.data.filename
+                })
+            }
+            catch(err){
+                console.log("err:",err);
+            }
+          } catch(error) {
+            console.log("err on upload photo",error);
+          }
         window.location = "/home";
     }
 
@@ -59,14 +70,20 @@ function TransactionUpload(){
                     <h1>Please upload your transfer slip</h1>
                     <label className="drop-image">
                     <br/>
-                        {haveimg?
-                        <img width="150px" height="150px" src={imagesURLs[0]}/> 
+                        {haveimg? 
+                        <div>
+                            <CheckCircleRoundedIcon style={{fontSize: "55px" ,color: "green"}}/>
+                            <br/>
+                            {"Image "+ image.name + " was uploaded"}
+                        </div>
+                        
                         : 
                         <WallpaperRoundedIcon style={{fontSize: "55px"}}/> }
 
                         { !haveimg && "Drop your image" }
                         <br/>
                         <input className="inputFile" type="file" name="slip" onChange={onImageChange} accept="image/*"></input>
+                        
                         
                     </label>
                 </div>

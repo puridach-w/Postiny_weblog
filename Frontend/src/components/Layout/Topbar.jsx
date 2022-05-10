@@ -21,7 +21,11 @@ function Topbar({ user_id }) {
                 <img 
                     onClick={ () => window.location=`/profile/${user_id}`}
                     className="topbarProfile" 
-                    src={user.profile_pic} 
+                    src={user.role_id === 1 ? "/admin.jpg" :
+                        user.role_id === 2 ? "/approver.jpg" :
+                        user.profile_pic === null? 
+                    "/pony-profile.jpg" : 
+                    "http://localhost:8080" + `/image/${user.profile_pic}`} 
                     alt="profile" 
                 />
             </div>

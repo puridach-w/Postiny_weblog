@@ -128,7 +128,7 @@ const Blog = () => {
       <br />
       {blog ? 
       <><div className="blog-wrap">
-          <img src={blog.article_pic} alt="cover img" />
+          <img src={"http://localhost:8080" + `/image/${blog.article_pic}`} alt="cover img" />
           <h4 className="blog-category">{blog.category_name}</h4>
           <h1>{blog.title}</h1>
           <p className="blog-author">Written by {blog.firstname} {blog.lastname}</p>

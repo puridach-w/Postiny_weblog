@@ -456,12 +456,12 @@ COMMIT;
 --
 
 INSERT INTO `category` (`category_id`, `category_name`, `category_icon`) VALUES
-(1, 'Music', 'https://picsum.photos/100'),
-(2, 'Gaming', 'https://picsum.photos/100'),
-(3, 'Art&Design', 'https://picsum.photos/100'),
-(4, 'Technology', 'https://picsum.photos/100'),
-(5, 'Beauty', 'https://picsum.photos/100'),
-(6, 'Sports', 'https://picsum.photos/100');
+(1, 'Music', 'music.png'),
+(2, 'Gaming', 'gaming.png'),
+(3, 'Art&Design', 'art.png'),
+(4, 'Technology', 'tech.png'),
+(5, 'Beauty', 'beauty.png'),
+(6, 'Sports', 'sports.png');
 
 
 --
@@ -486,12 +486,12 @@ INSERT INTO `status` (`status_id`, `status_name`) VALUES
 -- Dumping data for table `userinfo`
 --
 
-INSERT INTO `userinfo` (`user_id`, `role_id`, `username`, `password`, `email`, `firstname`, `lastname`, `DOB`, `gender`, `phone_number`, `profile_pic`, `bio`, `coin_balance`, `created_at`, `updated_at`) VALUES
-(1, 1, 'testAdmin', '$2b$10$f0lzJLAK45pN4bYs8tbpeOck0iRpBSH8qj/Vn8tfk7A/OJqPTVbe6', 'ceo@gmail.com', 'poori', 'handsome', '2013-04-07', 'M', '0812345678', 'https://picsum.photos/200', 'single', 200, '2022-04-27 13:39:28', '2022-04-29 13:39:28'),
-(2, 2, 'testApprover', '$2b$10$Kj595gxi3hT/XnMFKIuDlekNuv87YnOSjgPqgM4jlxtxYU2nwB00q', 'easysql@gmail.com', 'thamon', 'boonpa', '2012-05-20', 'F', '0957841234', 'https://picsum.photos/200', 'single', 100, '2022-04-26 13:44:35', '2022-04-27 13:44:35'),
-(3, 3, 'ryan', '$2b$10$n7CKPQOlpGWQwpe3OAnbAul8PETo33hWVf98sOz7zVtO.RaNzrcYy', 'ryanisadog@gmail.com', 'ryan', 'seeha', '2022-01-14', 'M', '0889641234', 'https://picsum.photos/200', 'Hello I am a dog', 10, '2022-04-27 13:56:53', '2022-04-27 16:56:53'),
-(4, 3, 'kunpra', '$2b$10$n7CKPQOlpGWQwpe3OAnbAul8PETo33hWVf98sOz7zVtO.RaNzrcYy', 'kunpra@gmail.com', 'kunpra', 'waipra', '2022-01-14', 'M', '0889641234', 'https://picsum.photos/200', 'Hello I am a dog', 0, '2022-04-27 13:56:53', '2022-04-27 16:56:53'),
-(5, 3, 'kunjao', '$2b$10$n7CKPQOlpGWQwpe3OAnbAul8PETo33hWVf98sOz7zVtO.RaNzrcYy', 'kunjao@gmail.com', 'kunjao', 'waijao', '2022-01-14', 'F', '0889641234', 'https://picsum.photos/200', 'Hello I am a dog', 0, '2022-04-27 13:56:53', '2022-04-27 16:56:53');
+INSERT INTO `userinfo` (`user_id`, `role_id`, `username`, `password`, `email`, `firstname`, `lastname`, `DOB`, `gender`, `phone_number`, `bio`, `coin_balance`, `created_at`, `updated_at`) VALUES
+(1, 1, 'testAdmin', '$2b$10$f0lzJLAK45pN4bYs8tbpeOck0iRpBSH8qj/Vn8tfk7A/OJqPTVbe6', 'ceo@gmail.com', 'poori', 'handsome', '2013-04-07', 'M', '0812345678', 'single', 200, '2022-04-27 13:39:28', '2022-04-29 13:39:28'),
+(2, 2, 'testApprover', '$2b$10$Kj595gxi3hT/XnMFKIuDlekNuv87YnOSjgPqgM4jlxtxYU2nwB00q', 'easysql@gmail.com', 'thamon', 'boonpa', '2012-05-20', 'F', '0957841234', 'single', 100, '2022-04-26 13:44:35', '2022-04-27 13:44:35'),
+(3, 3, 'ryan', '$2b$10$n7CKPQOlpGWQwpe3OAnbAul8PETo33hWVf98sOz7zVtO.RaNzrcYy', 'ryanisadog@gmail.com', 'ryan', 'seeha', '2022-01-14', 'M', '0889641234', 'Hello I am a dog', 10, '2022-04-27 13:56:53', '2022-04-27 16:56:53'),
+(4, 3, 'kunpra', '$2b$10$n7CKPQOlpGWQwpe3OAnbAul8PETo33hWVf98sOz7zVtO.RaNzrcYy', 'kunpra@gmail.com', 'kunpra', 'waipra', '2022-01-14', 'M', '0889641234', 'Hello I am a dog', 0, '2022-04-27 13:56:53', '2022-04-27 16:56:53'),
+(5, 3, 'kunjao', '$2b$10$n7CKPQOlpGWQwpe3OAnbAul8PETo33hWVf98sOz7zVtO.RaNzrcYy', 'kunjao@gmail.com', 'kunjao', 'waijao', '2022-01-14', 'F', '0889641234', 'Hello I am a dog', 0, '2022-04-27 13:56:53', '2022-04-27 16:56:53');
 
 
 --
@@ -575,9 +575,9 @@ INSERT INTO `payment` (`payment_id`, `user_id`, `approver_id`, `status_id`, `is_
 --
 
 INSERT INTO `reporttype` (`report_type_id`, `report_type_name`, `report_type_icon`) VALUES
-(1, 'Article', "https://picsum.photos/100"),
-(2, 'Payment', "https://picsum.photos/100"),
-(3, 'Comment', "https://picsum.photos/100");
+(1, 'Article', "article.png"),
+(2, 'Payment', "payment.png"),
+(3, 'Comment', "comment.png");
 
 --
 -- Dumping data for table `report`

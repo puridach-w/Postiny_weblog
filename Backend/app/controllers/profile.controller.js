@@ -57,7 +57,7 @@ const getProfileData = (req,res) => {
             return;
         }
         const profile_id = req.params.profile_id;
-        const query = "SELECT username,firstname, lastname, profile_pic, bio, (SELECT COUNT(*) FROM likearticle WHERE article_id IN (SELECT article_id FROM article WHERE author_id = ?)) AS totalLike, (SELECT COUNT(*) FROM subscription WHERE subscribed_user_id = ?) AS totalSub, (SELECT COUNT(*) FROM article WHERE author_id = ?) AS totalArticle FROM userInfo WHERE user_id = ?"
+        const query = "SELECT username, role_id,firstname, lastname, profile_pic, bio, (SELECT COUNT(*) FROM likearticle WHERE article_id IN (SELECT article_id FROM article WHERE author_id = ?)) AS totalLike, (SELECT COUNT(*) FROM subscription WHERE subscribed_user_id = ?) AS totalSub, (SELECT COUNT(*) FROM article WHERE author_id = ?) AS totalArticle FROM userInfo WHERE user_id = ?"
         
         db.query(query,
         [profile_id,profile_id,profile_id,profile_id], 

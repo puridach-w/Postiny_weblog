@@ -131,9 +131,11 @@
 }
 
 .container .option_item img {
-    width: 150px;
-    height: 150px;
-    margin-top: 5px;
+    width: 100px;
+    height: 100px;
+    margin-top: 35px;
+    margin-bottom: 3px;
+    
 }
 
 .checkbox {

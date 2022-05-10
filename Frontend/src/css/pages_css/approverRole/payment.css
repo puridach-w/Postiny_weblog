@@ -34,6 +34,7 @@
 .table-payment .tableContainer {
     margin: 10px 10px;
     max-width: 950px;
+    padding-bottom: 20px;
 }
 
 .tableContainer .tableHeaderCell {

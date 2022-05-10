@@ -83,8 +83,8 @@
 }
 
 .blogItem-cover {
-    width: 100%;
-    height: fit-content;
+    width: 346px;
+    height: 194px;
     object-fit: cover;
     border-radius: 5px;
     margin-bottom: 1rem;

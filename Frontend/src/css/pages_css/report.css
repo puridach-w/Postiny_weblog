@@ -36,3 +36,12 @@
     font-size: 34px;
     cursor: pointer;
 }
+
+.row .reporttype img{
+    width: 70px;
+    height: 70px;
+}
+
+.reporttype{
+    cursor: pointer;
+}

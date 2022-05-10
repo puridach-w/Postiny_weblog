@@ -1,9 +1,13 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import ponystand from "../images/inhupony.png"
 import "../css/newcat.css"
 import GoBackBtn from "../components/gobackbtn";
+import Axios from "axios";
 
 export default function NewCat() {
+    const [allcate,setAllcate] = useState([]);
+    
+
     return (
         <div className="newcat">
             <GoBackBtn path="./editprofile"/>
