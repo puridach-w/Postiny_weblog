@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./writeArticleModal.css";
 import DropPicture from '@material-ui/icons/WallpaperRounded';
 import Switch from '@mui/material/Switch';
-import LockOpen from '@material-ui/icons/LockOpenRounded';
-import Lock from '@material-ui/icons/LockRounded';
 import Axios from 'axios';
 
 function WriteArticleModal({ setOpenModal, setBlur}) {
@@ -29,7 +27,7 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
   const addArticle = async () => {
       const formData = new FormData();
       formData.append('image',image);
-    /// alert when write article fail is not success
+      // alert when write article fail is not success
         try {
             const response = await Axios({
             method: "post",
@@ -46,7 +44,7 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
                 article_pic: response.data.filename,
                 sub_required: lock
               }).catch(()=> {
-                alert("eeeee");
+                alert("Created article!");
               })
             }
             catch(err){
@@ -80,7 +78,15 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
             <label className="img-frame">
               <DropPicture className="drop-picture" style={{ fontSize: "70px" }} />
 			        <p>Drop your image here</p>
-              <input className="input-file" type="file" name="slip" onChange={onImageChange} accept="image/*" required></input>
+              <input 
+                className="input-file" 
+                type="file" 
+                name="article-cover" 
+                onChange={onImageChange} 
+                accept="image/*" 
+                required
+              >
+              </input>
             </label>
             <span>
               <div className="detail">

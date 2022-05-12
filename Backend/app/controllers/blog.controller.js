@@ -208,6 +208,39 @@ const getViewing = (req, res) => {
    }); 
 }
 
+const editArticle = (req, res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            res.status(500).json({'error':err});
+            return;
+        }
+        const article_id = req.body.article_id;
+        const category = req.body.category;
+        const title = req.body.title;
+        const content = req.body.content;
+        const article_pic = req.body.article_pic;
+        const sub_required = req.body.sub_required;
+        console.log("test");
+        console.log(req.body);
+        db.query(`UPDATE article
+                SET category_id = ?, title = ?, content = ?, article_pic = ?, sub_required = ?, updated_at = CURRENT_TIMESTAMP
+                WHERE article_id = ?`,
+        [category, title, content, article_pic, sub_required, article_id],
+        (err,result) => {
+            if (err) {
+                console.log(err);
+                res.status(500).json({'error':err});
+                db.release();
+                return;
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+    });
+}
+
 module.exports = {
     isLiked,
     like,
@@ -217,5 +250,6 @@ module.exports = {
     updateComment,
     deleteComment,
     addViewing,
-    getViewing
+    getViewing,
+    editArticle
 }

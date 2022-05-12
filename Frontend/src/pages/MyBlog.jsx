@@ -168,8 +168,6 @@ const MyBlog = () => {
     }
   }
 
-  
-
   function addtodb(){
     Axios.post("http://localhost:8080/addviewing",{
       article_id: id,
@@ -195,7 +193,7 @@ const MyBlog = () => {
   return (
     <>
     <div>
-    {editModalOpen && <EditArticleModal setOpenModal={setEditModalOpen} setBlur={setBlur}/>}
+    {editModalOpen && <EditArticleModal blogData={blogData} setOpenModal={setEditModalOpen} setBlur={setBlur}/>}
     {promoteModalOpen && <PromoteArticleModal setOpenModal={setPromoteModalOpen} setBlur={setBlur} promote={promote}/>}
     <div style={{ filter: blur? "blur(5px)" : "none"}}>
     <Gobackbtn path="/profile"/>

@@ -18,7 +18,7 @@ const sections = [
   },
   {
     title: 'Personal information',
-    description: 'modify your username, email, firstname, lastname, phone number, gender, date of birth, profile picture, and bio'
+    description: 'modify your username, email, firstname, lastname, phone number, gender, date of birth, and bio'
   },
   {
     title: 'Password',
