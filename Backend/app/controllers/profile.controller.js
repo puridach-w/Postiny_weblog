@@ -59,7 +59,7 @@ const getProfileData = (req,res) => {
             return;
         }
         const profile_id = req.params.profile_id;
-        const query = `SELECT username, firstname, lastname, profile_pic, bio,
+        const query = `SELECT username, firstname, lastname, profile_pic, bio, role_id,
         (SELECT COUNT(*) 
         FROM likearticle 
         WHERE article_id IN (
