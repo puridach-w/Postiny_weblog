@@ -43,16 +43,6 @@ const SidebarData3 = [
         title: "Report",
         icon: <ReportRoundedIcon style={{ fontSize: 30 }} />,
         link: "/report-admin"
-    },
-    {
-        title: "Article",
-        icon: <DescriptionRoundedIcon style={{ fontSize: 30 }} />,
-        link: "/article-admin"
-    },
-    {
-        title: "User",
-        icon: <PersonRoundedIcon style={{ fontSize: 30 }} />,
-        link: "/user-admin"
     }
 ]
 
