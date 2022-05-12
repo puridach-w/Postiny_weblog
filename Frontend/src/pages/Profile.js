@@ -12,10 +12,13 @@ import likeicon from "../images/like.jpg"
 // import EmptyBlog from "../components/EmptyBlog";
 // import { blogList } from "../dummyData";
 import GoBackBtn from "../components/gobackbtn";
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 // import BlogList from '../components/BlogList/BlogList';
 // import EmptyBlog from "../components/EmptyBlog";
+import IconButton from '@mui/material/IconButton';
 import ProfileArticleList from "../components/ProfileArticleList";
 import ProfileSideBtn from "../components/ProfileSideButton";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router";
 import Axios from "axios";
 
@@ -56,14 +59,20 @@ export default function Profile(props) {
     } else {
         type = "nosubprofile";
     }
+
+    let navigate = useNavigate(); 
+    function routeChange() { 
+      let path = `/editprofilepic`; 
+      navigate(path);
+    }
+
     return ( 
         <div>
             <div className="profile"> 
-            
             <GoBackBtn />
             <div className="profileSummary">
                 <div className="profileimg">
-                    <img alt="" src={profileData.role_id === 1 ? "/admin.jpg" :
+                <img alt="" src={profileData.role_id === 1 ? "/admin.jpg" :
                         profileData.role_id === 2 ? "/approver.jpg" :
                         profileData.profile_pic === null ? 
                         "/pony-profile.jpg" : "http://localhost:8080" + `/image/${profileData.profile_pic}`}/>
@@ -92,10 +101,9 @@ export default function Profile(props) {
                 {/* <button onClick={routeChange} className="btn-modal">
                 Edit profile
                 </button> */}
-                {profileData.role_id === 3 && <ProfileSideBtn
+                <ProfileSideBtn
                 id={profile_id}
-                type={type}/>}
-                
+                type={type}/>
                 </div>
             <h3 className="bio">{profileData.bio}</h3>
             <h4 className="favcat">
@@ -103,6 +111,13 @@ export default function Profile(props) {
                 <span>{item.category_name}&ensp;</span>
               ))}
             </h4>
+            <div>
+                {type === "myprofile" && profileData.role_id === 3 &&
+            <IconButton style={{color: '#A9A9A9', borderColor: "#E3E3E6", marginLeft: "125px", marginTop: "-475px"}}
+          onClick={() => routeChange()}>
+            <AddAPhotoIcon />
+          </IconButton>}
+          </div>
             {/* <div className="myarticles">
                 {!blogs.length? <EmptyBlog /> : <BlogList blogs={blogs} />}
             </div> */}

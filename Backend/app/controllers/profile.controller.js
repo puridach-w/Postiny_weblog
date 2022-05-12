@@ -1,4 +1,6 @@
 const pool = require("../config/db");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const getSubscribed = (req, res) => {
     pool.getConnection((err, db) => {
@@ -250,6 +252,110 @@ const getAdsBlog = (req,res) => {
    });
 }
 
+const changePassword = (req,res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            db.release();
+            return;
+        }
+        const user_id = req.body.user_id;
+        const newPassword = req.body.newpassword;
+        const hashNewPassword = bcrypt.hashSync(newPassword, saltRounds);
+        db.query(`UPDATE userinfo
+        SET password = ? , updated_at =  CURRENT_TIMESTAMP
+        WHERE user_id = ?
+        `, [hashNewPassword,user_id], (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+   });
+}
+
+const checkPassword = (req,res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            db.release();
+            return;
+        }
+        const user_id = req.params.user_id;
+        const password = req.params.password;
+        db.query(`SELECT password 
+        FROM userinfo
+        WHERE user_id = ?
+        `, [user_id], (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                if (bcrypt.compareSync(password, result[0].password)) {
+                    res.json({msg: "check success"});
+                } else{
+                    res.json({msg: "Wrong current password"});
+                }
+            }
+            db.release();
+        });
+   });
+}
+
+const editPersonal = (req,res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            db.release();
+            return;
+        }
+        const user_id = req.body.user_id;
+        const username = req.body.username;
+        const email = req.body.email;
+        const firstname = req.body.firstname;
+        const lastname = req.body.lastname;
+        const phone_number = req.body.phone_number;
+        const gender = req.body.gender;
+        const bio = req.body.bio;
+        const DOB = req.body.DOB;
+
+        db.query(`UPDATE userinfo
+        SET username = ?, email = ?, firstname = ?, lastname = ?, DOB = ?, gender = ?, phone_number = ?, bio = ?, updated_at = CURRENT_TIMESTAMP
+        WHERE user_id = ?        
+        `, [username,email,firstname,lastname,DOB,gender,phone_number,bio,user_id], (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+   });
+}
+
+const uploadProfileImage = (req,res) =>{
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            db.release();
+            return;
+        }
+        const user_id = req.body.user_id;
+        const image = req.body.image;
+        console.log(image);
+        db.query(`UPDATE userinfo SET profile_pic = ?, updated_at = CURRENT_TIMESTAMP WHERE user_id = ?`
+        , [image,user_id], (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+   });
+}
+
 module.exports = {
     getSubscribed,
     getAllArticle,
@@ -260,5 +366,9 @@ module.exports = {
     getFullAdDay,
     addAdvertise,
     checkAmount,
-    getAdsBlog
+    getAdsBlog,
+    changePassword,
+    checkPassword,
+    editPersonal,
+    uploadProfileImage
 }

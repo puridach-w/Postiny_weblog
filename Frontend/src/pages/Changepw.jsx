@@ -1,15 +1,29 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 // import ponyreg from "../images/ponyreg.png"
 // import "../css/changepassword.css"
 import ponystand from "../images/inhupony.png"
 import "../css/changepassword.css"
 import GoBackBtn from "../components/gobackbtn";
+import Axios from "axios";
+import axios from "axios";
 
 export default function Changepw() {
 
    const [password, setPassword] = useState("");
    const [newpassword, setNewPassword] = useState("");
    const [confirmpassword, setConfirmPassword] = useState("");
+   const user_id = localStorage.getItem("user_id");
+
+   const updatePassWord = () => {
+      Axios.patch("http://localhost:8080/changePassword",{
+            user_id: user_id,
+            password: password,
+            newpassword: newpassword
+         }).then((response) => {
+            alert("updated password success");
+            window.location = `/profile/${user_id}`;
+         })
+   }
 
    function handleSubmit() {
       const confirm = document.querySelector('input[name=cfnpassword]');
@@ -17,10 +31,16 @@ export default function Changepw() {
             confirm.setCustomValidity('Password do not match');
         } else {
          confirm.setCustomValidity('');
-          alert("updated!!");
+         Axios.get(`http://localhost:8080/checkPassword/${user_id}/${password}`).then((response) => {
+            if(response.data.msg === "check success"){
+               updatePassWord();
+            } else{
+               alert(response.data.msg);
+            }
+         })
+         
         }
    }
-   
 
     return (
        <div>
@@ -52,7 +72,7 @@ export default function Changepw() {
                     }}/>
                   </div>
                   <div className="savechangepw">
-                     <button type="submit" className="cpwbtn" onClick={handleSubmit}>Update password</button> <br />
+                     <button type="button" className="cpwbtn" onClick={handleSubmit}>Update password</button> <br />
                   </div>
                </form>
                </div>

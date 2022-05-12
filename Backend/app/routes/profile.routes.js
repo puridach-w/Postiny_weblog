@@ -8,9 +8,13 @@ module.exports = function (app) {
     app.get("/getFullAdDay/:article_id", controller.getFullAdDay)
     app.get("/checkAmount/:user_id", controller.checkAmount);
     app.get("/getAdsBlog/:date",controller.getAdsBlog);
+    app.get("/checkPassword/:user_id/:password",controller.checkPassword)
 
     app.post("/subscribe",controller.subscribe);
     app.post("/addAdvertise", controller.addAdvertise);
+    app.post("/editPersonal", controller.editPersonal);
 
     app.patch("/updateBalanceUser",controller.updateBalanceUser);
+    app.patch("/changePassword",controller.changePassword);
+    app.patch("/uploadProfileImage",controller.uploadProfileImage);
 }

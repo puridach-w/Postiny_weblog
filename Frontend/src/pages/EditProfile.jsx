@@ -1,12 +1,13 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 // import ponyreg from "../images/ponyreg.png"
 import "../css/editprofile.css"
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
 import GoBackBtn from "../components/gobackbtn";
+import Axios from "axios";
 
 
 
@@ -26,8 +27,18 @@ const sections = [
 ];
 
 export default function EditProfile() {
-  
-  let navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const user_id = localStorage.getItem("user_id");
+  const [userData,setUserData] = useState([]);
+
+  useEffect( () => {
+  Axios.get(`http://localhost:8080/currentUser/${user_id}`).then((response) => {
+      setUserData(response.data);
+  })
+  }, []);
+
+  console.log(userData);
+
 
   function routeChange(section) { 
     let path = `/editprofile`; 
@@ -41,7 +52,7 @@ export default function EditProfile() {
         path = `/changepassword`; 
       }
 
-    navigate(path);
+    navigate(path,{state:{data:userData,user_id:user_id}});
   }
 
   return (

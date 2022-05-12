@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import EditPersonal from "./pages/EditPersonal";
 import ChangeCategory from "./pages/ChangeCategory";
+import ProfilePic from "./pages/ProfilePic";
 import ChangePW from "./pages/Changepw";
 import Subscribe from "./pages/Subscribe";
 import MyBlog from "./pages/MyBlog";
@@ -37,6 +38,7 @@ export default function App() {
 					<Route path="/newcategory" element={<NewCat/>}/>
 					<Route path="/profile/:profile_id" element={<Profile />}/>
 					<Route path="/editprofile" element={<EditProfile/>}/>
+					<Route path="/editprofilepic" element={<ProfilePic/>}/>
 					<Route path="/editpersonal" element={<EditPersonal />}/>
 					<Route path="/changecategory" element={<ChangeCategory />}/>
 					<Route path="/changepassword" element={<ChangePW />}/>
