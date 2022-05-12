@@ -29,7 +29,10 @@ const getAllPayment = (req,res) => {
             db.release();
             return;
         }
-        db.query("SELECT payment.*, username, status_name FROM payment INNER JOIN userinfo ON payment.user_id=userinfo.user_id INNER JOIN status ON payment.status_id=status.status_id", (err, result) => {
+        db.query(`SELECT payment.*, username, status_name FROM payment 
+                INNER JOIN userinfo ON payment.user_id=userinfo.user_id 
+                INNER JOIN status ON payment.status_id=status.status_id`
+        , (err, result) => {
             if (err) {
                 console.log(err);
             } else {

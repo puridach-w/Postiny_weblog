@@ -77,10 +77,10 @@ const getBlogList = (req, res) => {
             return;
         }
         db.query(`SELECT article.*, category_name, userinfo.username, userinfo.firstname, userinfo.lastname, userinfo.profile_pic, COUNT(likearticle.user_id) AS totalLike
-                    FROM article JOIN category ON article.category_id = category.category_id 
-                    JOIN userinfo ON article.author_id = userinfo.user_id 
-                    LEFT JOIN likearticle ON likearticle.article_id = article.article_id
-                    GROUP BY article_id`,
+                FROM article JOIN category ON article.category_id = category.category_id 
+                JOIN userinfo ON article.author_id = userinfo.user_id 
+                LEFT JOIN likearticle ON likearticle.article_id = article.article_id
+                GROUP BY article_id`,
             (err, result) => {
             if (err) {
                 console.log(err);
@@ -120,8 +120,8 @@ const getSearchId = (req, res) => {
         }
         const username = req.params.username;
         db.query(`SELECT user_id 
-        FROM userinfo
-        WHERE username=?`,
+                FROM userinfo
+                WHERE username=?`,
         [username],
             (err, result) => {
             if (err) {

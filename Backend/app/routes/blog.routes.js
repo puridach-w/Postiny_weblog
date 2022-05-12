@@ -10,8 +10,8 @@ module.exports = function (app) {
     app.post("/addviewing", controller.addViewing)
 
     app.patch("/updateComment", controller.updateComment);
+    app.patch("/editArticle", controller.editArticle);
 
     app.delete("/unlike", controller.unlike);
     app.delete("/deleteComment", controller.deleteComment);
-
 }

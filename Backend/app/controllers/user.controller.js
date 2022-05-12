@@ -63,7 +63,8 @@ const register = (req, res) => {
         const DOB = req.body.DOB;
         const password = req.body.password;
         const hashPassword = bcrypt.hashSync(password, saltRounds);
-        db.query("INSERT INTO userinfo (role_id, username, password, email, firstname, lastname, DOB, gender, phone_number, coin_balance, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?,?,0,NOW(),NOW())",
+        db.query(`INSERT INTO userinfo (role_id, username, password, email, firstname, lastname, DOB, gender, phone_number, coin_balance, created_at, updated_at) 
+                VALUES (?,?,?,?,?,?,?,?,?,0,NOW(),NOW())`,
         [role_id, username, hashPassword, email, firstname, lastname, DOB, gender, phone_number],
         (err,result) => {
             if (err) {

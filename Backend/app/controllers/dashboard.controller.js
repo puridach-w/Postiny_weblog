@@ -35,16 +35,16 @@ const topSubscribe = (req, res) => {
             return;
         }
         db.query(`SELECT s.subscribed_user_id, COUNT(s.subscriber_id) AS subCount, u.firstname, u.lastname, u.profile_pic, c.category_name
-                    FROM subscription s JOIN userinfo u ON s.subscribed_user_id = u.user_id
-                    LEFT JOIN category c ON c.category_id = 
-                    (SELECT a.category_id
-                    FROM article a JOIN category c ON a.category_id = c.category_id
-                    WHERE author_id = s.subscribed_user_id
-                    GROUP BY category_id 
-                    ORDER BY COUNT(article_id) DESC LIMIT 1)
-                    WHERE s.created_at > date_sub(now(), INTERVAL 1 week)
-                    GROUP BY subscribed_user_id
-                    ORDER BY subCount DESC LIMIT 5`,
+                FROM subscription s JOIN userinfo u ON s.subscribed_user_id = u.user_id
+                LEFT JOIN category c ON c.category_id = 
+                (SELECT a.category_id
+                FROM article a JOIN category c ON a.category_id = c.category_id
+                WHERE author_id = s.subscribed_user_id
+                GROUP BY category_id 
+                ORDER BY COUNT(article_id) DESC LIMIT 1)
+                WHERE s.created_at > date_sub(now(), INTERVAL 1 week)
+                GROUP BY subscribed_user_id
+                ORDER BY subCount DESC LIMIT 5`,
         (err, result) => {
             if (err) {
                 console.log(err);

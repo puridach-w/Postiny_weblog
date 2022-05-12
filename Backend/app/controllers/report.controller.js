@@ -34,7 +34,8 @@ const sendReport = (req, res) => {
         const payment_id = req.body.payment_id; 
         const comment_id = req.body.comment_id; 
         const description = req.body.description;
-        db.query("INSERT INTO report (report_type_id, reporter_id, status_id, article_id, payment_id, comment_id, description, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())",
+        db.query(`INSERT INTO report (report_type_id, reporter_id, status_id, article_id, payment_id, comment_id, description, created_at, updated_at) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())`,
         [report_type_id, reporter_id, status_id, article_id, payment_id, comment_id, description],
         (err,result) => {
             if (err) {
