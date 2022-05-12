@@ -16,4 +16,5 @@ module.exports = function (app) {
 
     app.patch("/updateBalanceUser",controller.updateBalanceUser);
     app.patch("/changePassword",controller.changePassword);
+    app.patch("/uploadProfileImage",controller.uploadProfileImage);
 }

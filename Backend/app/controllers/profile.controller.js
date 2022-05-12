@@ -323,6 +323,28 @@ const editPersonal = (req,res) => {
    });
 }
 
+const uploadProfileImage = (req,res) =>{
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            db.release();
+            return;
+        }
+        const user_id = req.body.user_id;
+        const image = req.body.image;
+        console.log(image);
+        db.query(`UPDATE userinfo SET profile_pic = ?, updated_at = CURRENT_TIMESTAMP WHERE user_id = ?`
+        , [image,user_id], (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+   });
+}
+
 module.exports = {
     getSubscribed,
     getAllArticle,
@@ -336,5 +358,6 @@ module.exports = {
     getAdsBlog,
     changePassword,
     checkPassword,
-    editPersonal
+    editPersonal,
+    uploadProfileImage
 }
