@@ -8,30 +8,32 @@
 } */
 
 .profile-Pic .container {
-    height: 450px;
-    width: 300px;
+    height: 650px;
+    width: 500px;
     border-radius: 10px;
     background-color: white;
+    border: 1px solid #1572a1;
+    margin-left: auto;
+    margin-top: 50px;
 }
 
 .profile-Pic .headerprofilepic {
-    width: 300px;
-    height: 60px;
     background-color: white;
-    padding: 10px;
-    padding-top: 18px;
-    padding-bottom: 44px;
+    margin: auto;
 }
 
 .profile-Pic h5 {
-    font-family: SF Pro Rounded-Semibold;
     color: #1572a1;
-    font-size: 22px;
+    font-size: 30px;
+}
+
+.profile-Pic{
+    font-family: SF Pro Rounded-Semibold;
 }
 
 .profile-Pic .editprofileimg {
     background-color: #f0f0f0;
-    padding-left: 0px;
+    margin: auto;
 }
 
 
@@ -52,10 +54,8 @@
 } */
 
 .profile-Pic .container input[type="file"] {
-    font-family: SF Pro Rounded-Medium;
     color: #676767;
-    padding-left: 32px;
-    padding-top: 20px;
+    margin-left: 77px;
 }
 
 
@@ -69,3 +69,24 @@
     text-align: center;
     cursor: pointer;
 }  */
+
+.eppbtn {
+    border: none;
+    background-color: #1572A1;
+    color: white;
+    width: 320px;
+    height: 50px;
+    display: block;
+    border-radius: 10px;
+    padding: 10px 0;
+    padding-top: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-left: 78px;
+    margin-top: 10x;
+    margin-bottom: -30px;
+}
+
+.eppbtn:hover {
+    background-color: black;
+}

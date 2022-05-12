@@ -62,20 +62,6 @@ export default function NewCat() {
                         <div className="name">Facebook</div>
                     </div>
                 </label>
-                <label className="option_item">
-                    <input type="checkbox" className="checkbox" />
-                    <div className="option_inner">
-                        <img alt="" src={ponystand}/>
-                        <div className="name">Facebook</div>
-                    </div>
-                </label>
-                <label className="option_item">
-                    <input type="checkbox" className="checkbox" />
-                    <div className="option_inner">
-                        <img alt="" src={ponystand}/>
-                        <div className="name">Facebook</div>
-                    </div>
-                </label>
                 </form>
                 
             </div>
