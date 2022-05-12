@@ -1,4 +1,6 @@
+import React from "react";
 import { useState, useEffect } from "react";
+import GoBackBtn from "../components/gobackbtn";
 import "../css/profilepic.css"
 
 export default function ProfilePic() {
@@ -19,16 +21,25 @@ export default function ProfilePic() {
   console.log("Images : ", images);
   console.log("imageURLs : ", imageURLs);
 
+
+  function handleSubmit() {
+    
+        alert("upload laew jra!!");
+
+ }
+
   return (
     <div className="profile-Pic">
+      <GoBackBtn path="./profile"/>
       <div className="container">
         <div className="headerprofilepic">
-          <h5 className="h5profilepic">Upload your profile picture</h5>
+          <h5 className="h5profilepic">Change your profile picture</h5>
         </div>
       {imageURLs.map((imageSrc, idx) => (
-        <img alt="" className="editprofileimg" key={idx} width="200" height="260" src={imageSrc} />
+        <img alt="" className="editprofileimg" key={idx} width="320" height="320" src={imageSrc} />
       ))}
       <input type="file" multiple accept="image/*" onChange={onImageChange} />
+      <button type="submit" className="eppbtn" onClick={handleSubmit}>Upload profile picture</button> <br />
       </div>
     </div>
   );
