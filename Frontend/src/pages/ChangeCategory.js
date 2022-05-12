@@ -1,18 +1,60 @@
-import React, {useState,useEffect} from "react";
+import React, {useEffect} from "react";
 import ponystand from "../images/inhupony.png"
 import "../css/newcat.css"
 import GoBackBtn from "../components/gobackbtn";
 import Axios from "axios";
+import {useLocation} from 'react-router-dom';
 
 export default function NewCat() {
-    const [allcate,setAllcate] = useState([]);
+    const location = useLocation();
+    const [getAllCategory,setGetAllCategory] = React.useState();
+    var checkedCategory = [];
+    const user_id = location.state.user_id;
+
+    useEffect( () => {
+        Axios.get('http://localhost:8080/getAllCategory').then((response) => {
+            setGetAllCategory(response.data);
+        });
+      }, []);
+
+    const addCategory = (category_id) => {
+        console.log(category_id);
+        Axios.post('http://localhost:8080/addCategory', {
+          user_id: user_id,
+          category_id: category_id
+        })
+      }
+
+    const submitCategory = () => {
+        Axios.delete(`http://localhost:8080/deleteCategory/${user_id}`).then((response) => {
+            checkedCategory.map(item => {
+                addCategory(item);
+            })
+            window.location = `/profile/${user_id}`;
+        })
+    }
+
+    const handleChecked = (event) => {
+        const id = event.target.value;
+        const checked = event.target.checked; //true = checked false = unchecked
+        if(checked){
+            checkedCategory.push(id);
+        } else{
+            var newChecked = [];
+            newChecked = checkedCategory.filter(function(item) {
+                  return item !== id;
+            });
+            checkedCategory = newChecked;
+        }
+        console.log(checkedCategory);
+        }
     
 
     return (
         <div className="newcat">
-            <GoBackBtn path="./editprofile"/>
+            <GoBackBtn path="./register"/>
             <div className="choosecat">
-                <h2>Choose interested category</h2>
+                <h2>Change interested category</h2>
             </div>
             <div className="ccdetail">
                 <h4>choose<span className="yellow"> at least 1 category </span>
@@ -20,54 +62,23 @@ export default function NewCat() {
             </div>              
             <div className="container">
             <form action="" id="choosecat">
+                {getAllCategory?.map( category => (
                 <label className="option_item">
-                    <input type="checkbox" className="checkbox" />
+                    <input type="checkbox" value={category.category_id} onChange={(e) => {
+                        handleChecked(e);
+                    }} className="checkbox" />
                     <div className="option_inner">
-                        <img alt="" src={ponystand}/>
-                        <div className="name">Facebook</div>
+                        <img alt="" src={"http://localhost:8080" + `/image/${category.category_icon}`}/>
+                        <div className="name">{category.category_name}</div>
                     </div>
                 </label>
-                <label className="option_item">
-                    <input type="checkbox" className="checkbox" />
-                    <div className="option_inner">
-                        <img alt="" src={ponystand}/>
-                        <div className="name">Facebook</div>
-                    </div>
-                </label>
-                <label className="option_item">
-                    <input type="checkbox" className="checkbox" />
-                    <div className="option_inner">
-                        <img alt="" src={ponystand}/>
-                        <div className="name">Facebook</div>
-                    </div>
-                </label>
-                <label className="option_item">
-                    <input type="checkbox" className="checkbox" />
-                    <div className="option_inner">
-                        <img alt="" src={ponystand}/>
-                        <div className="name">Facebook</div>
-                    </div>
-                </label>
-                <label className="option_item">
-                    <input type="checkbox" className="checkbox" />
-                    <div className="option_inner">
-                        <img alt="" src={ponystand}/>
-                        <div className="name">Facebook</div>
-                    </div>
-                </label>
-                <label className="option_item">
-                    <input type="checkbox" className="checkbox" />
-                    <div className="option_inner">
-                        <img alt="" src={ponystand}/>
-                        <div className="name">Facebook</div>
-                    </div>
-                </label>
-                </form>
+                ))}
+            </form>
                 
             </div>
             <div className="ponystand">
                 <img alt="" src={ponystand}/>
-                <button type="submit" form="choosecat">Save changes</button>
+                <button type="button" onClick={submitCategory} form="choosecat">Save changes</button>
             </div>
             
         </div>

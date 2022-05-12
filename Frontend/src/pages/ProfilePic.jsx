@@ -24,7 +24,6 @@ export default function ProfilePic() {
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
             });
-            console.log(response.data.filename);
             try{
                 Axios.patch("http://localhost:8080/uploadProfileImage",{
                 user_id: user_id,

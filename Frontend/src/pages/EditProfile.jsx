@@ -30,14 +30,18 @@ export default function EditProfile() {
   const navigate = useNavigate();
   const user_id = localStorage.getItem("user_id");
   const [userData,setUserData] = useState([]);
+  const [userInterest,setUserInterest] = useState([]);
 
   useEffect( () => {
   Axios.get(`http://localhost:8080/currentUser/${user_id}`).then((response) => {
       setUserData(response.data);
   })
+  Axios.get(`http://localhost:8080/getInterestCategory/${user_id}`).then((response) => {
+      setUserInterest(response.data);
+  })
   }, []);
 
-  console.log(userData);
+  console.log(userInterest);
 
 
   function routeChange(section) { 
@@ -52,7 +56,7 @@ export default function EditProfile() {
         path = `/changepassword`; 
       }
 
-    navigate(path,{state:{data:userData,user_id:user_id}});
+    navigate(path,{state:{data:userData,interest:userInterest,user_id:user_id}});
   }
 
   return (

@@ -12,9 +12,11 @@ module.exports = function (app) {
 
     app.post("/subscribe",controller.subscribe);
     app.post("/addAdvertise", controller.addAdvertise);
-    app.post("/editPersonal", controller.editPersonal);
 
     app.patch("/updateBalanceUser",controller.updateBalanceUser);
     app.patch("/changePassword",controller.changePassword);
+    app.patch("/editPersonal", controller.editPersonal);
     app.patch("/uploadProfileImage",controller.uploadProfileImage);
+
+    app.delete("/deleteCategory/:user_id",controller.deleteCategory);
 }

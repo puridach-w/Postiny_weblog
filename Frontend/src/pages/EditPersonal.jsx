@@ -32,7 +32,7 @@ function EditPersonal() {
     var maxage = xyear + "-" + month + "-" + day;
 
     const handleClick = () => {
-        Axios.post("http://localhost:8080/editPersonal",{
+        Axios.patch("http://localhost:8080/editPersonal",{
             user_id: user_id,
             username: username,
             email: email,
