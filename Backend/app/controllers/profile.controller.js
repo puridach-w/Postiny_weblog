@@ -59,7 +59,7 @@ const getProfileData = (req,res) => {
             return;
         }
         const profile_id = req.params.profile_id;
-        const query = `SELECT username, firstname, lastname, profile_pic, bio,
+        const query = `SELECT username, firstname, lastname, profile_pic, bio, role_id,
         (SELECT COUNT(*) 
         FROM likearticle 
         WHERE article_id IN (
@@ -95,8 +95,7 @@ const getInterestCategory = (req,res) => {
             return;
         }
         const profile_id = req.params.profile_id;
-        db.query(`SELECT c.category_name FROM userinterest u JOIN category c ON u.category_id = c.category_id 
-                WHERE u.user_id = ?`,
+        db.query("SELECT u.category_id, c.category_name FROM userinterest u JOIN category c ON u.category_id = c.category_id WHERE u.user_id = ?",
         [profile_id], 
         (err, result) => {
             if (err) {
@@ -356,6 +355,27 @@ const uploadProfileImage = (req,res) =>{
    });
 }
 
+const deleteCategory = (req,res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            db.release();
+            return;
+        }
+        const user_id = req.params.user_id;
+        db.query(`DELETE FROM userinterest
+                    WHERE user_id = ?`,
+        [user_id], (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+    }); 
+}
+
 module.exports = {
     getSubscribed,
     getAllArticle,
@@ -370,5 +390,6 @@ module.exports = {
     changePassword,
     checkPassword,
     editPersonal,
-    uploadProfileImage
+    uploadProfileImage,
+    deleteCategory
 }
