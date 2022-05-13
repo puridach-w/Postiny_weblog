@@ -16,6 +16,7 @@ import AddApprover from "./pages/adminRole/AdminCreateAccount"
 import AdminCreateSummary from "./pages/adminRole/AdminCreateSummary";
 
 import PaymentApprove from "./pages/approverRole/PaymentApprove";
+import ClaimApprove from "./pages/approverRole/ClaimApprove";
 import AdminRP from "./pages/adminRole/AdminRP";
 import Home from "./pages/Home";
 import Blog from './pages/Blog';
@@ -24,6 +25,8 @@ import Wallet from "./pages/Wallet"
 import Report from "./pages/Report"
 import Page404 from "./pages/Page404";
 import Topup from "./pages/Topup";
+import Claim from "./pages/Claim";
+import ClaimSummary from "./pages/ClaimSummary";
 import TransactionUpload from "./pages/TransactionUpload";
 import Signout from "./pages/signout";
 
@@ -49,11 +52,14 @@ export default function App() {
 					<Route path="/signout" element={<Signout />} />
 
 					<Route path="/payment" element={<PaymentApprove />} />
+					<Route path="/claimrequest" element={<ClaimApprove />} />
 
 					<Route path="/report-admin" element={<AdminRP />} />
 
 					<Route path="/home" element={<Home />} />
 					<Route path="/topup" element={<Topup />} />
+					<Route path="/claim" element={<Claim />} />
+                	<Route path="/claimsummary" element={<ClaimSummary />} />
 					<Route path="/blog/:id" element={<Blog />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/wallet" element={<Wallet />} />

@@ -11,7 +11,8 @@
     display: flex;
 }
 
-.amodalBackground {
+.amodalBackground,
+.cmodalBackground {
     font-family: "SF Pro Rounded-Medium";
     z-index: 999;
     width: 100%;
@@ -62,6 +63,19 @@
     padding: 30px;
 }
 
+.cmodalContainer {
+    width: 760px;
+    height: 620px;
+    margin-top: 60px;
+    margin-left: 450px;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: #666666 0px 5px 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
 .rmodalContainer {
     width: 460px;
     height: 780px;
@@ -90,6 +104,13 @@
 }
 
 .amodalContainer .atitle {
+    display: inline-block;
+    margin-top: 25px;
+    margin-left: 190px;
+    margin-bottom: 30px;
+}
+
+.cmodalContainer .ctitle {
     display: inline-block;
     margin-top: 25px;
     margin-left: 190px;
@@ -140,12 +161,12 @@
     padding-bottom: 0;
 }
 
-.emodalContainer  .efooter label {
+.emodalContainer .efooter label {
     border: 0;
-    display: block;   
+    display: block;
     /* margin-right: auto;   */
-    margin-left: auto;   
-  }
+    margin-left: auto;
+}
 
 .emodalContainer .efooter button {
     width: 180px;
@@ -339,6 +360,41 @@
     margin-top: -36px;
     font-size: 30px;
     margin-left: 38%;
+}
+
+.c-btn {
+    width: 240px;
+    height: 48px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #1572A1;
+    color: white;
+    border-radius: 12px;
+    margin-top: 25px;
+    margin-left: 230px;
+}
+
+.ctitle {
+    color: #1572A1;
+}
+
+.cbody h2 {
+    padding-top: 10px;
+    padding-left: 85px;
+    font-size: 30px;
+}
+
+.cbody h4 {
+    margin-top: -36px;
+    font-size: 30px;
+    margin-left: 38%;
+}
+
+.claiminfo {
+    margin-top: 30px;
+    width: 610px;
+    padding-left: 86px;
 }
 
 .rwrapper {

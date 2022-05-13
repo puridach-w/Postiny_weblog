@@ -7,6 +7,7 @@ import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
 import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
 import DoneRoundedIcon from '@material-ui/icons/DoneRounded';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 
 const SidebarData = [
     {
@@ -48,9 +49,14 @@ const SidebarData3 = [
 
 const SidebarData4 = [
     {
-        title: "Payment",
+        title: "Top-up",
         icon: <DoneRoundedIcon style={{ fontSize: 30 }} />,
         link: "/payment"
+    },
+    {
+        title: "Claim",
+        icon: <CurrencyExchangeIcon style={{ fontSize: 30 }} />,
+        link: "/claimrequest"
     }
 ]
     
