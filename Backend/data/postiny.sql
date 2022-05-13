@@ -121,7 +121,7 @@ CREATE TABLE `payment` (
   `status_id` int(11) NOT NULL,
   `is_withdrawal` tinyint(1) NOT NULL,
   `amount` int(11) NOT NULL,
-  `payment_slip` varchar(128) NOT NULL,
+  `payment_slip` varchar(128) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),

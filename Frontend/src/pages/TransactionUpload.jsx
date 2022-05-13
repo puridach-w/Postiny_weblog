@@ -35,10 +35,11 @@ function TransactionUpload(){
             headers: { "Content-Type": "multipart/form-data" },
             });
             try{
-                Axios.post("http://localhost:8080/transaction",{
+                Axios.post("http://localhost:8080/uploadTopup",{
                 user_id: user_id,
                 amount: amount,
-                receipt: response.data.filename
+                receipt: response.data.filename,
+                is_withdrawal: 0
                 })
             }
             catch(err){
@@ -87,7 +88,8 @@ function TransactionUpload(){
                         
                     </label>
                 </div>
-                <button className="btn-upload" onClick={handleClicked}>Upload now</button>
+                {haveimg && <button className="btn-upload" onClick={handleClicked}>Upload now</button>}
+                
             </div> 
         </div>
     </div>

@@ -1,11 +1,11 @@
 const controller = require("../controllers/wallet.controller");
 
 module.exports = function (app) {
-    app.get("/getAllPayment", controller.getAllPayment);
+    app.get("/getAllPayment/:is_withdrawal", controller.getAllPayment);
     app.get("/getAllStatus", controller.getAllStatus);
-    app.get("/getUser")
+    app.get("/getPaymentData/:user_id",controller.getPaymentData);
 
-    app.post("/transaction", controller.transactionUpload);
+    app.post("/uploadTopup", controller.uploadTopup);
 
     app.patch("/updateStatus",controller.updateStatus);
     app.patch("/updateCoinbalance",controller.updateCoinbalance);

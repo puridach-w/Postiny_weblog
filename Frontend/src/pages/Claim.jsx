@@ -9,8 +9,7 @@ import Axios from "axios";
 
 
 function Claim(){
-    var user_id = localStorage.getItem("user_id");
-
+    const user_id = localStorage.getItem("user_id");
     const [amount,setAmount] = React.useState("");
     const [type,setType] = React.useState(false);
     let navigate = useNavigate(); 
@@ -44,20 +43,42 @@ function Claim(){
         setType(true)
     }
 
-    function handleClicked(){
-        const routeChange = () =>{ 
+    const addClaim = () => {
+        Axios.post("http://localhost:8080/uploadTopup",{
+            user_id: user_id,
+            amount: amount,
+            receipt: null,
+            is_withdrawal: 1
+            })
+        Axios.patch('http://localhost:8080/updateChangeApproveToReject', {
+            user_id: user_id,
+            amount: amount
+            }).then(res => console.log(res.data));
+    }
+
+    const routeChange = () =>{ 
         let path = '/claimsummary'; 
         navigate(path);
         }
 
+    function handleClicked(){
+
         if(amount >= 100) {
             /* check balance > claim amount */
             /* then insert into db*/
-            console.log("sai db laew jaa")
-            routeChange();
+            Axios.get(`http://localhost:8080/checkAmount/${user_id}`).then((response) => {
+                if(response.data[0].coin_balance >= amount){
+                    addClaim();
+                    routeChange();
+                } else {
+                    alert("Your coin is not enough");
+                }
+            })
+            resultData();
         } else {
             alert("minimum: 100 Coins");
         }
+        
     }
 
 
