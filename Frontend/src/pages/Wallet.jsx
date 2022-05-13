@@ -40,9 +40,23 @@ function Wallet() {
 
 	let navigate = useNavigate(); 
   	const routeChange = () =>{ 
-    let path = '/topup'; 
+    let path = '/claim'; 
     navigate(path);
   	}
+
+	  	// let navigate = useNavigate(); 
+	// function routeChange(type) { 
+	// 	console.log(type)
+	//   let path = '/wallet'; 
+	  
+	//   if (type === "topup") {
+	// 	  path = '/topup'
+	//   }
+	//   else if (type === "claim") {
+	// 	  path = '/claim'
+	//   }
+	//   navigate(path);
+	// }
 
 	useEffect( () => {
 		Axios.get(`http://localhost:8080/currentuser/${user_id}`).then((response) => {
@@ -77,7 +91,7 @@ function Wallet() {
 					</div>
 					<br/> <br/> 
 					<div>
-						<button className='btn_claim'>
+						<button onClick={routeChange} className='btn_claim'>
 						<ArrowForwardRoundedIcon style={{ fontSize: 35 }}/>
 						&ensp;Claim</button>
 					</div>
