@@ -72,16 +72,11 @@ function TransactionUpload(){
                     <label className="drop-image">
                     <br/>
                         {haveimg? 
-                        <div>
-                            <CheckCircleRoundedIcon style={{fontSize: "55px" ,color: "green"}}/>
-                            <br/>
-                            {"Image "+ image.name + " was uploaded"}
-                        </div>
-                        
+                            <CheckCircleRoundedIcon style={{marginTop: "35px",fontSize: "55px" ,color: "green"}}/>
                         : 
                         <WallpaperRoundedIcon style={{fontSize: "55px"}}/> }
 
-                        { !haveimg && "Drop your image" }
+                        { haveimg===false? "Drop your image here" : <p>*{image.name}*was uploaded</p> }
                         <br/>
                         <input className="inputFile" type="file" name="slip" onChange={onImageChange} accept="image/*"></input>
                         

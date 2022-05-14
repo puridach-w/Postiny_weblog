@@ -25,21 +25,17 @@ const ClaimModal = ({rejectToApprove, update, data, setOpenModal, setBlur, onIma
                     
                 <div className="body"> 
                 <div className="upload">
-                            <label className="img-frame">
-                           
-                            
-                            {haveimg?
-                            <div>
-                            <CheckCircleRoundedIcon className="drop-picture" style={{marginLeft: "76px", fontSize: "60px", color: "green"}}/>
-                            <br />
-                            {"*" + image.name + "* was uploaded"}
-                            </div>
-                            :
-                            <DropPicture className="drop-picture" style={{ fontSize: "70px" }} />
-                        }
-                    { !haveimg && "Drop your payment slip here" }
+                    <label className="img-frame">
+                    
+                    
+                    {haveimg?
+                    <CheckCircleRoundedIcon className="drop-picture" style={{fontSize: "70px", color: "green"}}/>
+                    :
+                    <DropPicture className="drop-picture" style={{ fontSize: "70px" }} />
+                    }
+                    { haveimg===false? "Drop your payment slip here" : <p>*{image.name}*was uploaded</p> }
                     <input className="inputFile" type="file" name="rpticon" onChange={onImageChange} accept="image/*"></input>
-                            </label>
+                    </label>
                         </div>
                     <div className="info">
                             <p>Payment ID: <span className="data">{data.payment_id}</span></p>
