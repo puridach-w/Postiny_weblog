@@ -1,6 +1,6 @@
 # Postiny Web Blog Application
 
-[![image](Backend/uploads/icon.jpg)
+[image](Backend/uploads/icon.jpg)
 
 ### Created by my internet is 4G but my heart is 4U
 > For CPE231 Database system final project
