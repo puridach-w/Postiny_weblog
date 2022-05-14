@@ -13,7 +13,7 @@
 ### Import Database
 ```
 create database name "postiny"
-import "backend/data/postiny.sql" to import mysql (xapp)
+import "backend/data/postiny.sql" into mysql (xampp)
 ```
 
 ### Initial Installation
