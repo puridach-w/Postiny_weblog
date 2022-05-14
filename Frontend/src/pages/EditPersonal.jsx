@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import ponyreg from "../images/ponyreg.png"
 import "../css/register.css"
 import Axios from 'axios'
@@ -65,7 +65,7 @@ function EditPersonal() {
             gender: gender,
             bio: bio,
             DOB: DOB,
-        }).then((response) => {
+        }).then(() => {
             alert("Edit success!");
             window.location = `/profile/${user_id}`;
         })

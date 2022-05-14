@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/profile.css";
-import { Button , IconButton} from '@mui/material';
+import { Button } from '@mui/material';
 import EditIcon from '@mui/icons-material/EditOutlined';
 import { useNavigate } from "react-router-dom";
 
@@ -26,7 +26,7 @@ export default function ProfileSideButton(props) {
    
     return (
         <div>
-            {props.type === "myprofile" &&
+            {props.type === "myprofile" && props.role_id === 3 &&
         <Button style={{color: '#1D1D2B', borderColor: "#E3E3E6"}} variant="outlined" startIcon={<EditIcon />}
             onClick={() => routeChange(props.type)}>
             Edit profile

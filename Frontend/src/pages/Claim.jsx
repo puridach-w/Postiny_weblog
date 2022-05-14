@@ -53,7 +53,7 @@ function Claim(){
         Axios.patch('http://localhost:8080/updateChangeApproveToReject', {
             user_id: user_id,
             amount: amount
-            }).then(res => console.log(res.data));
+            });
     }
 
     const routeChange = () =>{ 

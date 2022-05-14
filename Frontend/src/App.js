@@ -68,15 +68,6 @@ export default function App() {
 					<Route path="*" element={<Page404 />} />
 				</Routes>
 			</BrowserRouter>
-			{/* <Layout /> */}
 		</div>
 	)
 }
-
-{/* <Route exact path="/" render={() => (
-  loggedIn ? (
-    <Redirect to="/dashboard"/>
-  ) : (
-    <PublicHomePage/>
-  )
-)}/> */}

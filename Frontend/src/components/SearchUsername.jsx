@@ -1,6 +1,4 @@
-import React, {useState,useEffect} from 'react';
-import Select from 'react-select';
-import { userInfo } from '../dummyData';
+import React, {useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import "../css/searchusername.css"
 import Axios from 'axios';

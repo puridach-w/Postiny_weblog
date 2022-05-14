@@ -1,7 +1,6 @@
 import React, {useState,useEffect} from "react";
-// import ponyreg from "../images/ponyreg.png"
 import "../css/editprofile.css"
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import GlobalStyles from '@mui/material/GlobalStyles';
@@ -41,7 +40,6 @@ export default function EditProfile() {
   })
   }, []);
 
-  console.log(userInterest);
 
 
   function routeChange(section) { 
@@ -100,7 +98,3 @@ export default function EditProfile() {
     </div>
   );
 }
-
-// export default function EditProfile() {
-//   return <EditProfile />;
-// }

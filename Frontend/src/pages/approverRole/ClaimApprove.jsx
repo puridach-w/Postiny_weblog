@@ -56,7 +56,6 @@ function ClaimApprove() {
         formData.append('image',image);
 
         try {
-            console.log("123");
             const response = await Axios({
             method: "post",
             url: "http://localhost:8080/upload",
@@ -69,7 +68,7 @@ function ClaimApprove() {
                     status: status,
                     approver_id: approver_id,
                     payment_slip: response.data.filename
-                }).then(res => console.log(res.data));
+                });
             }
             catch(err){
                 console.log("err:",err);
@@ -84,7 +83,7 @@ function ClaimApprove() {
             Axios.patch('http://localhost:8080/updateCoinbalance', {
             user_id: data.user_id,
             amount: data.amount
-            }).then(res => console.log(res.data));
+            });
         }
         location.reload();
     }
@@ -92,9 +91,7 @@ function ClaimApprove() {
     const rejectToApprove = async (status,data) => {
         const formData = new FormData();
         formData.append('image',image);
-        console.log(123);
         try {
-            console.log(345);
             const response = await Axios({
             method: "post",
             url: "http://localhost:8080/upload",
@@ -102,13 +99,12 @@ function ClaimApprove() {
             headers: { "Content-Type": "multipart/form-data" },
             });
             try{
-                console.log(5567);
                 Axios.patch('http://localhost:8080/updateStatus', {
                     payment_id: data.payment_id,
                     status: status,
                     approver_id: approver_id,
                     payment_slip: response.data.filename
-                }).then(res => console.log(res.data));
+                });
             }
             catch(err){
                 console.log("err:",err);
@@ -120,7 +116,7 @@ function ClaimApprove() {
         Axios.patch('http://localhost:8080/updateChangeApproveToReject', {
             user_id: data.user_id,
             amount: data.amount
-        }).then(res => console.log(res.data));
+        });
         location.reload();
     }
 

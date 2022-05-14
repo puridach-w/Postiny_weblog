@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import ponystand from "../images/inhupony.png"
 import "../css/newcat.css"
-import GoBackBtn from "../components/gobackbtn";
 import Axios from "axios";
 
 export default function NewCat() {
@@ -60,10 +59,6 @@ export default function NewCat() {
 
     return (
         <div className="newcat">
-            {/* <div className="backbtn">
-                <a href="#" >&lt; back</a>
-            </div> */}
-            {/* <GoBackBtn path="./register"/> */}
             <br/> <br/> <br/>
             <div className="choosecat">
                 <h2>Choose interested category</h2>

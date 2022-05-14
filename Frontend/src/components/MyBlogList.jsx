@@ -16,7 +16,6 @@ const MyBlogList = ({blogs,type,author_id}) => {
 	}
 
 	const otherBlogList = (blog,type,author_id) => {
-		console.log("type: " + type);
 		return (
 			type === "subprofile"? 
 			<SubBlogItem

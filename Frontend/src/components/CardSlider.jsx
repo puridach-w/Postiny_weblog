@@ -56,7 +56,7 @@ export default function CardSlider(props) {
                             } }>
                             <div className="slider-card-image" 
                                 style={{backgroundImage:`url(${"http://localhost:8080" + `/image/${article.article_pic}`})`}}></div>
-                            <p className="slider-card-title">{article.title}</p>
+                            <p className="slider-card-title">{article.title.substring(0, 15)}...</p>
                             <p className="slider-card-content">{article.content.substring(0, 49)} ...</p>
                         </div>
                     )

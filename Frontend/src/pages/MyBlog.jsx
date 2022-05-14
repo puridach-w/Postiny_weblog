@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from "react-router";
 import Gobackbtn from "../components/gobackbtn";
-import { likeArray } from "../dummyData";
 import EmptyBlog from '../components/EmptyBlog';
 import Comments from "../components/Comment/Comments"
 import IconButton from '@mui/material/IconButton';
-import EventRoundedIcon from '@material-ui/icons/EventRounded';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import EditArticleModal from "../components/Modal/EditArticleModal";
 import PromoteArticleModal from "../components/Modal/PromoteArticleModal";
@@ -89,9 +87,7 @@ const MyBlog = () => {
     Axios.patch("http://localhost:8080/updateBalanceUser",{
         user_id: user_id,
         amount: amount
-    }).then((response) => {
-        console.log(response.data);
-    })
+    });
 }
 
   const promote = (startDate,period) => {
@@ -196,7 +192,7 @@ const MyBlog = () => {
     {editModalOpen && <EditArticleModal blogData={blogData} setOpenModal={setEditModalOpen} setBlur={setBlur}/>}
     {promoteModalOpen && <PromoteArticleModal setOpenModal={setPromoteModalOpen} setBlur={setBlur} promote={promote}/>}
     <div style={{ filter: blur? "blur(5px)" : "none"}}>
-    <Gobackbtn path="/profile"/>
+    <Gobackbtn />
     <div className="articledisplay" style={{marginLeft: "60px"}}>      
       <br />
       {blogData ? 
@@ -250,38 +246,3 @@ const MyBlog = () => {
 }
 
 export default MyBlog;
-
-//  let haveread = false;
-//  console.log(haveread)
-// let called = React.useRef(false);
-// const [showComponent, setShowComponent] = useState(haveread);
-
-//  function addToDB() {
-//    console.log("malaew");
-//   setShowComponent(true);
-//  }
-//  setInterval(() => {
-//    if (!haveread) {
-//     haveread = true;
-//     addToDB();
-//    }
-//    else {
-//      return;
-//    }
-//  }, 3000)
-
-//  console.log(haveread)
-
-// const [showComponent, setShowComponent] = useState(haveread);
-  // useEffect(() => {
-  //   if (!called.current) {
-  //   setInterval(() => {
-  //     setShowComponent(true);
-  //     addToDB();
-  //   }, 6000)
-  //   called.current = true;
-  // }
-  // else if (called.current) {
-  //   return;
-  // }
-  // }, []);

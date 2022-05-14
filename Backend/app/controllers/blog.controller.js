@@ -56,7 +56,6 @@ const unlike = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const user_id = req.query.user_id;
@@ -78,7 +77,6 @@ const getAllComment = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const article_id = req.params.article_id;
@@ -101,7 +99,6 @@ const addComment = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const article_id = req.body.article_id;
@@ -124,7 +121,6 @@ const updateComment = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const content = req.body.content;
@@ -147,7 +143,6 @@ const deleteComment = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const comment_id = req.query.comment_id;
@@ -168,7 +163,6 @@ const addViewing = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const article_id = req.body.article_id;
@@ -190,7 +184,6 @@ const getViewing = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const article_id = req.params.article_id;
@@ -221,8 +214,6 @@ const editArticle = (req, res) => {
         const content = req.body.content;
         const article_pic = req.body.article_pic;
         const sub_required = req.body.sub_required;
-        console.log("test");
-        console.log(req.body);
         db.query(`UPDATE article
                 SET category_id = ?, title = ?, content = ?, article_pic = ?, sub_required = ?, updated_at = CURRENT_TIMESTAMP
                 WHERE article_id = ?`,

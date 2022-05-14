@@ -2,8 +2,6 @@ import React, { useState,useEffect } from "react";
 import ponyreg from "../../images/ponyreg.png"
 import "../../css/register.css"
 import Axios from 'axios'
-import { useNavigate } from "react-router-dom";
-import AdminCreateSummary from "./AdminCreateSummary";
 
 export default function AdminCreateAccount() {
     const [username, setUsername] = useState("");
@@ -17,7 +15,6 @@ export default function AdminCreateAccount() {
     const [confirmpassword, setConfirmPassword] = useState("");
     const [userInfo, setUserInfo] = useState([]);
 
-    const navigate = useNavigate();
     const token = localStorage.getItem('token');
 
 	useEffect( () => {
@@ -74,7 +71,6 @@ export default function AdminCreateAccount() {
         DOB: DOB,
         password: confirmpassword
         }).then(() => {
-            console.log("Register approver success");
             setUserInfo([
                 ...userInfo,
                 {

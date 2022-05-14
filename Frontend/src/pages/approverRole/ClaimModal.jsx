@@ -41,15 +41,14 @@ const ClaimModal = ({rejectToApprove, update, data, setOpenModal, setBlur, onIma
                             <p>Payment ID: <span className="data">{data.payment_id}</span></p>
                             <p>Username: <span className="data">{data.username}</span></p> 
                             <p>Amount money: <span className="data">{data.amount}฿</span></p>
-                            {haveimg&& <div className="footer">
+                            {haveimg === true ? data.status_id === 1?
+                            <div className="footer">    
                                 <button 
                                     className="approve"
                                     onClick={() => {
                                         if(data.status_id === 3){
-                                            console.log("q");
                                             rejectToApprove(2,data);
                                         } else{
-                                            console.log("b");
                                             update(2,data);
                                         }
                                         // then tranfer coin into 'that' user
@@ -65,7 +64,37 @@ const ClaimModal = ({rejectToApprove, update, data, setOpenModal, setBlur, onIma
                                         setBlur(false);
                                     }}
                                 >Reject</button>
-                            </div>}
+                            </div>
+                            :
+                            data.status_id === 2?
+                            <div className="footer"> 
+                            <button 
+                                    className="reject"
+                                    onClick={() => {
+                                        update(3,data);
+                                        setOpenModal(false);
+                                        setBlur(false);
+                                    }}
+                                >Reject</button>
+                            </div>
+                            :
+                            <div className="footer"> 
+                            <button 
+                                    className="approve"
+                                    onClick={() => {
+                                        if(data.status_id === 3){
+                                            rejectToApprove(2,data);
+                                        } else{
+                                            update(2,data);
+                                        }
+                                        // then tranfer coin into 'that' user
+                                        setOpenModal(false);
+                                        setBlur(false);
+                                    }}
+                                >Approve</button>
+                            </div>
+                            :
+                            ""}
                     </div>
                     
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from "react";
+import React, { useEffect} from "react";
 import "../css/pages_css/adminRole/adminRP.css"
 import SidebarUser from "../components/Layout/SidebarUser";
 import Topbar from "../components/Layout/Topbar";

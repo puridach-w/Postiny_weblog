@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-// import ponyreg from "../images/ponyreg.png"
-// import "../css/changepassword.css"
+import React, { useState} from "react";
 import ponystand from "../images/inhupony.png"
 import "../css/changepassword.css"
 import GoBackBtn from "../components/gobackbtn";
@@ -17,7 +15,7 @@ export default function Changepw() {
             user_id: user_id,
             password: password,
             newpassword: newpassword
-         }).then((response) => {
+         }).then(() => {
             alert("updated password success");
             window.location = `/profile/${user_id}`;
          })
@@ -40,7 +38,7 @@ export default function Changepw() {
 
     return (
        <div>
-      <GoBackBtn path="./editprofile"/>
+      <GoBackBtn />
         <div className="changepw">
                <div className="formcpw">
                <form className="changepassword" >
@@ -78,43 +76,4 @@ export default function Changepw() {
       </div>
       </div>
         );
-
-    // return (
-    //     <div className="split-screen">
-    //     <div className="left">
-    //         <section className="copy">
-    //             <h2>Enjoy!</h2>
-    //             <img alt="" src={ponyreg}/>
-    //         </section>
-    //     </div>
-    //         <div className="right">
-    //             <div className="backbtn">
-    //                 <a href="/editprofile">&lt; back</a>
-    //             </div>
-    //             <form action="" className="formreg">
-    //             <section className="copy">
-    //                         <h2>Change password</h2>
-    //                     </section>
-    //             <div className="input-container password">
-    //                     <label>Old password</label>
-    //                     <input id="password" name="password" type="password" placeholder="Enter your password" required
-    //                     />
-    //                 </div>
-    //                 <div className="input-container password">
-    //                     <label>New password</label>
-    //                     <input id="password" name="password" type="password" placeholder="Enter your password" required
-    //                     />
-    //                 </div>
-    //                 <div className="input-container confirmpw">
-    //                     <label>Confirm new password</label>
-    //                     <input id="confirmpw" name="confirmpw" type="password" placeholder="Confirm your password" required/>
-    //                 </div>
-
-    //             <button className="signupbtn" type="submit"
-    //             >Save Changes</button>
-    //         </form>
-    //     </div>
-
-    // </div>
-    // );
 }

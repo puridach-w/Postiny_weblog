@@ -134,7 +134,6 @@ const updateBalanceUser = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const user_id = req.body.user_id;
@@ -155,7 +154,6 @@ const getFullAdDay = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const article_id = req.params.article_id;
@@ -187,7 +185,6 @@ const addAdvertise = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const article_id = req.body.article_id;
@@ -209,7 +206,6 @@ const checkAmount = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const user_id = req.params.user_id;
@@ -231,7 +227,6 @@ const getAdsBlog = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const date = req.params.date;
@@ -255,7 +250,6 @@ const changePassword = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const user_id = req.body.user_id;
@@ -279,7 +273,6 @@ const checkPassword = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const user_id = req.params.user_id;
@@ -306,7 +299,6 @@ const editPersonal = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const user_id = req.body.user_id;
@@ -337,7 +329,6 @@ const uploadProfileImage = (req,res) =>{
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const user_id = req.body.user_id;
@@ -359,7 +350,6 @@ const deleteCategory = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const user_id = req.params.user_id;

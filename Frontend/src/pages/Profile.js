@@ -1,20 +1,10 @@
 import React, {useState,useEffect} from "react";
 import "../css/profile.css"
-import profile from "../images/profilesample.jpg"
 import subicon from "../images/sub.jpg"
 import articleicon from "../images/article.jpg"
 import likeicon from "../images/like.jpg"
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { Button , IconButton} from '@mui/material';
-// import EditIcon from '@mui/icons-material/Edit';
-// import BlogList from '../components/BlogList/BlogList';
-// import EmptyBlog from "../components/EmptyBlog";
-// import { blogList } from "../dummyData";
 import GoBackBtn from "../components/gobackbtn";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-// import BlogList from '../components/BlogList/BlogList';
-// import EmptyBlog from "../components/EmptyBlog";
 import IconButton from '@mui/material/IconButton';
 import ProfileArticleList from "../components/ProfileArticleList";
 import ProfileSideBtn from "../components/ProfileSideButton";
@@ -66,10 +56,11 @@ export default function Profile(props) {
       navigate(path);
     }
 
+
     return ( 
         <div>
             <div className="profile"> 
-                <GoBackBtn />
+                <GoBackBtn path="/home"/>
                 <div className="profileSummary">
                     <div className="profileimg">
                     <img alt="" src={profileData.role_id === 1 ? "/admin.jpg" :
@@ -101,6 +92,7 @@ export default function Profile(props) {
                         onClick={() => routeChange()}>
                     <AddAPhotoIcon />
                     </IconButton>}
+                    
                 </div>
                 <div className="profileDetail">
                     <h2 className="fullname">{profileData.firstname} {profileData.lastname} ({profileData.username})</h2>
@@ -108,6 +100,7 @@ export default function Profile(props) {
                         <ProfileSideBtn
                             id={profile_id}
                             type={type}
+                            role_id={profileData.role_id}
                         />
                     </div>  
                     <h3 className="bio">{profileData.bio}</h3>
