@@ -5,7 +5,7 @@ import ChevronRight from '@material-ui/icons/ChevronRightRounded';
 import { useNavigate } from "react-router-dom";
 import Axios from 'axios';
 
-export default function CardSlider(props) {
+export default function CardSlider() {
     let navigate = useNavigate(); 
     const date = new Date();
     var day = date.getDate();

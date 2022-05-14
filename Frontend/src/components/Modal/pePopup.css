@@ -164,7 +164,6 @@
 .emodalContainer .efooter label {
     border: 0;
     display: block;
-    /* margin-right: auto;   */
     margin-left: auto;
 }
 
@@ -297,10 +296,6 @@
 }
 
 
-/* .formpromote .input-container {
-    padding-right: 127px;
-} */
-
 .formpromote {
     margin-left: 90px;
 }
@@ -308,7 +303,6 @@
 .formpromote input[type='date'],
 .addrptname,
 .addcatname {
-    /* display: block; */
     background-color: #f1f1f1;
     border: 1.5px solid;
     width: 260px;

@@ -1,8 +1,6 @@
 import React,{useEffect,useState} from "react";
 import GoBackBtn from "../components/gobackbtn";
-import profile from "../images/profilesample.jpg"
 import { useParams } from "react-router";
-import {userInfo} from "../dummyData"
 import "../css/subscribe.css"
 import Axios from "axios";
 
@@ -82,6 +80,7 @@ export default function Subscribe() {
                 </div>
             </div>
         </div>
+        
         
         </div>
     );

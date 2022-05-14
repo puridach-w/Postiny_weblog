@@ -3,12 +3,6 @@
 }
 
 
-/* * {
-    padding: 0;
-    margin: 0;
-    height: auto;
-} */
-
 .copy h2 {
     padding: 10px 0px;
     font-weight: 100;
@@ -20,18 +14,14 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    /* margin-top: 20px; */
 }
 
 .left {
-    /* height: 250px; */
     background-size: cover;
     background-color: #1572A1;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* margin-bottom: -500px; */
-    /* height: 100%; */
 }
 
 .left h2 {
@@ -49,7 +39,6 @@
 }
 
 .right {
-    /* display: flex; */
     justify-content: space-between;
     align-items: center;
     background-color: white;
@@ -75,12 +64,6 @@
     color: black;
 }
 
-
-/* .right .copy {
-    color: black;
-    text-align: center;
-} */
-
 .right .formreg {
     display: flex;
     flex-wrap: wrap;
@@ -105,7 +88,6 @@
 .formreg input[type='email'],
 .formreg input[type='tel'],
 .formreg input[type='date'] {
-    /* display: block; */
     background-color: #f1f1f1;
     border: 1.5px solid;
     width: 260px;
@@ -117,7 +99,6 @@
     border-color: #f1f1f1;
     font-family: SF Pro Rounded-Medium;
     font-size: 15px;
-    /* margin-top: 5px; */
 }
 
 .formreg textarea {
@@ -135,19 +116,8 @@
     max-height: 330px;
 }
 
-
-/* input[type='text'] {
-    padding-top: 0px;
-} */
-
-
-/* input[type='password'] {
-    min-width: 500px;
-} */
-
 .formreg select {
     margin-right: 120px;
-    /* display: block; */
     background-color: #f1f1f1;
     border: 1.5px solid;
     width: 140px;
@@ -160,7 +130,6 @@
     font-family: SF Pro Rounded-Medium;
     font-size: 15px;
     border-right: 16px solid transparent;
-    /* margin-top: 5px; */
 }
 
 .formreg .dateofbirth {
