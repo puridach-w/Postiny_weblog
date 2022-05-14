@@ -4,8 +4,6 @@ import DashboardRoundedIcon from '@material-ui/icons/DashboardRounded';
 import Wallet from '@material-ui/icons/AccountBalanceWalletRounded';
 import ReportRoundedIcon from '@material-ui/icons/ReportRounded';
 import ExitToAppRoundedIcon from '@material-ui/icons/ExitToAppRounded';
-import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
-import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
 import DoneRoundedIcon from '@material-ui/icons/DoneRounded';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 

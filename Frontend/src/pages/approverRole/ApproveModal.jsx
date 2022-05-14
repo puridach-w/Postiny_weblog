@@ -27,6 +27,7 @@ const ApproveModal = ({approveToReject, update, data, setOpenModal, setBlur }) =
                             <p>Payment ID: <span className="data">{data.payment_id}</span></p>
                             <p>Username: <span className="data">{data.username}</span></p> 
                             <p>Amount money: <span className="data">{data.amount}฿</span></p>
+                            {data.status_id === 1? 
                             <div className="footer">
                                 <button 
                                     className="approve"
@@ -52,6 +53,38 @@ const ApproveModal = ({approveToReject, update, data, setOpenModal, setBlur }) =
                                     }}
                                 >Reject</button>
                             </div>
+                            :
+                            data.status_id === 2? 
+                            <div className="footer">
+                                <button 
+                                    className="reject"
+                                    onClick={() => {
+                                        if(data.status_id === 2){
+                                            approveToReject(3,data);
+                                        } else{
+                                            update(3,data);
+                                        }
+                                        setOpenModal(false);
+                                        setBlur(false);
+                                        window.location.reload(true);
+                                    }}
+                                >Reject</button>
+                            </div>
+                            :
+                            <div className="footer">
+                                <button 
+                                    className="approve"
+                                    onClick={() => {
+                                        update(2,data);
+                                        // then tranfer coin into 'that' user
+                                        setOpenModal(false);
+                                        setBlur(false);
+                                        window.location.reload(true);
+                                    }}
+                                >Approve</button>
+                            </div>
+                            }
+                            
                     </div>
                     
                 </div>

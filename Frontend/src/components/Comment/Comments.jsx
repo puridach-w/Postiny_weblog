@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CommentForm from "./CommentForm";
 import Comment from "./Comment";
-import {
-  getComments as getCommentsApi,
-  createComment as createCommentApi,
-  updateComment as updateCommentApi,
-  deleteComment as deleteCommentApi,
-} from "../../dummyData";
 
 import './comment.css';
 import Axios from "axios";
@@ -50,7 +44,7 @@ function checkTime() {
       article_id: article_id,
       user_id: user_id,
       content: text
-    }).then((comment) => {
+    }).then(() => {
       location.reload();
       setActiveComment(null);
     })
@@ -61,21 +55,20 @@ function checkTime() {
     Axios.patch("http://localhost:8080/updateComment",{
       content: text,
       comment_id: commentId 
-    }).then((response) => {
+    }).then(() => {
       location.reload();
       setActiveComment(null);
     })
   };
 
   const deleteComment = (commentId) => {
-    console.log(commentId);
     if (window.confirm("Are you sure you want to remove comment?")) {
       Axios.delete(`http://localhost:8080/deleteComment`,
         {
           params: {
             comment_id: commentId,
             }
-        }).then((response) => {
+        }).then(() => {
           location.reload();
         })
     }

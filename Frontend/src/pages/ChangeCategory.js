@@ -18,7 +18,6 @@ export default function NewCat() {
       }, []);
 
     const addCategory = (category_id) => {
-        console.log(category_id);
         Axios.post('http://localhost:8080/addCategory', {
           user_id: user_id,
           category_id: category_id
@@ -46,13 +45,12 @@ export default function NewCat() {
             });
             checkedCategory = newChecked;
         }
-        console.log(checkedCategory);
         }
     
 
     return (
         <div className="newcat">
-            <GoBackBtn path="./register"/>
+            <GoBackBtn />
             <div className="choosecat">
                 <h2>Change interested category</h2>
             </div>

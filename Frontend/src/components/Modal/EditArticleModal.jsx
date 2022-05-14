@@ -120,7 +120,6 @@ function EditArticleModal({ setOpenModal, setBlur, blogData }) {
                       type="text" 
                       placeholder="Once upon a time..." 
                       onChange={(event) => {
-                        console.log(title);
                         setTitle(event.target.value);
                       }}
                     />
@@ -131,7 +130,6 @@ function EditArticleModal({ setOpenModal, setBlur, blogData }) {
                       className="edes" 
                       placeholder="The start of  a wonderful story..." 
                       onChange={(event) => {
-                        console.log(content);
                         setContent(event.target.value);
                       }}
                     />

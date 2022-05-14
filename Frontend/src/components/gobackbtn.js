@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import "../css/gobackbtn.css"
 
-export default function GoBackBtn() {
+export default function GoBackBtn({path}) {
     
     const back = () => {
-        window.history.back();
-        // window.location.reload();
+        if(path){
+            window.location = path;
+        }else{
+            window.history.back();
+        }
     }
 
     return (

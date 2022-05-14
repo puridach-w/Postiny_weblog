@@ -4,7 +4,6 @@ const uploadTopup = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const user_id = req.body.user_id;
@@ -27,7 +26,6 @@ const getAllPayment = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const is_withdrawal = req.params.is_withdrawal;
@@ -50,7 +48,6 @@ const getAllStatus = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         db.query("SELECT * from status", (err, result) => {
@@ -68,7 +65,6 @@ const updateStatus = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const payment_id = req.body.payment_id;
@@ -93,7 +89,6 @@ const updateCoinbalance = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const user_id = req.body.user_id;
@@ -114,7 +109,6 @@ const updateChangeApproveToReject = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const user_id = req.body.user_id;
@@ -135,7 +129,6 @@ const getPaymentData = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const user_id = req.params.user_id;

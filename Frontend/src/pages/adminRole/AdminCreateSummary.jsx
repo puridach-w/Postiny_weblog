@@ -1,14 +1,11 @@
 import React from "react";
 import "../../components/Modal/pePopup.css";
 import { useNavigate } from "react-router-dom";
-import { userInfo } from "../../dummyData";
 
 function AdminCreateSummary(props) {
 
   const navigate = useNavigate();
   const goMainAdmin = () => navigate('/report-admin');
-
-  // let user = userInfo.find(user => user.user_id === parseInt("1"));
 
   return (
     <div className="amodalBackground">

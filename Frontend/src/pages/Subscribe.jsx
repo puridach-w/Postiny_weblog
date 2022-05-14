@@ -9,9 +9,9 @@ import Axios from "axios";
 export default function Subscribe() {
     const {id} = useParams();
     const user_id = localStorage.getItem("user_id");
-    let user = userInfo.find(user => user.user_id === parseInt(id));
     const [authorData,setAuthorData] = useState([]);
     const [userData,setUserData] = useState([]);
+
 
     useEffect( () => {
         Axios.get(`http://localhost:8080/currentuser/${id}`).then((response) => {
@@ -26,18 +26,14 @@ export default function Subscribe() {
         Axios.patch("http://localhost:8080/updateBalanceUser",{
             user_id: user_id,
             amount: 20
-        }).then((response) => {
-            console.log(response.data);
-        })
+        });
     }
 
     const updateBalanceAuthor = () => {
         Axios.patch("http://localhost:8080/updateCoinbalance",{
             user_id: id,
             amount: 20
-        }).then((response) => {
-            console.log(response.data);
-        })
+        });
     }
 
     const subscribe = () => {
@@ -65,12 +61,15 @@ export default function Subscribe() {
 
     return (
         <div className="subscribeuser">
-        <GoBackBtn/>
+        <GoBackBtn />
             <div className="subcontainer1">
                 <div className="subsummary">
                     <h2>Subscription</h2>
                     <div className="subprofileimg">
-                        <img alt="" src={authorData.profile_pic}/>
+                        <img alt="" src={authorData.role_id === 1 ? "/admin.jpg" :
+                            authorData.role_id === 2 ? "/approver.jpg" :
+                            authorData.profile_pic === null ? 
+                            "/pony-profile.jpg" : "http://localhost:8080" + `/image/${authorData.profile_pic}`}/>
                     </div>
                 <div className="subuserDetail">
                     <h3 className="subname">{authorData.firstname} {authorData.lastname}</h3>

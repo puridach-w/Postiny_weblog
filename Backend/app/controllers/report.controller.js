@@ -24,7 +24,6 @@ const sendReport = (req, res) => {
         if (err) {
             console.log(err);
             res.status(500).json({'error':err});
-            db.release();
             return;
         }
         const report_type_id = req.body.report_type_id;

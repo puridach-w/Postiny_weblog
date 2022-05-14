@@ -2,9 +2,9 @@ import React, {useState,useEffect} from 'react';
 import '../css/pages_css/wallet.css';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import CreditCardOutlinedIcon from '@material-ui/icons/CreditCardOutlined';
-import ListTransaction from "./transaction/ListTransaction";
 import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
 import { useNavigate } from "react-router-dom";
+import pony from "../images/ponyreg.png"
 
 import SidebarUser from "../components/Layout/SidebarUser";
 import Topbar from "../components/Layout/Topbar";
@@ -45,20 +45,6 @@ function Wallet() {
     navigate(path);
   	}
 
-	  	// let navigate = useNavigate(); 
-	// function routeChange(type) { 
-	// 	console.log(type)
-	//   let path = '/wallet'; 
-	  
-	//   if (type === "topup") {
-	// 	  path = '/topup'
-	//   }
-	//   else if (type === "claim") {
-	// 	  path = '/claim'
-	//   }
-	//   navigate(path);
-	// }
-
 	useEffect( () => {
 		Axios.get(`http://localhost:8080/currentuser/${user_id}`).then((response) => {
 			setUserData(response.data[0]);
@@ -74,18 +60,17 @@ function Wallet() {
                     <SidebarUser role="user" />
                     <div>
                       <div style={{marginLeft: "60px"}} className="container-fluid">
-		<div className='content'>
-			<div className='row'>
-				<div className='col-lg-6'>
+			<div className='contentAtWalletPage'>
+				<div>
 					<div className='balance'>
-						<span><AccountBalanceWalletIcon style={{ fontSize: 80 }}/></span>
-						<div className="coin-balance">
-							<p>Current Balance</p>
-							<p>{userData.coin_balance} COIN </p>
-						</div>
+					<span><AccountBalanceWalletIcon style={{ fontSize: 80 }}/></span>
+					<div className="coin-balance">
+						<p>Current Balance</p>
+						<p>{userData.coin_balance} COIN </p>
+					</div>
 					</div>
 					<br/> <br/> <br/> <br/>
-					<div>
+					<div className='button'>
 						<button onClick={() => {
 							routeChange("topup")
 						}} className='btn_topUp'>
@@ -93,7 +78,7 @@ function Wallet() {
 						<span className='spanTopUp'>Top-up</span></button>
 					</div>
 					<br/> <br/> 
-					<div>
+					<div className='button'>
 						<button onClick={() => {
 							routeChange("claim")
 						}} className='btn_claim'>
@@ -101,20 +86,10 @@ function Wallet() {
 						&ensp;Claim</button>
 					</div>
 				</div>
-				<div className='transaction col-lg-6'>
-					<h1>Transaction history</h1>
-					<br/>
-					{/* //alltransaction history */}
-					{/* {walletData.map(item => (
-						<ListTransaction
-							userId={item.userId}
-							payment={item.payment}
-							subscription={item.subscription}
-						/>
-					))} */}
+				<div className='ponyImgAtWalletPage'>
+					<img src={pony} />
 				</div>
 			</div>
-		</div>
 	</div>
                     </div> 
                 </div>

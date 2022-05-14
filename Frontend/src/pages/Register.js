@@ -50,7 +50,6 @@ export default function Register() {
             DOB: DOB,
             password: confirmpassword
         }).then(() => {
-            console.log("Register success");
             setUserInfo([
                 ...userInfo,
                 {
