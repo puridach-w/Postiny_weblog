@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import AdminCreateSummary from "./AdminCreateSummary";
 
 export default function AdminCreateAccount() {
-
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [firstname, setFirstname] = useState("");
@@ -20,7 +19,6 @@ export default function AdminCreateAccount() {
 
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
-	
 
 	useEffect( () => {
 		Axios.post('http://localhost:8080/auth', {
@@ -47,42 +45,52 @@ export default function AdminCreateAccount() {
         setUserInfo(response.data);
     });
 
-    const addNewUser = async () => {
-        const confirm = document.querySelector('input[name=confirmpw]');
+    const handleSubmit = () => {
+        let isValid = true;
         if (confirmpassword !== password) {
-            confirm.setCustomValidity('Password do not match');
+            alert('Password do not match');
         } else {
-            confirm.setCustomValidity('');
-            
-            Axios.post('http://localhost:8080/register', {
-            role_id: 2,
-            username: username,
-            email: email,
-            firstname: firstname,
-            lastname: lastname,
-            phone_number: phone_number,
-            gender: gender,
-            DOB: DOB,
-            password: confirmpassword
-            }).then(() => {
-                console.log("Register approver success");
-                setUserInfo([
-                    ...userInfo,
-                    {
-                        username: username,
-                        email: email,
-                        firstname: firstname,
-                        lastname: lastname,
-                        phone_number: phone_number,
-                        gender: gender,
-                        DOB: DOB,
-                        password: password
-                    }
-                ]);
-                alert("Created approver account!");
-                window.location = "/report-admin";
-            });
+            userInfo.map( item => {
+                if (item.username === username) {
+                    alert("This username already exists!");
+                    isValid = false;
+                }
+            })
+            if(isValid == true) {
+                addNewUser();
+            }
         }
+    }
+
+    const addNewUser = async () => {
+        Axios.post('http://localhost:8080/register', {
+        role_id: 2,
+        username: username,
+        email: email,
+        firstname: firstname,
+        lastname: lastname,
+        phone_number: phone_number,
+        gender: gender,
+        DOB: DOB,
+        password: confirmpassword
+        }).then(() => {
+            console.log("Register approver success");
+            setUserInfo([
+                ...userInfo,
+                {
+                    username: username,
+                    email: email,
+                    firstname: firstname,
+                    lastname: lastname,
+                    phone_number: phone_number,
+                    gender: gender,
+                    DOB: DOB,
+                    password: password
+                }
+            ]);
+            alert("Created approver account!");
+            window.location = "/report-admin";
+        });
     }
 
     var date = new Date();
@@ -197,7 +205,7 @@ export default function AdminCreateAccount() {
                     <button 
                         className="signupbtn" 
                         type="button" 
-                        onClick={addNewUser}
+                        onClick={handleSubmit}
                     >Create account
                     </button>
                 </form>

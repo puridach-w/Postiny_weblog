@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ponyreg from "../images/ponyreg.png"
 import "../css/register.css"
 import Axios from 'axios'
+import GoBackBtn from "../components/gobackbtn";
 
 import {useLocation} from 'react-router-dom';
 
@@ -17,6 +18,7 @@ function EditPersonal() {
     const [gender, setGender] = useState(userData.gender);
     const [DOB, setDOB] = useState(userData.DOB.substring(0,10));
     const [bio,setBio] = useState(userData.bio);
+    const [userInfo, setUserInfo] = useState([]);
 
     var date = new Date();
 
@@ -31,7 +33,28 @@ function EditPersonal() {
     var minage = year + "-" + month + "-" + day;   
     var maxage = xyear + "-" + month + "-" + day;
 
-    const handleClick = () => {
+    Axios.get('http://localhost:8080/userinfo').then((response) => {
+        setUserInfo(response.data);
+    });
+
+    const handleSubmit = () => {
+        let isValid = true;
+        userInfo.map( item => {
+            if (item.username === username) {
+                if (user_id == item.user_id) {
+                    isValid = true;
+                } else {
+                    alert("This username already exists!");
+                    isValid = false;
+                }
+            }
+        })
+        if(isValid == true) {
+            editPersonal();
+        }
+    }
+
+    const editPersonal = () => {
         Axios.patch("http://localhost:8080/editPersonal",{
             user_id: user_id,
             username: username,
@@ -58,7 +81,7 @@ function EditPersonal() {
             </div>
                 <div className="right">
                     <div className="backbtn">
-                        <a href="/editprofile">&lt; back</a>
+                        <GoBackBtn />
                     </div>
                     <form action="" className="formreg">
                         <section className="copy">
@@ -68,7 +91,6 @@ function EditPersonal() {
                             <label>Username</label>
                             <input id="username" value={username} name="username" type="text" className="textinput" placeholder="Enter a unique username" required
                                 onChange={(event) => {
-                                    console.log(username);
                                     setUsername(event.target.value);
                                 }}
                             />
@@ -133,11 +155,8 @@ function EditPersonal() {
                                     }}
                                 />
                             </div> 
-                        </div>
-
-                       
-    
-                    <button onClick={handleClick} className="signupbtn" type="submit"
+                        </div>        
+                    <button onClick={handleSubmit} className="signupbtn" type="button"
                     >Save Changes</button>
                 </form>
             </div>

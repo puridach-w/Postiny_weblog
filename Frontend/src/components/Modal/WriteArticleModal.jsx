@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./writeArticleModal.css";
 import DropPicture from '@material-ui/icons/WallpaperRounded';
+import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import Switch from '@mui/material/Switch';
 import Axios from 'axios';
 
@@ -11,10 +12,12 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [lock, setLock] = useState(0);
+  const [haveimg, setHaveImg] = useState(false);
   const user_id = localStorage.getItem("user_id");
 
   const onImageChange = (e) => {
     setImage(e.target.files[0]);
+    setHaveImg(true);
   }
 
   //get category list
@@ -44,15 +47,16 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
                 article_pic: response.data.filename,
                 sub_required: lock
               }).catch(()=> {
-                alert("Created article!");
+                alert("Error!");
               })
-            }
+            } 
             catch(err){
                 console.log("err:",err);
             }
           } catch(error) {
             console.log("err on upload photo",error);
           }
+          window.location.reload();
   }
 
   return (
@@ -76,8 +80,12 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
         <div className="body">
           <div className="upload">
             <label className="img-frame">
-              <DropPicture className="drop-picture" style={{ fontSize: "70px" }} />
-			        <p>Drop your image here</p>
+              {haveimg?
+                <CheckCircleRoundedIcon className="drop-picture" style={{fontSize: "70px", color: "green"}}/>
+                :
+                <DropPicture className="drop-picture" style={{ fontSize: "70px" }} />
+              }
+			        { haveimg===false? "Drop your image here" : <p>*{image.name}*was uploaded</p> }
               <input 
                 className="input-file" 
                 type="file" 
@@ -137,7 +145,6 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
               setOpenModal(false);
               setBlur(false);
 			        addArticle();
-              window.location.reload(true);
           }}>Post</button>
         </div>
       </div>

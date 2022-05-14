@@ -62,7 +62,7 @@ export default function EditProfile() {
   return (
     <div className="editprofileselection">
     <React.Fragment>
-      <GoBackBtn path="./profile"/>
+      <GoBackBtn />
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       <CssBaseline />
 

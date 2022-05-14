@@ -24,7 +24,9 @@ function SubBlogItem({blog}) {
 
             <footer>
                 <div className="blogItem-author">
-                    <img src={authorData.profile_pic} alt="author pic" />
+                    <img src={authorData.profile_pic === null ? "/pony-profile.jpg" 
+                        : 
+                        "http://localhost:8080" + `/image/${authorData.profile_pic}`} alt="author pic" />
                     <div className="blogItem-info">
                         <h6>{authorData.username}</h6>
                         <p>{blog.created_at.substring(0, 10)}</p>

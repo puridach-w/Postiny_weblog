@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ponyreg from "../images/ponyreg.png"
-import "../css/register.css"
+import ponyreg from "../images/ponyreg.png";
+import "../css/register.css";
 import Axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
@@ -14,11 +14,29 @@ export default function Register() {
     const [gender, setGender] = useState("");
     const [DOB, setDOB] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmpassword, setConfirmPassword] = useState("");
     const [userInfo, setUserInfo] = useState([]);
 
     Axios.get('http://localhost:8080/userinfo').then((response) => {
         setUserInfo(response.data);
     });
+
+    const handleSubmit = () => {
+        let isValid = true;
+        if (confirmpassword !== password) {
+            alert('Password do not match');
+        } else {
+            userInfo.map( item => {
+                if (item.username === username) {
+                    alert("This username already exists!");
+                    isValid = false;
+                }
+            })
+            if(isValid == true) {
+                addUser();
+            }
+        }
+    }
     
     const addUser = async () => {
         Axios.post('http://localhost:8080/register', {
@@ -30,7 +48,7 @@ export default function Register() {
             phone_number: phone_number,
             gender: gender,
             DOB: DOB,
-            password: password
+            password: confirmpassword
         }).then(() => {
             console.log("Register success");
             setUserInfo([
@@ -63,8 +81,6 @@ export default function Register() {
 
     var minage = year + "-" + month + "-" + day;   
     var maxage = xyear + "-" + month + "-" + day;
-
-
 
     return (
         <div className="split-screen">
@@ -146,20 +162,24 @@ export default function Register() {
                         </div>
                         <div className="input-container password">
                             <label>Password</label>
-                            <input id="password" name="password" type="password" placeholder="Enter your password" required/>
+                            <input id="password" name="password" type="password" placeholder="Enter your password" required
+                                onChange={(event) => { 
+                                    setPassword(event.target.value);
+                                }}
+                            />
                         </div>
                         <div className="input-container confirmpw">
                             <label>Confirm password</label>
                             <input id="confirmpw" name="confirmpw" type="password" placeholder="Confirm your password" required
-                                onChange={(event) => {
-                                    setPassword(event.target.value);
-                            }}
+                                onChange={(event) => { 
+                                    setConfirmPassword(event.target.value);
+                                }}
                             />
                         </div>
     
                     <button type="button" 
                         className="signupbtn"
-                        onClick={addUser}
+                        onClick={handleSubmit}
                     >Create account
                     </button>
                 </form>

@@ -82,7 +82,7 @@ const getAllComment = (req, res) => {
             return;
         }
         const article_id = req.params.article_id;
-        db.query(`SELECT c.comment_id, c.content, c.created_at, u.user_id, u.username
+        db.query(`SELECT c.comment_id, c.content, c.created_at, u.user_id, u.username, u.profile_pic
                 FROM comment c JOIN userinfo u ON c.user_id = u.user_id
                 WHERE c.article_id = ?
                 ORDER BY created_at DESC`,

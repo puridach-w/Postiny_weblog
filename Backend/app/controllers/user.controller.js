@@ -9,7 +9,6 @@ const userInfo = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         db.query("SELECT * FROM userinfo", (err, result) => {
@@ -28,7 +27,6 @@ const currentUser = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const current_id = req.params.id;
@@ -50,7 +48,6 @@ const register = (req, res) => {
         if (err) {
             console.log(err);
             res.status(500).json({'error':err});
-            db.release();
             return;
         }
         const role_id = req.body.role_id;
@@ -86,7 +83,6 @@ const signin = (req, res) => {
         if (err) {
             console.log(err);
             res.status(500).json({'error':err});
-            db.release();
             return;
         }
         const username = req.body.username;

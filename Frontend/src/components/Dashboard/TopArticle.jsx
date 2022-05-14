@@ -50,15 +50,16 @@ function TopArticle() {
           <TableHead>
             <TableRow >
               <TableCell style={{ paddingLeft: '2rem', borderBottom:"none"}} width="65px" className="tatcHeaderCell">No.</TableCell>
-              <TableCell style={{borderBottom:"none"}} width="280px" className="tatcHeaderCell">Article Title</TableCell>
+              <TableCell style={{borderBottom:"none"}} width="280px" className="tatcHeaderCell">Article Information</TableCell>
               <TableCell style={{borderBottom:"none"}} width="65px" className="tatcHeaderCell">Like</TableCell>
               <TableCell style={{borderBottom:"none"}} width="65px" className="tatcHeaderCell">Comment</TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {filterCategory.map((row, count) => (
-              <TableRow key={row.article_id}>
+            {  filterCategory.slice(0, 5).map((row, count) => (
+              <div key={count}>
+              <TableRow key={count}>
                 <TableCell style={{borderBottom:"none"}} className="tatccell">
                   <div className="idContainer">
                   {count+1}
@@ -66,7 +67,7 @@ function TopArticle() {
                 </TableCell>
                 <TableCell style={{borderBottom:"none"}} className="tatccell">
                     <div className="tatcimg">
-                        <img alt="" src={row.article_pic}/>
+                        <img alt="" src={"http://localhost:8080" + `/image/${row.article_pic}`}/>
                     </div>
                     <div className="tatctitle">
                         {row.title}
@@ -82,11 +83,10 @@ function TopArticle() {
                   {row.commentCount} Comments
                 </TableCell>
               </TableRow>
-            ))}
-
+              </div>
+            ))
+            }
           </TableBody>
-
-         
         </Table>
       </TableContainer>
       </div>

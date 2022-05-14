@@ -1,14 +1,12 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // import ponyreg from "../images/ponyreg.png"
 // import "../css/changepassword.css"
 import ponystand from "../images/inhupony.png"
 import "../css/changepassword.css"
 import GoBackBtn from "../components/gobackbtn";
 import Axios from "axios";
-import axios from "axios";
 
 export default function Changepw() {
-
    const [password, setPassword] = useState("");
    const [newpassword, setNewPassword] = useState("");
    const [confirmpassword, setConfirmPassword] = useState("");
@@ -26,11 +24,9 @@ export default function Changepw() {
    }
 
    function handleSubmit() {
-      const confirm = document.querySelector('input[name=cfnpassword]');
         if (confirmpassword !== newpassword) {
-            confirm.setCustomValidity('Password do not match');
+            alert('Password do not match');
         } else {
-         confirm.setCustomValidity('');
          Axios.get(`http://localhost:8080/checkPassword/${user_id}/${password}`).then((response) => {
             if(response.data.msg === "check success"){
                updatePassWord();

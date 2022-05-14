@@ -30,7 +30,9 @@ const BlogItem = ({ blog }) => {
 
             <footer>
                 <div className="blogItem-author">
-                    <img src={blog.profile_pic} alt="author pic" />
+                    <img src={blog.profile_pic === null ? "/pony-profile.jpg" 
+                        : 
+                        "http://localhost:8080" + `/image/${blog.profile_pic}`} alt="author pic" />
                     <div className="blogItem-info">
                         <h6>{blog.username}</h6>
                         <p>{blog.created_at.substring(0, 10)}</p>
@@ -55,7 +57,9 @@ const BlogItem = ({ blog }) => {
 
         <footer>
             <div className="blogItem-author">
-                <img src={blog.profile_pic} alt="author pic" />
+                <img src={blog.profile_pic === null ? "/pony-profile.jpg" 
+                    : 
+                    "http://localhost:8080" + `/image/${blog.profile_pic}`} alt="author pic" />
                 <div className="blogItem-info">
                     <h6>{blog.username}</h6>
                     <p>{blog.created_at.substring(0, 10)}</p>

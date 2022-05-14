@@ -38,7 +38,6 @@ function Home() {
 	const [blur, setBlur] = useState(false);
 	const user_id = localStorage.getItem('user_id');
 	const token = localStorage.getItem('token');
-	
 
 	useEffect( () => {
 		Axios.post('http://localhost:8080/auth', {
@@ -68,7 +67,6 @@ function Home() {
 			user_id: user_id
 	  	}
 	});
-	
 	useEffect( () => {
 		Axios.all([requestGetBlogList, requestGetFavCategory]).then(Axios.spread((...responses) => {
 				const responseOne = responses[0]

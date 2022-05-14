@@ -2,6 +2,7 @@ import React,  { useState, useEffect } from "react";
 import Axios from "axios";
 import "./pePopup.css";
 import DropPicture from '@material-ui/icons/WallpaperRounded';
+import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import Switch from '@mui/material/Switch';
 
 function EditArticleModal({ setOpenModal, setBlur, blogData }) {
@@ -11,10 +12,12 @@ function EditArticleModal({ setOpenModal, setBlur, blogData }) {
       const [title, setTitle] = useState(blogData.title);
       const [content, setContent] = useState(blogData.content);
       const [lock, setLock] = useState(blogData.sub_required);
+      const [haveimg, setHaveImg] = useState(false);
       const user_id = localStorage.getItem("user_id");
 
       const onImageChange = (e) => {
         setImage(e.target.files[0]);
+        setHaveImg(true);
       }
 
       useEffect( () => {
@@ -43,7 +46,7 @@ function EditArticleModal({ setOpenModal, setBlur, blogData }) {
                   article_pic: response.data.filename,
                   sub_required: lock
                 }).catch(()=> {
-                  alert("The article has been edited!");
+                  alert("Error!");
                 })
               }
               catch(err){
@@ -52,6 +55,7 @@ function EditArticleModal({ setOpenModal, setBlur, blogData }) {
           } catch(error) {
             console.log("err on upload photo",error);
           }
+          window.location.reload();
       }
 
       return (
@@ -75,8 +79,12 @@ function EditArticleModal({ setOpenModal, setBlur, blogData }) {
             <div className="ebody">
               <div className="eupload">
                 <label className="eimg-frame">
-                  <DropPicture className="edrop-picture" style={{ fontSize: "70px" }} />
-                  <p>Drop your new image here</p>
+                {haveimg?
+                <CheckCircleRoundedIcon className="drop-picture" style={{fontSize: "70px", color: "green"}}/>
+                :
+                <DropPicture className="drop-picture" style={{ fontSize: "70px" }} />
+              }
+			        { haveimg===false? "Drop your new image here" : <p>*{image.name}*was uploaded</p> }
                   <input 
                     className="einput-file" 
                     type="file" 
@@ -139,7 +147,6 @@ function EditArticleModal({ setOpenModal, setBlur, blogData }) {
                 setOpenModal(false);
                 setBlur(false);
                 editArticle();
-                window.location.reload(true);
               }}>Save changes</button>
             </div>
           </div>

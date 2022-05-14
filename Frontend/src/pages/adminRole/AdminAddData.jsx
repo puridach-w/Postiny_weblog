@@ -1,19 +1,20 @@
 import React , { useState } from "react";
 import DropPicture from '@material-ui/icons/WallpaperRounded';
+import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import "../../components/Modal/pePopup.css";
 import "../../components/Modal/writeArticleModal.css";
-import { optionGroupUnstyledClasses } from "@mui/base";
 
 import Axios from "axios";
 
 function AdminAddData({ setOpenModal, setBlur }) {
-
   const [reportType, setReportType] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState({});
+  const [haveimg, setHaveImg] = useState(false);
 
   const onImageChange = (e) => {
     setImage(e.target.files[0]);
+    setHaveImg(true);
   }
   
   const handleAddCategory = async () => {
@@ -47,8 +48,6 @@ function AdminAddData({ setOpenModal, setBlur }) {
       }
 
   }
-
-  console.log(reportType);
 
   const handleAddReportType = async() => {
       setOpenModal(false);
@@ -108,8 +107,12 @@ function AdminAddData({ setOpenModal, setBlur }) {
                     <div className="rtab-content">
                     <div className="upload">
                             <label className="img-frame">
+                            {haveimg?
+                            <CheckCircleRoundedIcon className="drop-picture" style={{fontSize: "70px", color: "green"}}/>
+                            :
                             <DropPicture className="drop-picture" style={{ fontSize: "70px" }} />
-                                    <p>Drop your report icon here</p>
+                            }
+                            { haveimg===false? "Drop your report icon here" : <p>*{image.name}*was uploaded</p> }
                             <input className="input-file" type="file" name="rpticon" onChange={onImageChange} accept="image/*"></input>
                             </label>
                         </div>
@@ -121,15 +124,22 @@ function AdminAddData({ setOpenModal, setBlur }) {
                             </div>
                     </div>
                 </div>
+
                 <div className="rtab">
                     <input type="radio" name="css-tabs" id="tab-2" className="rtab-switch"/>
                     <label for="tab-2" className="rtab-label">Category</label>
                     <div className="rtab-content">
-                    <div className="upload">
+                        <div className="upload">
                             <label className="img-frame">
-                            <DropPicture className="drop-picture" style={{ fontSize: "70px" }} />
-                                    <p>Drop your category icon here</p>
-                            <input className="input-file" type="file" name="caticon" onChange={onImageChange} accept="image/*"></input>
+                              {haveimg?
+                                <div>
+                                  <CheckCircleRoundedIcon className="drop-picture" style={{fontSize: "70px", color: "green"}}/>
+                                </div>
+                                :
+                                <DropPicture className="drop-picture" style={{ fontSize: "70px" }} />
+                              }
+                                { haveimg===false? "Drop your category icon here" : <p>*{image.name}*was uploaded</p> }
+                                <input className="input-file" type="file" name="caticon" onChange={onImageChange} accept="image/*"></input>
                             </label>
                         </div>
                         <div className="detailadd">

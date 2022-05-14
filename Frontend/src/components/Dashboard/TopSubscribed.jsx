@@ -39,7 +39,10 @@ function TopSubscribed() {
                       </TableCell>
                       <TableCell style={{borderBottom:"none"}} className="tscell">
                           <div className="tsimg">
-                              <img alt="" src={row.profile_pic}/>
+                              <img alt="" src={row.profile_pic === null ? "/pony-profile.jpg" 
+                                : 
+                                "http://localhost:8080" + `/image/${row.profile_pic}`}
+                              />
                           </div>
                           <div className="tsname">
                               {row.firstname} {row.lastname}
