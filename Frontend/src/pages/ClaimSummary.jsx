@@ -1,27 +1,26 @@
-import React, {useEffect} from "react";
+import React, {useEffect,useState} from "react";
 import "../components/Modal/pePopup.css";
 import { useNavigate } from "react-router-dom";
 import Alert from '@mui/material/Alert';
+import Axios from "axios";
 
 import SidebarUser from "../components/Layout/SidebarUser";
 import Topbar from "../components/Layout/Topbar";
 
 
 function ClaimSummary() {
-  var user_id = localStorage.getItem("user_id");
+  const user_id = localStorage.getItem("user_id");
+  const [paymentData,setPaymentData] = useState([]);
 
   const navigate = useNavigate();
   const goWallet = () => navigate('/wallet');
 
-  
-const payment = {
-  payment_id: 4,
-  user_id: 1,
-  username: "iamkonsuay",
-  status: "Pending",
-  amount: "500",
-  created_at: "2022-05-03 11.26.30"
-};
+    useEffect( () => {
+    Axios.get(`http://localhost:8080/getPaymentData/${user_id}`).then((response) => {
+        setPaymentData(response.data[0]);
+      })
+    }, []);
+
 
   return (
       <div>
@@ -38,19 +37,19 @@ const payment = {
         <div className="cbody">
             <h2>Payment ID: 
               <h4>
-              {payment.payment_id}
+              {paymentData.payment_id}
               </h4></h2>
             <h2>Username: 
-              <h4>{payment.username}
+              <h4>{paymentData.username}
               </h4></h2>
             <h2>Amount: 
-            <h4>{payment.amount}
+            <h4>{paymentData.amount}
             </h4></h2>
             <h2>Status: 
-            <h4>{payment.status}
+            <h4>{paymentData.status_name}
             </h4></h2>
             <h2>Date: 
-            <h4>{payment.created_at}
+            <h4>{paymentData.created_at&& paymentData.created_at.substring(0,10) + " " + paymentData.created_at.substring(12,19)}
             </h4></h2>
         </div>
         <div className="claiminfo">

@@ -39,8 +39,9 @@ function Wallet() {
 	})
 
 	let navigate = useNavigate(); 
-  	const routeChange = () =>{ 
-    let path = '/claim'; 
+
+  	const routeChange = (name) =>{ 
+    let path = '/' + name; 
     navigate(path);
   	}
 
@@ -85,13 +86,17 @@ function Wallet() {
 					</div>
 					<br/> <br/> <br/> <br/>
 					<div>
-						<button onClick={routeChange} className='btn_topUp'>
+						<button onClick={() => {
+							routeChange("topup")
+						}} className='btn_topUp'>
 						<CreditCardOutlinedIcon style={{ fontSize: 35 }}/>&ensp;
 						<span className='spanTopUp'>Top-up</span></button>
 					</div>
 					<br/> <br/> 
 					<div>
-						<button onClick={routeChange} className='btn_claim'>
+						<button onClick={() => {
+							routeChange("claim")
+						}} className='btn_claim'>
 						<ArrowForwardRoundedIcon style={{ fontSize: 35 }}/>
 						&ensp;Claim</button>
 					</div>

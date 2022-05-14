@@ -35,10 +35,11 @@ function TransactionUpload(){
             headers: { "Content-Type": "multipart/form-data" },
             });
             try{
-                Axios.post("http://localhost:8080/transaction",{
+                Axios.post("http://localhost:8080/uploadTopup",{
                 user_id: user_id,
                 amount: amount,
-                receipt: response.data.filename
+                receipt: response.data.filename,
+                is_withdrawal: 0
                 })
             }
             catch(err){
@@ -71,23 +72,19 @@ function TransactionUpload(){
                     <label className="drop-image">
                     <br/>
                         {haveimg? 
-                        <div>
-                            <CheckCircleRoundedIcon style={{fontSize: "55px" ,color: "green"}}/>
-                            <br/>
-                            {"Image "+ image.name + " was uploaded"}
-                        </div>
-                        
+                            <CheckCircleRoundedIcon style={{marginTop: "35px",fontSize: "55px" ,color: "green"}}/>
                         : 
                         <WallpaperRoundedIcon style={{fontSize: "55px"}}/> }
 
-                        { !haveimg && "Drop your image" }
+                        { haveimg===false? "Drop your image here" : <p>*{image.name}*was uploaded</p> }
                         <br/>
                         <input className="inputFile" type="file" name="slip" onChange={onImageChange} accept="image/*"></input>
                         
                         
                     </label>
                 </div>
-                <button className="btn-upload" onClick={handleClicked}>Upload now</button>
+                {haveimg && <button className="btn-upload" onClick={handleClicked}>Upload now</button>}
+                
             </div> 
         </div>
     </div>

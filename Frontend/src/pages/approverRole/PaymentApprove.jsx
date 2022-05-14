@@ -39,18 +39,20 @@ function PaymentApprove() {
             });
 
 
-    Axios.get('http://localhost:8080/getAllPayment').then((response) => {
+    Axios.get(`http://localhost:8080/getAllPayment/${0}`).then((response) => {
             setAllData(response.data);
         });
     }, []);
 
 
     const updateStatus = (status,data) => {
+        console.log(data);
         console.log("status" + status);
         Axios.patch('http://localhost:8080/updateStatus', {
             payment_id: data.payment_id,
             status: status,
-            approver_id: approver_id
+            approver_id: approver_id,
+            payment_slip: data.payment_slip
         }).then(res => console.log(res.data));
 
         if(status === 2){
@@ -65,7 +67,8 @@ function PaymentApprove() {
         Axios.patch('http://localhost:8080/updateStatus', {
             payment_id: data.payment_id,
             status: status,
-            approver_id: approver_id
+            approver_id: approver_id,
+            payment_slip: data.payment_slip
         }).then(res => console.log(res.data));
 
         Axios.patch('http://localhost:8080/updateChangeApproveToReject', {
