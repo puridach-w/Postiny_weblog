@@ -1,9 +1,10 @@
 .tsscontainer {
     width: 420px;
-    height: 680px;
+    height: auto;
+    min-height: 750px;
     background-color: white;
     border-radius: 25px;
-    margin-top: -680px;
+    margin-top: -750px;
     margin-left: 1000px;
 }
 
@@ -62,6 +63,7 @@
     padding: 2px 5px;
     border-radius: 5px;
     width: fit-content;
+    margin-bottom: 10px;
 }
 
 .table-topsc .tscell .tssubcount {
@@ -73,7 +75,7 @@
     color: #1572A1;
     margin-bottom: 22px;
     padding-top: 60px;
-    margin-left: 30px;
+    margin-left: 40px;
     font-weight: bold;
     font-size: xx-large;
 }

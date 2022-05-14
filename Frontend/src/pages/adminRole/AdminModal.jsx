@@ -22,12 +22,12 @@ const AdminModal = ({ data, manageReport, setOpenModal, setBlur}) => {
                     
                 <div className="body"> 
                     <div className="info">
-                            <p>ID: <span>{data.report_id}</span></p>
-                            <p>Type: <span>{data.report_type_name}</span></p>
-                            <p>Username: <span>{data.username}</span></p> 
-                            <p>Date: <span>{data.updated_at.substring(0, 10)}</span></p> 
-                            <p>Description: </p>
-                            <p className='description'>{data.description}</p>
+                        <p>ID: <span>{data.report_id}</span></p>
+                        <p>Type: <span>{data.report_type_name}</span></p>
+                        <p>Username: <span>{data.username}</span></p> 
+                        <p>Date: <span>{data.updated_at.substring(0, 10)}</span></p> 
+                        <p>Description: </p>
+                        <p className='description'>{data.description}</p>
                     </div>
                     
                 </div>

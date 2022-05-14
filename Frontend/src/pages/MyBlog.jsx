@@ -211,7 +211,8 @@ const MyBlog = () => {
             <CreateOutlinedIcon />
           </IconButton>
           <h1>{blogData.title}</h1>
-          <p className="article-author">Written by {blogData.username}</p>
+          <p className="blog-author">Article ID = {blogData.article_id}</p>
+          <p className="blog-author">Written by {blogData.firstname} {blogData.lastname} ({blogData.username})</p>
           <p className="article-date">Published on {blogData.updated_at.substring(0,10)}</p>
           <p className="article-desc">{blogData.content}</p>
         </div>

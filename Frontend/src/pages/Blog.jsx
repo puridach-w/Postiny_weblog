@@ -131,8 +131,8 @@ const Blog = () => {
           <img src={"http://localhost:8080" + `/image/${blog.article_pic}`} alt="cover img" />
           <h4 className="blog-category">{blog.category_name}</h4>
           <h1>{blog.title}</h1>
-          <p className="blog-author">Written by {blog.firstname} {blog.lastname}</p>
-          <p className="blog-author">Username {blog.username}</p>
+          <p className="blog-author">Article ID = {blog.article_id}</p>
+          <p className="blog-author">Written by {blog.firstname} {blog.lastname} ({blog.username})</p>
           <p className="blog-date">Published on {blog.created_at.substring(0,10)}</p>
           <p className="blog-desc">{blog.content}</p>
         </div>

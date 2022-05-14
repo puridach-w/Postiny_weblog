@@ -54,12 +54,26 @@ function AdminRP() {
             status: status,
             admin_id: admin_id
         });
-
         // delete row data (article/comment)
         if(status === 2) {
-            if(data.report_type_id === 1 || data.report_type_id === 3) {
+            // if(data.report_type_id === 1 || data.report_type_id === 3) {
+            //     Axios.delete(`http://localhost:8080/acceptDelete/${data.report_id}`)
+            //     .then(res => {console.log(res)})
+            // }
+            if (data.report_type_id === 1) {
+                // console.log(data);
+                Axios.delete(`http://localhost:8080/deleteArticle/${data.article_id}`)
+                .then(res => {console.log(res)});
+
                 Axios.delete(`http://localhost:8080/acceptDelete/${data.report_id}`)
-                .then(res => {console.log(res)})
+                .then(res => {console.log(res)});
+            } else if (data.report_type_id === 3) {
+                // console.log(data.comment_id);
+                Axios.delete(`http://localhost:8080/deleteComment/${data.comment_id}`)
+                .then(res => {console.log(res)});
+
+                Axios.delete(`http://localhost:8080/acceptDelete/${data.report_id}`)
+                .then(res => {console.log(res)});
             }
         }
     }

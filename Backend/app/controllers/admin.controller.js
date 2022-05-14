@@ -5,7 +5,6 @@ const getAllReport = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         db.query(`SELECT report.*, username, status_name, report_type_name FROM report 
@@ -27,7 +26,6 @@ const updateReportStatus = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const report_id = req.body.report_id;
@@ -50,7 +48,6 @@ const acceptDelete = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         const report_id = req.params.report_id;
@@ -66,11 +63,48 @@ const acceptDelete = (req, res) => {
    }); 
 }
 
+const deleteComment = (req, res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        const article_id = req.params.article_id;
+        db.query("DELETE FROM article WHERE article_id = ?",
+        [article_id], (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+   }); 
+}
+
+const deleteArticle = (req, res) => {
+    pool.getConnection((err, db) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        const comment_id = req.params.comment_id;
+        db.query("DELETE FROM comment WHERE comment_id = ?",
+        [comment_id], (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+            db.release();
+        });
+   }); 
+}
+
 const getReportCount = (req, res) => {
     pool.getConnection((err, db) => {
         if (err) {
             console.log(err);
-            db.release();
             return;
         }
         db.query(`SELECT completed.completeCount, pending.pendingCount
@@ -149,5 +183,7 @@ module.exports = {
     acceptDelete,
     getReportCount,
     addReportType,
-    addCategoryType
+    addCategoryType,
+    deleteComment,
+    deleteArticle
 }

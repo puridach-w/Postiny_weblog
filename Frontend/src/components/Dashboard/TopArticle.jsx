@@ -57,8 +57,7 @@ function TopArticle() {
           </TableHead>
 
           <TableBody>
-            {  filterCategory.slice(0, 5).map((row, count) => (
-              <div key={count}>
+            {filterCategory.slice(0, 5).map((row, count) => (
               <TableRow key={count}>
                 <TableCell style={{borderBottom:"none"}} className="tatccell">
                   <div className="idContainer">
@@ -83,7 +82,6 @@ function TopArticle() {
                   {row.commentCount} Comments
                 </TableCell>
               </TableRow>
-              </div>
             ))
             }
           </TableBody>
