@@ -4,6 +4,10 @@
 
 ### Created by my internet is 4G but my heart is 4U
 > For CPE231 Database system final project
+* Sonia Gautam 63070503410
+* Neeracha Seehawong 63070503423
+* Puridach Wutthihathaithamrong 63070503440
+* Apirak Senarak 63070503458
 
 ## Web application dev tools
 * Client - JavaScript, React, Bootstrap 5
