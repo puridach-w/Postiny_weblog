@@ -1,19 +1,3 @@
-/* .backbtnprofile {
-    margin-top: 70px;
-    margin-left: 80px;
-}
-
-.backbtnprofile a {
-    font-family: SF Pro Rounded-Medium;
-    color: #676767;
-    font-size: 17px;
-    text-decoration: none;
-    margin-top: 10px;
-}
-
-.backbtnprofile a:hover {
-    color: black;
-} */
 
 .profile {
     background-color: transparent;
@@ -21,12 +5,8 @@
 
 .profileSummary {
     background-color: white;
-    /* display: flex;
-    flex-wrap: wrap; */
-    /* justify-content: space-between; */
     width: 1800px;
     height: 250px;
-    /* margin: 100px; */
     padding-left: 260px;
     padding-top: 20px;
 }
@@ -40,10 +20,6 @@
 }
 
 
-/* .profileimg {
-    margin-right: 50px;
-} */
-
 .sub,
 .article,
 .like {
@@ -52,7 +28,6 @@
     align-items: center;
     width: 200px;
     height: 80px;
-    /* border: 1px solid #000; */
     text-align: left;
     margin-top: 60px;
     margin-right: 100px;

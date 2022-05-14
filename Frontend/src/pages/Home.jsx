@@ -12,7 +12,6 @@ import WriteArticleModal from "../components/Modal/WriteArticleModal";
 import SearchUsername from '../components/SearchUsername';
 
 import '../css/pages_css/home.css';
-import { adsArticles } from "../dummyData";
 
 import SidebarUser from "../components/Layout/SidebarUser";
 import Topbar from "../components/Layout/Topbar";
@@ -147,7 +146,7 @@ function Home() {
 									<p className="ads">Ads</p>
 								</div>
 								<div id="ads-card">
-									<CardSlider adsArticles={adsArticles} />
+									<CardSlider />
 								</div>
 								
 								{/* Search bar */}

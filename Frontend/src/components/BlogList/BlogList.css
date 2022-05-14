@@ -1,4 +1,4 @@
-/* Search bar */
+
 
 .searchBar-wrap {
     font-family: "SF Pro Rounded-Semibold";
@@ -52,15 +52,12 @@
 }
 
 
-/* Blog list */
-
 .blogList-wrap {
     font-family: "SF Pro Rounded-Semibold";
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 5rem;
     grid-row-gap: 1.5rem;
-    /* width: fit-content; */
     width: 75rem;
 }
 
@@ -105,7 +102,6 @@
     font-family: "SF Pro Rounded-Bold";
     font-size: 18px;
     margin: 0.5rem 0 0.4rem 0;
-    /* flex: 1; */
 }
 
 .blogItem-desc {
@@ -129,7 +125,6 @@
 .blogItem-wrap footer {
     display: flex;
     align-items: center;
-    /* margin-top: 0rem; */
     justify-content: space-between;
 }
 

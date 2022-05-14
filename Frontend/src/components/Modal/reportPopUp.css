@@ -11,8 +11,6 @@
       left: 250px;
       top: 0px;
       background-color: transparent;
-      /* justify-content: center; */
-      /* align-items: center; */
     }
     
   .container-popup {
@@ -70,14 +68,6 @@
     background-color: crimson;
   }
 
-
-  .reportID{
-  
-  } 
-
-  .description{
-
-  }
 
   .information .inputBox{
     background-color: #f1f1f1;
