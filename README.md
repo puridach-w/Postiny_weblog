@@ -1,6 +1,6 @@
 # Postiny Web Blog Application
 
-## Created by my internet is 4G but my heart is 4U
+### Created by my internet is 4G but my heart is 4U
 > For CPE231 Database system final project
 
 ## Web application dev tools
