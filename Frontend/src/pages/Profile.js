@@ -69,64 +69,60 @@ export default function Profile(props) {
     return ( 
         <div>
             <div className="profile"> 
-            <GoBackBtn />
-            <div className="profileSummary">
-                <div className="profileimg">
-                <img alt="" src={profileData.role_id === 1 ? "/admin.jpg" :
-                        profileData.role_id === 2 ? "/approver.jpg" :
-                        profileData.profile_pic === null ? 
-                        "/pony-profile.jpg" : "http://localhost:8080" + `/image/${profileData.profile_pic}`}/>
-                </div>
-                <div className="summary">
-                    <div className="sub">
-                        <img src={subicon} alt="" />
-                        <h3>{profileData.totalSub}</h3>
-                        <h5>Subscribers</h5>
+                <GoBackBtn />
+                <div className="profileSummary">
+                    <div className="profileimg">
+                    <img alt="" src={profileData.role_id === 1 ? "/admin.jpg" :
+                            profileData.role_id === 2 ? "/approver.jpg" :
+                            profileData.profile_pic === null ? 
+                            "/pony-profile.jpg" : "http://localhost:8080" + `/image/${profileData.profile_pic}`}/>
                     </div>
-                    <div className="article">
-                        <img src={articleicon} alt="" />
-                        <h3>{profileData.totalArticle}</h3>
-                        <h5>Articles</h5>
-                    </div>
-                    <div className="like">
-                        <img src={likeicon} alt="" />
-                        <h3>{profileData.totalLike}</h3>
-                        <h5>Likes</h5>
+                    <div className="summary">
+                        <div className="sub">
+                            <img src={subicon} alt="" />
+                            <h3>{profileData.totalSub}</h3>
+                            <h5>Subscribers</h5>
+                        </div>
+                        <div className="article">
+                            <img src={articleicon} alt="" />
+                            <h3>{profileData.totalArticle}</h3>
+                            <h5>Articles</h5>
+                        </div>
+                        <div className="like">
+                            <img src={likeicon} alt="" />
+                            <h3>{profileData.totalLike}</h3>
+                            <h5>Likes</h5>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="profileDetail">
-            <h2 className="fullname">{profileData.firstname} {profileData.lastname} ({profileData.username})</h2>
-            <div className="besideprofilebtn">
-                {/* <button onClick={routeChange} className="btn-modal">
-                Edit profile
-                </button> */}
-                <ProfileSideBtn
-                id={profile_id}
-                type={type}/>
+                <div>
+                    {type === "myprofile" && profileData.role_id === 3 &&
+                    <IconButton style={{color: '#A9A9A9', borderColor: "#E3E3E6", marginLeft: "405px", marginTop: "-120px"}}
+                        onClick={() => routeChange()}>
+                    <AddAPhotoIcon />
+                    </IconButton>}
                 </div>
-            <h3 className="bio">{profileData.bio}</h3>
-            <h4 className="favcat">
-                {interestCategory.map((item) => (
-                <span>{item.category_name}&ensp;</span>
-              ))}
-            </h4>
-            <div>
-                {type === "myprofile" && profileData.role_id === 3 &&
-            <IconButton style={{color: '#A9A9A9', borderColor: "#E3E3E6", marginLeft: "125px", marginTop: "-475px"}}
-          onClick={() => routeChange()}>
-            <AddAPhotoIcon />
-          </IconButton>}
-          </div>
-            {/* <div className="myarticles">
-                {!blogs.length? <EmptyBlog /> : <BlogList blogs={blogs} />}
-            </div> */}
-            <ProfileArticleList
-            type={type}
-            id={profile_id}
-            blogList={blogList}
-            />
-            </div>
+                <div className="profileDetail">
+                    <h2 className="fullname">{profileData.firstname} {profileData.lastname} ({profileData.username})</h2>
+                    <div className="besideprofilebtn">
+                        <ProfileSideBtn
+                            id={profile_id}
+                            type={type}
+                        />
+                    </div>  
+                    <h3 className="bio">{profileData.bio}</h3>
+                    <h4 className="favcat">
+                        {interestCategory.map((item) => (
+                            <span>{item.category_name}&ensp;</span>
+                        ))}
+                    </h4>
+
+                    <ProfileArticleList
+                        type={type}
+                        id={profile_id}
+                        blogList={blogList}
+                    />
+                </div>
             </div>
         </div>
     );
