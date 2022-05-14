@@ -346,6 +346,7 @@ const uploadProfileImage = (req,res) =>{
    });
 }
 
+
 const deleteCategory = (req,res) => {
     pool.getConnection((err, db) => {
         if (err) {
