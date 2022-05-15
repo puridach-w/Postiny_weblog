@@ -1,156 +1,156 @@
+.signInpage header {
+    background: white;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    height: 200px;
+    width: 100%;
+    padding: 0 100px;
+    padding-top: 20px;
+}
 
-    .signInpage header {
-        background: white;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        height: 180px;
-        width: 100%;
-        padding: 0 100px;
-    }
-    
-    * {
-        margin: 0;
-        padding: 0;
-        text-decoration: none;
-        outline: none;
-    }
-    
-    header .logo {
-        color: #1572A1;
-        font-family: SF Pro Rounded-Bold;
-        font-size: 64px;
-        font-weight: 700;
-        letter-spacing: 0px;
-    }
-    
-    header .nav-items {
-        display: flex;
-        padding-right: 40px;
-    }
-    
-    header .nav-items li {
-        list-style: none;
-        padding: 0 32px;
-    }
-    
-    header .nav-items li a {
-        font-family: SF Pro Rounded-Medium;
-        color: #1572A1;
-        font-size: 24px;
-        text-decoration: none;
-    }
-    
-    header .nav-items li a:hover {
-        color: black;
-    }
-    
-    .btn:hover {
-        background-color: black;
-    }
-    
-    .form .login {
-        background-color: white;
-        position: absolute;
-        width: 50%;
-        height: 100%;
-        padding-left: 1300px;
-        padding-top: 70px;
-        padding-bottom: 100px;
-    }
-    
-    .login h2 {
-        color: #1572A1;
-        padding: 10px 0px;
-        font-family: SF Pro Rounded-Semibold;
-        font-weight: 150;
-        font-size: 52px;
-        padding-bottom: 40px;
-        width: 300px;
-        letter-spacing: 0.3px;
-    }
-    
-    .login input[type='text'],
-    .login input[type='password'] {
-        display: block;
-        background-color: #f1f1f1;
-        border: 1.5px solid;
-        padding: 10px 10px;
-        border-radius: 10px;
-        text-align: left;
-        color: black;
-        border-color: #f1f1f1;
-        font-family: SF Pro Rounded-Medium;
-        font-size: 15px;
-    }
-    
-    .login input[type='text'] {
-        width: 320px;
-        height: 50px;
-    }
-    
-    .login input[type='password'] {
-        width: 320px;
-        height: 50px;
-    }
-    
-    .login .btn {
-        border: none;
-        background-color: #1572A1;
-        color: white;
-        width: 320px;
-        height: 50px;
-        display: block;
-        border-radius: 5px;
-        padding: 10px;
-        padding-top: 10px;
-        font-family: SF Pro Rounded-Semibold;
-        font-size: 15px;
-        cursor: pointer;
-    }
-    
-    .sub-link h4 {
-        width: 270px;
-        position: relative;
-        color: black;
-        font-family: SF Pro Rounded-Medium;
-        font-size: 20px;
-        font-weight: 300;
-        padding-left: 2px;
-        padding-top: 20px;
-    }
-    
-    .sub-link h4 a {
-        color: #1572A1;
-    }
-    
-    .f-container {
-        width: 50%;
-        height: 100%;
-        padding-left: 260px;
-        padding-top: 195px;
-        font-family: SF Pro Rounded-Semibold;
-        position: absolute;
-        background-color: white;
-    }
-    
-    .img-container img {
-        width: 416px;
-        left: 800px;
-        padding-top: 220px;
-        position: relative;
-        background-color: white;
-    }
-    
-    .f-container h4 a {
-        text-decoration: none;
-    }
-    
-    .f-container h2 {
-        font-family: SF Pro Rounded-Semibold;
-        font-size: 50px;
-        font-weight: bold;
-        color: black;
-        letter-spacing: 0.75px;
-    }
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    outline: none;
+}
+
+header .logo {
+    color: #1572A1;
+    font-family: SF Pro Rounded-Bold;
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: 0px;
+}
+
+header .nav-items {
+    display: flex;
+    padding-right: 40px;
+}
+
+header .nav-items li {
+    list-style: none;
+    padding: 0 32px;
+}
+
+header .nav-items li a {
+    font-family: SF Pro Rounded-Medium;
+    color: #1572A1;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+header .nav-items li a:hover {
+    color: black;
+}
+
+.login .btn:hover {
+    background-color: #1d7fb1;
+}
+
+.form .login {
+    background-color: white;
+    position: absolute;
+    width: 50%;
+    height: auto;
+    padding-left: 1300px;
+    padding-top: 70px;
+    padding-bottom: 100px;
+}
+
+.login h2 {
+    color: #1572A1;
+    padding: 10px 0px;
+    font-family: SF Pro Rounded-Semibold;
+    font-weight: 150;
+    font-size: 52px;
+    padding-bottom: 40px;
+    width: 300px;
+    letter-spacing: 0.3px;
+}
+
+.login input[type='text'],
+.login input[type='password'] {
+    display: block;
+    background-color: #f1f1f1;
+    border: 1.5px solid;
+    padding: 10px 10px;
+    border-radius: 10px;
+    text-align: left;
+    color: black;
+    border-color: #f1f1f1;
+    font-family: SF Pro Rounded-Medium;
+    font-size: 15px;
+}
+
+.login input[type='text'] {
+    width: 320px;
+    height: 50px;
+}
+
+.login input[type='password'] {
+    width: 320px;
+    height: 50px;
+}
+
+.login .btn {
+    border: none;
+    background-color: #1572A1;
+    color: white;
+    width: 320px;
+    height: 50px;
+    display: block;
+    border-radius: 5px;
+    padding: 10px;
+    padding-top: 10px;
+    font-family: SF Pro Rounded-Semibold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.sub-link h4 {
+    width: 270px;
+    position: relative;
+    color: black;
+    font-family: SF Pro Rounded-Medium;
+    font-size: 20px;
+    font-weight: 300;
+    padding-left: 2px;
+    padding-top: 20px;
+}
+
+.sub-link h4 a {
+    color: #1572A1;
+}
+
+.f-container {
+    width: 50%;
+    height: auto;
+    padding-left: 260px;
+    padding-top: 195px;
+    font-family: SF Pro Rounded-Semibold;
+    position: absolute;
+    background-color: white;
+}
+
+.img-container img {
+    width: 416px;
+    left: 800px;
+    padding-top: 220px;
+    position: relative;
+    background-color: white;
+}
+
+.f-container h4 a {
+    text-decoration: none;
+}
+
+.f-container h2 {
+    font-family: SF Pro Rounded-Semibold;
+    font-size: 50px;
+    font-weight: bold;
+    color: black;
+    letter-spacing: 0.75px;
+}
