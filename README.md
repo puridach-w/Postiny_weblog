@@ -55,11 +55,11 @@ password: 123
 * Admin
 ```
 username: testAdmin
-password: 123
+password: testAdmin
 ```
 
 * Approver
 ```
 username: testApprover
-password: 123
+password: testApprover
 ```
