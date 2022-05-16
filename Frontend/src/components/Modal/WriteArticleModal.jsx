@@ -10,7 +10,7 @@ function WriteArticleModal({ setOpenModal, setBlur}) {
   const [image, setImage] = useState({});
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState();
   const [lock, setLock] = useState(0);
   const [haveimg, setHaveImg] = useState(false);
   const user_id = localStorage.getItem("user_id");
