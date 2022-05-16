@@ -11,7 +11,7 @@
 
 ## Web application dev tools
 * Client - JavaScript, React, Bootstrap 5
-* Backend - NodeJS, Express
+* Server - NodeJS, Express
 * Database - MySQL
 
 ## Run the web
